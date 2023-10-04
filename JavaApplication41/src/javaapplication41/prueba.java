@@ -11,4 +11,5 @@ package javaapplication41;
  */
 public class prueba {
     private int number;
+    private int number2;
 }
