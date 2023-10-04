@@ -1,6 +1,6 @@
 package restaurante;
 
-public class JavaApplication41 {
+public class RestauranteMain {
 
     /**
      * @param args the command line arguments
