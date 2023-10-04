@@ -1,4 +1,4 @@
-package javaapplication41;
+package restaurante;
 
 public class JavaApplication41 {
 
