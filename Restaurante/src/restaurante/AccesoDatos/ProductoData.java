@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package restaurante;
+package restaurante.AccesoDatos;
 
 /**
  *
- * @author Rodri
+ * @author Ariel
  */
-public class prueba {
-    private int number;
-    private int number2;
+public class ProductoData {
+    
 }
