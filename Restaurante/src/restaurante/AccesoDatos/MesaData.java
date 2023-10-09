@@ -5,7 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import restaurante.Entidades.EstadoMesa;
 import restaurante.Entidades.Mesa;
 
 public class MesaData {
@@ -50,7 +53,7 @@ public class MesaData {
 
     public Mesa buscarMesa(int id) {
         Mesa mesa = null;
-        sql = "SELECT numMesa, capacidad, estado FROM mesa WHERE id = ?";
+        sql = "SELECT numMesa, capacidad, estado FROM mesa WHERE idMesa = ?";
 
         try {
             ps = con.prepareStatement(sql);
@@ -60,9 +63,11 @@ public class MesaData {
 
             if (rs.next()) {
                 mesa = new Mesa();
+                mesa.setIdMesa(id);
                 mesa.setNumMesa(rs.getInt("numMesa"));
-                //Estado mesa
                 mesa.setCapacidad(rs.getInt("capacidad"));
+                mesa.setEstado((EstadoMesa.valueOf(rs.getString("estado"))));
+                System.out.println(mesa);
             } else {
                 JOptionPane.showMessageDialog(null, "No existe la mesa.");
             }
@@ -75,11 +80,11 @@ public class MesaData {
 
         return mesa;
     }
-/*
-    public List<Empleado> listarEmpleados() {
-        List<Empleado> empleados = new ArrayList<>();
 
-        sql = "SELECT * FROM empleado WHERE estado = 1";
+    public List<Mesa> listarMesas() {
+        List<Mesa> mesas = new ArrayList<>();
+
+        sql = "SELECT * FROM mesa";
 
         try {
 
@@ -88,64 +93,64 @@ public class MesaData {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                Empleado empleado = new Empleado();
+                Mesa mesa = new Mesa();
 
-                empleado.setIdEmpleado(rs.getInt("idEmpleado"));
-                empleado.setDni(rs.getInt("dni"));
-                empleado.setNombre(rs.getString("nombre"));
-                empleado.setEstado(rs.getBoolean("estado"));
+                mesa.setIdMesa(rs.getInt("idMesa"));
+                mesa.setNumMesa(rs.getInt("numMesa"));
+                mesa.setCapacidad(rs.getInt("capacidad"));
+                mesa.setEstado((EstadoMesa.valueOf(rs.getString("estado"))));
 
-                empleados.add(empleado);
+                mesas.add(mesa);
             }
 
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla empleado. " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla mesa. " + ex.getMessage());
         }
 
-        return empleados;
+        return mesas;
     }
 
-    public void modificarEmpleado(Empleado empleado) {
+    public void modificarMesa(Mesa mesa) {
 
-        sql = "UPDATE empleado SET dni = ?, nombre = ?, estado = ? WHERE idEmpleado = ?";
+        sql = "UPDATE mesa SET numMesa = ?, capacidad = ?, estado = ? WHERE idMesa = ?";
 
         try {
             ps = con.prepareStatement(sql);
 
-            ps.setInt(1, empleado.getDni());
-            ps.setString(2, empleado.getNombre());
-            ps.setBoolean(3, empleado.isEstado());
-            ps.setInt(4, empleado.getIdEmpleado());
+            ps.setInt(1, mesa.getNumMesa());
+            ps.setInt(2, mesa.getCapacidad());
+            ps.setString(3, mesa.getEstado());
+            ps.setInt(4, mesa.getIdMesa());
 
             int registroFilas = ps.executeUpdate();
 
             if (registroFilas == 1) {
-                JOptionPane.showMessageDialog(null, "Modificado exitosamente.");
+                JOptionPane.showMessageDialog(null, "Mesa modificada exitosamente.");
             } else {
-                JOptionPane.showMessageDialog(null, "No se encontró al empleado.");
+                JOptionPane.showMessageDialog(null, "No se encontró la mesa.");
             }
 
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla empleado. " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla mesa. " + ex.getMessage());
         }
     }
 
-    public void eliminarEmpleado(int dni) {
-
-        sql = "UPDATE empleado SET estado = 0 WHERE dni = ?";
+    public void eliminarMesa(int numMesa) {
+    //Puede ser con el Id
+        sql = "DELETE FROM mesa WHERE numMesa = ?";
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, dni);
+            ps.setInt(1, numMesa);
 
             int registroFilas = ps.executeUpdate();
 
             if (registroFilas == 1) {
-                JOptionPane.showMessageDialog(null, "Empleado eliminado exitosamente.");
+                JOptionPane.showMessageDialog(null, "Mesa eliminada exitosamente.");
             } else {
                 JOptionPane.showMessageDialog(null, "Error al eliminar.");
             }
@@ -153,8 +158,8 @@ public class MesaData {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla empleado. " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla mesa. " + ex.getMessage());
         }
     }
-*/
+
 }
