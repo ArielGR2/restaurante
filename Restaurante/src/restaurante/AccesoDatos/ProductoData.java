@@ -28,7 +28,7 @@ public class ProductoData {
     ResultSet rs;
 
     public ProductoData() {
-        con = Conexion.getConexion();
+        this.con = Conexion.getConexion();
     }
 
     public void agregarProducto(Producto producto) {//viene un producto sin id
@@ -162,6 +162,8 @@ public class ProductoData {
 
             if (registroFilas == 1) {
                 JOptionPane.showMessageDialog(null, "Producto eliminado exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al eliminar.");
             }
 
             ps.close();

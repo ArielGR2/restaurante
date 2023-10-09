@@ -47,8 +47,8 @@ public class Mesa {
         this.capacidad = capacidad;
     }
 
-    public EstadoMesa getEstado() {
-        return estado;
+    public String getEstado() {
+        return estado.toString();
     }
 
     public void setEstado(EstadoMesa estado) {
