@@ -35,8 +35,8 @@ public class RestauranteMain {
             
         };
 //        prodData.modificarProducto(producto);
-        Producto producto= prodData.buscarProducto(1);
-        System.out.println(producto.toString());
+        //Producto producto= prodData.buscarProducto(1);
+       // System.out.println(producto.toString());
 //        producto.setNombre("pizza con jamón");
 //        prodData.modificarProducto(producto);
 //        prodData.eliminarProducto(6);
