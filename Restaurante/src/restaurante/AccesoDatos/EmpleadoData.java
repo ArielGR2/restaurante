@@ -49,19 +49,19 @@ public class EmpleadoData {
         }
     }
 
-    public Empleado buscarEmpleado(int id) {
+    public Empleado buscarEmpleado(int idEmpleado) {
         Empleado empleado = null;
         sql = "SELECT dni, nombre, estado FROM empleado WHERE idEmpleado = ?";
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setInt(1, idEmpleado);
 
             rs = ps.executeQuery();
 
             if (rs.next()) {
                 empleado = new Empleado();
-                empleado.setIdEmpleado(id);
+                empleado.setIdEmpleado(idEmpleado);
                 empleado.setDni(rs.getInt("dni"));
                 empleado.setNombre(rs.getString("nombre"));
                 empleado.setEstado(rs.getBoolean("estado"));

@@ -90,6 +90,37 @@ public class ProductoData {
 
         return producto;
     }
+    
+    public Producto buscarProducto(int idProducto) {
+        Producto producto = null;
+        //Para que muestre Todos sin importar el estado
+        sql = "SELECT nombre, stock, precio, disponible FROM producto WHERE idProducto = ?";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, idProducto);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                producto = new Producto();
+                producto.setIdProducto(idProducto);
+                producto.setNombre(rs.getString("nombre"));
+                producto.setStock(rs.getInt("stock"));
+                producto.setPrecio(rs.getDouble("precio"));
+                producto.setDisponible(rs.getBoolean("disponible"));
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe el producto.");
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla producto. " + ex.getMessage());
+        }
+
+        return producto;
+    }
 
     public List<Producto> listarProductos() {
         List<Producto> productos = new ArrayList<>();
