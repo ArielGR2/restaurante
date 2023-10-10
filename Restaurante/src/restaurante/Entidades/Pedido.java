@@ -58,8 +58,8 @@ public class Pedido {
         this.precioPedido = precioPedido;
     }
 
-    public EstadoPedido getEstado() {
-        return estado;
+    public String getEstado() {
+        return estado.toString();
     }
 
     public void setEstado(EstadoPedido estado) {

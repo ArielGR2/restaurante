@@ -63,11 +63,9 @@ public class MesaData {
 
             if (rs.next()) {
                 mesa = new Mesa();
-                mesa.setIdMesa(id);
                 mesa.setNumMesa(rs.getInt("numMesa"));
                 mesa.setCapacidad(rs.getInt("capacidad"));
                 mesa.setEstado((EstadoMesa.valueOf(rs.getString("estado"))));
-                System.out.println(mesa);
             } else {
                 JOptionPane.showMessageDialog(null, "No existe la mesa.");
             }
