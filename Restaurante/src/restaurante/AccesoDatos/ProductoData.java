@@ -75,6 +75,7 @@ public class ProductoData {
             if (rs.next()) {
                 producto = new Producto();
                 producto.setIdProducto(rs.getInt("idProducto"));
+                producto.setNombre(nombre);
                 producto.setStock(rs.getInt("stock"));
                 producto.setPrecio(rs.getDouble("precio"));
                 producto.setDisponible(rs.getBoolean("disponible"));

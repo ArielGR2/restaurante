@@ -1,17 +1,7 @@
 package restaurante;
 
-import restaurante.AccesoDatos.DetalleData;
-import restaurante.AccesoDatos.EmpleadoData;
-import restaurante.AccesoDatos.MesaData;
-import restaurante.AccesoDatos.PedidoData;
-import restaurante.AccesoDatos.ProductoData;
-import restaurante.Entidades.Detalle;
-import restaurante.Entidades.Empleado;
-import restaurante.Entidades.EstadoMesa;
-import restaurante.Entidades.EstadoPedido;
-import restaurante.Entidades.Mesa;
-import restaurante.Entidades.Pedido;
-import restaurante.Entidades.Producto;
+import restaurante.AccesoDatos.*;
+import restaurante.Entidades.*;
 
 public class RestauranteMain {
 
@@ -20,9 +10,14 @@ public class RestauranteMain {
      */
     public static void main(String[] args) {
 
-        ProductoData prodData = new ProductoData();
+        DetalleData dData = new DetalleData();
+        //EmpleadoData eData = new EmpleadoData();
+        //MesaData mesaData = new MesaData();
+        //PedidoData pedidoData;
+        //ProductoData prodData;
+
         /* PRUEBAS DE PRODUCTO DATA
-       
+        ------------------------------------------------------------------------
         Producto producto = new Producto("pizza",100,3000,true);
         Producto producto1 = new Producto("tacos",50,3500,true);
         Producto producto2 = new Producto("lomo", 50,5000,true);
@@ -48,10 +43,9 @@ public class RestauranteMain {
         for(Producto prod:prodData.listarProductos()){
            System.out.println(prod.toString());    
         };
-         
+        ------------------------------------------------------------------------ 
         PRUEBAS DE MESA DATA
-        MesaData mesaData = new MesaData();
-
+        ------------------------------------------------------------------------
         mesaData.agregarMesa(new Mesa(5, 4, EstadoMesa.LIBRE));
         
         Mesa mesa = mesaData.buscarMesa(5);
@@ -64,28 +58,29 @@ public class RestauranteMain {
             System.out.println(m.toString());
 
         };
-        
+        ------------------------------------------------------------------------
+        PRUEBAS DE EMPLEADO DATA
+        ------------------------------------------------------------------------
         Empleado empleado = new Empleado(22012365, "Juan Perez", true);
-        EmpleadoData eData = new EmpleadoData();
-        eData.agregarEmpleado(empleado);
-         
 
-        MesaData mesaData = new MesaData();
-        EmpleadoData eData = new EmpleadoData();
-
-        //Mesa mesa = mesaData.buscarMesa(5);
-        //Empleado empleado = eData.buscarEmpleado(22012365);
-        //Pedido pedido = new Pedido(mesa,empleado,EstadoPedido.PENDIENTE);
-        PedidoData pedidoData = new PedidoData();
-
+        ------------------------------------------------------------------------
+        PRUEBAS DE PEDIDO DATA
+        ------------------------------------------------------------------------
+        Mesa mesa = mesaData.buscarMesa(5);
+        Empleado empleado = eData.buscarEmpleado(22012365);
+        
+        Pedido pedido = new Pedido(mesa,empleado,EstadoPedido.PENDIENTE);
+        
         pedidoData.agregarPedido(pedido);
-        Pedido pedido = pedidoData.buscarPedido(2);
-        Producto producto = prodData.buscarProducto("hamburguesa");
-
-        Detalle detalle = new Detalle(pedido, producto, 2);
-        DetalleData dData = new DetalleData();
+        ------------------------------------------------------------------------
+        PRUEBAS DE DETALLE DATA
+        ------------------------------------------------------------------------        
+        Pedido pedido = dData.pedidoData.buscarPedido(2);
+        Producto producto = dData.productoData.buscarProducto("pizza");  
+        Detalle detalle = new Detalle(pedido, producto, 1);
+        System.out.println(detalle);
         dData.agregarDetalle(detalle);
-*/
+        */
     }
 
 }

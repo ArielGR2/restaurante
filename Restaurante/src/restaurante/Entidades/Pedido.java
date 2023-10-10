@@ -63,8 +63,8 @@ public class Pedido {
         return listaDetalles;
     }
 
-    public void setDetalle(Detalle detalle) {
-        listaDetalles.add(detalle);
+    public void setListaDetalles(ArrayList<Detalle> listaDetalles) {
+        this.listaDetalles = listaDetalles;
     }
     
     public String getEstado() {

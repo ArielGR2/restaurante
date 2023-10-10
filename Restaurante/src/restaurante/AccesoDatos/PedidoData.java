@@ -16,7 +16,6 @@ public class PedidoData {
     private Connection con;
     private EmpleadoData eData = new EmpleadoData();
     private MesaData mData = new MesaData();
-    private DetalleData dData = new DetalleData();
 
     String sql;
     PreparedStatement ps;
