@@ -1,25 +1,26 @@
 package restaurante.Entidades;
 
+import java.util.ArrayList;
+
 public class Pedido {
     
     private int idPedido;
     private Mesa mesa;
     private Empleado empleado;
     private double precioPedido;
+    private ArrayList<Detalle> listaDetalles;
     private EstadoPedido estado;
 
-    public Pedido(int idPedido, Mesa mesa, Empleado empleado, double precioPedido, EstadoPedido estado) {
+    public Pedido(int idPedido, Mesa mesa, Empleado empleado, EstadoPedido estado) {
         this.idPedido = idPedido;
         this.mesa = mesa;
         this.empleado = empleado;
-        this.precioPedido = precioPedido;
         this.estado = estado;
     }
 
-    public Pedido(Mesa mesa, Empleado empleado, double precioPedido, EstadoPedido estado) {
+    public Pedido(Mesa mesa, Empleado empleado, EstadoPedido estado) {
         this.mesa = mesa;
         this.empleado = empleado;
-        this.precioPedido = precioPedido;
         this.estado = estado;
     }
 
@@ -58,6 +59,14 @@ public class Pedido {
         this.precioPedido = precioPedido;
     }
 
+    public ArrayList<Detalle> getListaDetalles() {
+        return listaDetalles;
+    }
+
+    public void setDetalle(Detalle detalle) {
+        listaDetalles.add(detalle);
+    }
+    
     public String getEstado() {
         return estado.toString();
     }

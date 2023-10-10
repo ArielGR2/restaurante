@@ -16,7 +16,7 @@ public class PedidoData {
     private Connection con;
     private EmpleadoData eData = new EmpleadoData();
     private MesaData mData = new MesaData();
-    private ProductoData prData = new ProductoData();
+    private DetalleData dData = new DetalleData();
 
     String sql;
     PreparedStatement ps;
@@ -28,7 +28,7 @@ public class PedidoData {
 
     public void agregarPedido(Pedido pedido) {
         sql = "INSERT INTO pedido (idMesa, idEmpleado, precioPedido, estado) VALUES (?,?,?,?)";
-
+        
         try {
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, pedido.getMesa().getIdMesa());
@@ -56,7 +56,7 @@ public class PedidoData {
 
     public Pedido buscarPedido(int idPedido) {
         Pedido pedido = null;
-        sql = "SELECT idMesa, idEmpleado, precioPedido, estado FROM pedido WHERE idPedido = ?";
+        sql = "SELECT * FROM pedido WHERE idPedido = ?";
 
         try {
             ps = con.prepareStatement(sql);
@@ -66,6 +66,7 @@ public class PedidoData {
 
             if (rs.next()) {
                 pedido = new Pedido();
+                pedido.setIdPedido(idPedido);
                 pedido.setMesa(mData.buscarMesa(rs.getInt("idMesa")));
                 pedido.setEmpleado(eData.buscarEmpleado(rs.getInt("idEmpleado")));
                 pedido.setPrecioPedido(rs.getDouble("precioPedido"));
@@ -100,6 +101,39 @@ public class PedidoData {
                 pedido.setIdPedido(rs.getInt("idPedido"));
                 pedido.setMesa(mData.buscarMesa(rs.getInt("idMesa")));
                 pedido.setEmpleado(eData.buscarEmpleado(rs.getInt("idEmpleado")));
+                pedido.setPrecioPedido(rs.getDouble("precioPedido"));
+                pedido.setEstado(EstadoPedido.valueOf(rs.getString("estado")));
+
+                pedidos.add(pedido);
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pedido. " + ex.getMessage());
+        }
+
+        return pedidos;
+    }
+
+    public List<Pedido> listarPedidosEmpleado(int idEmpleado) {
+        List<Pedido> pedidos = new ArrayList<>();
+
+        sql = "SELECT idPedido, idMesa, precioPedido, estado FROM pedido p, empleado e"
+               + "WHERE p.idEmpleado = ? AND (p.idEmpleado = e.idEmpleado)";
+
+        try {
+
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, idEmpleado);
+            
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Pedido pedido = new Pedido();
+
+                pedido.setIdPedido(rs.getInt("idPedido"));
+                pedido.setMesa(mData.buscarMesa(rs.getInt("idMesa")));
                 pedido.setPrecioPedido(rs.getDouble("precioPedido"));
                 pedido.setEstado(EstadoPedido.valueOf(rs.getString("estado")));
 

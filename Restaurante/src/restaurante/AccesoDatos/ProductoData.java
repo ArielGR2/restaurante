@@ -64,7 +64,7 @@ public class ProductoData {
     public Producto buscarProducto(String nombre) {
         Producto producto = null;
         //Para que muestre Todos sin importar el estado
-        sql = "SELECT stock, precio, disponible FROM producto WHERE nombre = ?";
+        sql = "SELECT idProducto, stock, precio, disponible FROM producto WHERE nombre = ?";
 
         try {
             ps = con.prepareStatement(sql);
@@ -74,6 +74,7 @@ public class ProductoData {
 
             if (rs.next()) {
                 producto = new Producto();
+                producto.setIdProducto(rs.getInt("idProducto"));
                 producto.setStock(rs.getInt("stock"));
                 producto.setPrecio(rs.getDouble("precio"));
                 producto.setDisponible(rs.getBoolean("disponible"));
