@@ -11,9 +11,9 @@ public class RestauranteMain {
     public static void main(String[] args) {
 
         DetalleData dData = new DetalleData();
-        //EmpleadoData eData = new EmpleadoData();
-        //MesaData mesaData = new MesaData();
-        //PedidoData pedidoData;
+        EmpleadoData eData = new EmpleadoData();
+        MesaData mesaData = new MesaData();
+        PedidoData pedidoData = new PedidoData();
         //ProductoData prodData;
 
         /* PRUEBAS DE PRODUCTO DATA
@@ -75,12 +75,24 @@ public class RestauranteMain {
         ------------------------------------------------------------------------
         PRUEBAS DE DETALLE DATA
         ------------------------------------------------------------------------        
-        Pedido pedido = dData.pedidoData.buscarPedido(2);
-        Producto producto = dData.productoData.buscarProducto("pizza");  
-        Detalle detalle = new Detalle(pedido, producto, 1);
-        System.out.println(detalle);
-        dData.agregarDetalle(detalle);
+         */
+        Pedido pedido = pedidoData.buscarPedido(3);
+
+        Producto producto1 = dData.productoData.buscarProducto("tacos");
+        Producto producto2 = dData.productoData.buscarProducto("gaseosas");
+
+        /*Detalle detalle1 = new Detalle(pedido, producto1, 2);
+        Detalle detalle2 = new Detalle(pedido, producto2, 4);
+
+        dData.agregarDetalle(detalle1);
+        dData.agregarDetalle(detalle2);
         */
+        
+        for (Detalle d : dData.listarDetallesPedido(pedido.getIdPedido())) {
+            pedido.setPrecioPedido(pedido.getPrecioPedido() + d.calcularSubtotal(d));
+            System.out.println(pedido.getPrecioPedido());
+        }
+        pedidoData.modificarPedido(pedido);
     }
 
 }

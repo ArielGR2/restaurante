@@ -11,17 +11,16 @@ public class Pedido {
     private ArrayList<Detalle> listaDetalles;
     private EstadoPedido estado;
 
-    public Pedido(int idPedido, Mesa mesa, Empleado empleado, EstadoPedido estado) {
+    public Pedido(int idPedido, Mesa mesa, Empleado empleado) {
         this.idPedido = idPedido;
         this.mesa = mesa;
         this.empleado = empleado;
-        this.estado = estado;
+        this.precioPedido = 0;
     }
 
-    public Pedido(Mesa mesa, Empleado empleado, EstadoPedido estado) {
+    public Pedido(Mesa mesa, Empleado empleado) {
         this.mesa = mesa;
         this.empleado = empleado;
-        this.estado = estado;
     }
 
     public Pedido() {
@@ -55,9 +54,14 @@ public class Pedido {
         return precioPedido;
     }
 
+    /*public void setPrecioPedido(double subtotal) {
+        this.precioPedido += subtotal;
+    }*/
+
     public void setPrecioPedido(double precioPedido) {
         this.precioPedido = precioPedido;
     }
+    
 
     public ArrayList<Detalle> getListaDetalles() {
         return listaDetalles;

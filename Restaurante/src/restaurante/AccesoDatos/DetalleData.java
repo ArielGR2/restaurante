@@ -25,14 +25,13 @@ public class DetalleData {
     }
 
     public void agregarDetalle(Detalle detalle) {
-        sql = "INSERT INTO detalle (idPedido, idProducto, cantProducto, subtotal) VALUES (?,?,?,?)";
+        sql = "INSERT INTO detalle (idPedido, idProducto, cantProducto) VALUES (?,?,?)";
 
         try {
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, detalle.getPedido().getIdPedido());
             ps.setInt(2, detalle.getProducto().getIdProducto());
             ps.setInt(3, detalle.getCantProducto());
-            ps.setDouble(4, detalle.getSubtotal());
 
             ps.executeUpdate();
 
@@ -54,7 +53,7 @@ public class DetalleData {
 
     public Detalle buscarDetalle(int idDetalle) {
         Detalle detalle = null;
-        sql = "SELECT idPedido, idProducto, cantProducto, subtotal FROM detalle WHERE idDetalle = ?";
+        sql = "SELECT idPedido, idProducto, cantProducto FROM detalle WHERE idDetalle = ?";
 
         try {
             ps = con.prepareStatement(sql);
@@ -69,7 +68,6 @@ public class DetalleData {
                 detalle.setPedido(pedidoData.buscarPedido(rs.getInt("idPedido")));
                 detalle.setProducto(productoData.buscarProducto(rs.getInt("idProducto")));
                 detalle.setCantProducto(rs.getInt("cantProducto"));
-                detalle.setSubtotal(rs.getDouble("subtotal"));
             } else {
                 JOptionPane.showMessageDialog(null, "Detalle inexistente.");
             }
@@ -101,7 +99,38 @@ public class DetalleData {
                 detalle.setPedido(pedidoData.buscarPedido(rs.getInt("idPedido")));
                 detalle.setProducto(productoData.buscarProducto(rs.getInt("idProducto")));
                 detalle.setCantProducto(rs.getInt("cantProducto"));
-                detalle.setSubtotal(rs.getDouble("subtotal"));
+
+                detalles.add(detalle);
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla detalle. " + ex.getMessage());
+        }
+
+        return detalles;
+    }
+    
+    public List<Detalle> listarDetallesPedido(int idPedido) {
+        List<Detalle> detalles = new ArrayList<>();
+
+        sql = "SELECT * FROM detalle WHERE idPedido = ?";
+
+        try {
+
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, idPedido);
+            
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Detalle detalle = new Detalle();
+
+                detalle.setIdDetalle(rs.getInt("idDetalle"));
+                detalle.setPedido(pedidoData.buscarPedido(rs.getInt("idPedido")));
+                detalle.setProducto(productoData.buscarProducto(rs.getInt("idProducto")));
+                detalle.setCantProducto(rs.getInt("cantProducto"));
 
                 detalles.add(detalle);
             }
@@ -116,7 +145,7 @@ public class DetalleData {
     }
      public void modificarDetalle(Detalle detalle) {
 
-        sql = "UPDATE detalle SET idPedido = ?, idProducto = ?, cantProducto = ?, subtotal = ? WHERE idDetalle = ?";
+        sql = "UPDATE detalle SET idPedido = ?, idProducto = ?, cantProducto = ? WHERE idDetalle = ?";
 
         try {
             ps = con.prepareStatement(sql);
@@ -124,7 +153,6 @@ public class DetalleData {
             ps.setInt(1, detalle.getPedido().getIdPedido());
             ps.setInt(2, detalle.getProducto().getIdProducto());
             ps.setInt(3, detalle.getCantProducto());
-            ps.setDouble(4, detalle.getSubtotal());
             ps.setInt(5, detalle.getIdDetalle());
 
             int registroFilas = ps.executeUpdate();

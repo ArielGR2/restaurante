@@ -78,10 +78,41 @@ public class EmpleadoData {
         return empleado;
     }
 
-    public List<Empleado> listarEmpleados() {
+    public List<Empleado> listarEmpleadosActivos() {
         List<Empleado> empleados = new ArrayList<>();
 
         sql = "SELECT * FROM empleado WHERE estado = 1";
+
+        try {
+
+            ps = con.prepareStatement(sql);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Empleado empleado = new Empleado();
+
+                empleado.setIdEmpleado(rs.getInt("idEmpleado"));
+                empleado.setDni(rs.getInt("dni"));
+                empleado.setNombre(rs.getString("nombre"));
+                empleado.setEstado(rs.getBoolean("estado"));
+
+                empleados.add(empleado);
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla empleado. " + ex.getMessage());
+        }
+
+        return empleados;
+    }
+    
+    public List<Empleado> listarEmpleados() {
+        List<Empleado> empleados = new ArrayList<>();
+
+        sql = "SELECT * FROM empleado";
 
         try {
 

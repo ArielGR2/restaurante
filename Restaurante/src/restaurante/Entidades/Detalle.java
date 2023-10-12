@@ -6,21 +6,19 @@ public class Detalle {
     private Pedido pedido;
     private Producto producto;
     private int cantProducto;
-    private double subtotal;
+    //private double subtotal;
 
     public Detalle(int idDetalle, Pedido pedido, Producto producto, int cantProducto) {
         this.idDetalle = idDetalle;
         this.pedido = pedido;
         this.producto = producto;
         this.cantProducto = cantProducto;
-        this.subtotal = cantProducto * producto.getPrecio();
     }
 
     public Detalle(Pedido pedido, Producto producto, int cantProducto) {
         this.pedido = pedido;
         this.producto = producto;
         this.cantProducto = cantProducto;
-        this.subtotal = cantProducto * producto.getPrecio();
     }
 
     public Detalle() {
@@ -58,16 +56,13 @@ public class Detalle {
         this.cantProducto = cantProducto;
     }
 
-    public double getSubtotal() {
-        return subtotal;
-    }
 
-    public void setSubtotal(double subtotal) {
-        this.subtotal = subtotal;
+    public double calcularSubtotal(Detalle detalle){
+        return detalle.cantProducto * detalle.producto.getPrecio();
     }
-
+    
     @Override
     public String toString() {
-        return "Detalle{" + "idDetalle=" + idDetalle + ", pedido=" + pedido + ", producto=" + producto + ", cantProducto=" + cantProducto + ", subtotal=" + subtotal + '}';
+        return "Detalle{" + "idDetalle=" + idDetalle + ", pedido=" + pedido + ", producto=" + producto + ", cantProducto=" + cantProducto + '}';
     }
 }

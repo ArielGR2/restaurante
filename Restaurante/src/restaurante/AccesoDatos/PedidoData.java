@@ -26,14 +26,13 @@ public class PedidoData {
     }
 
     public void agregarPedido(Pedido pedido) {
-        sql = "INSERT INTO pedido (idMesa, idEmpleado, precioPedido, estado) VALUES (?,?,?,?)";
+        sql = "INSERT INTO pedido (idMesa, idEmpleado, precioPedido) VALUES (?,?,?)";
         
         try {
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, pedido.getMesa().getIdMesa());
             ps.setInt(2, pedido.getEmpleado().getIdEmpleado());
             ps.setDouble(3, pedido.getPrecioPedido());
-            ps.setString(4, pedido.getEstado());
 
             ps.executeUpdate();
 
