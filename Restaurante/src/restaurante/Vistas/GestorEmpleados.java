@@ -1,23 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package restaurante.Vistas;
 
-import javax.swing.JInternalFrame;
-import javax.swing.JOptionPane;
+import javax.swing.JDesktopPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import restaurante.AccesoDatos.EmpleadoData;
 import restaurante.Entidades.Empleado;
 
-/**
- *
- * @author Abigail Castro
- */
-public class EmpleadoVistas extends javax.swing.JInternalFrame {
+public class GestorEmpleados extends javax.swing.JInternalFrame {
 
     EmpleadoData edata = new EmpleadoData();
 
@@ -31,7 +21,7 @@ public class EmpleadoVistas extends javax.swing.JInternalFrame {
     /**
      * Creates new form EmpleadoVistas
      */
-    public EmpleadoVistas() {
+    public GestorEmpleados() {
         initComponents();
         cabeceraTabla();
         cargarTabla();
@@ -190,16 +180,18 @@ public class EmpleadoVistas extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(agregarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(modificarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(eliminarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(agregarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(modificarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(eliminarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -230,14 +222,18 @@ public class EmpleadoVistas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAgregarMouseClicked
-        removeAll();
-        repaint();
-        NewEmpleado newEmpleado = new NewEmpleado();
-        newEmpleado.setVisible(true);
-        JInternalFrame internalFrame = new JInternalFrame("Agregar Empleado", true, true, true, true);
-        add(internalFrame);
-        internalFrame.pack();
-        internalFrame.setVisible(true);
+        FormularioEmpleados formulario = new FormularioEmpleados();
+        JDesktopPane desktopPane = getDesktopPane();
+
+        desktopPane.add(formulario);
+        
+        int x = (desktopPane.getWidth() - formulario.getWidth()) / 2;
+        int y = (desktopPane.getHeight() - formulario.getHeight()) / 2;
+
+        formulario.setLocation(x, y);
+        formulario.setVisible(true);
+
+
     }//GEN-LAST:event_jLAgregarMouseClicked
 
     private void jLModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLModificarMouseClicked

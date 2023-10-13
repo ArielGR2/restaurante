@@ -14,10 +14,9 @@ public class Empleado {
         this.estado = estado;
     }
 
-    public Empleado(int dni, String nombre, boolean estado) {
+    public Empleado(int dni, String nombre) {
         this.dni = dni;
         this.nombre = nombre;
-        this.estado = estado;
     }
 
     public Empleado() {

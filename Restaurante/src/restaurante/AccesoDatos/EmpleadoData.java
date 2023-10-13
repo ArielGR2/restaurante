@@ -23,7 +23,7 @@ public class EmpleadoData {
     }
 
     public void agregarEmpleado(Empleado empleado) {
-        sql = "INSERT INTO empleado (dni, nombre, estado) VALUES (?,?,?)";
+        sql = "INSERT INTO empleado (dni, nombre) VALUES (?,?)";
 
         try {
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -78,6 +78,33 @@ public class EmpleadoData {
         return empleado;
     }
 
+    public Empleado buscarEmpleadoDni(int dni) {
+        Empleado empleado = null;
+        sql = "SELECT idEmpleado, nombre, estado FROM empleado WHERE dni = ?";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, dni);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                empleado = new Empleado();
+                empleado.setIdEmpleado(rs.getInt("idEmpleado"));
+                empleado.setDni(dni);
+                empleado.setNombre(rs.getString("nombre"));
+                empleado.setEstado(rs.getBoolean("estado"));
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla empleado. " + ex.getMessage());
+        }
+
+        return empleado;
+    }
+
     public List<Empleado> listarEmpleadosActivos() {
         List<Empleado> empleados = new ArrayList<>();
 
@@ -108,7 +135,7 @@ public class EmpleadoData {
 
         return empleados;
     }
-    
+
     public List<Empleado> listarEmpleados() {
         List<Empleado> empleados = new ArrayList<>();
 

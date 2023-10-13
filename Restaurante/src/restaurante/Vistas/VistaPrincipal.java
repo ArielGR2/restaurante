@@ -115,10 +115,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+
         jDesktopPane1.removeAll();
         jDesktopPane1.repaint();
-        EmpleadoVistas empleadoVistas = new EmpleadoVistas();
+        
+        GestorEmpleados empleadoVistas = new GestorEmpleados();
         empleadoVistas.setVisible(true);
+        
         jDesktopPane1.add(empleadoVistas);
         jDesktopPane1.moveToFront(empleadoVistas);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -128,8 +131,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jDesktopPane1.removeAll();
         jDesktopPane1.repaint();
         //DESCOMENTAR Y REEMPLAZAR CON LA VENTANA INTERNA CORRESPONDIENTE
-        //EmpleadoVistas empleadoVistas = new EmpleadoVistas();
+        //EmpleadoVistas empleadoVistas = new GestorEmpleados();
         //empleadoVistas.setVisible(true);
+        
         //jDesktopPane1.add(empleadoVistas);
         //jDesktopPane1.moveToFront(empleadoVistas);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -139,8 +143,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jDesktopPane1.removeAll();
         jDesktopPane1.repaint();
         //DESCOMENTAR Y REEMPLAZAR CON LA VENTANA INTERNA CORRESPONDIENTE
-        //EmpleadoVistas empleadoVistas = new EmpleadoVistas();
+        //EmpleadoVistas empleadoVistas = new GestorEmpleados();
         //empleadoVistas.setVisible(true);
+        
         //jDesktopPane1.add(empleadoVistas);
         //jDesktopPane1.moveToFront(empleadoVistas);
     }//GEN-LAST:event_jButton3ActionPerformed
