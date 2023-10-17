@@ -7,12 +7,15 @@ import restaurante.Entidades.Empleado;
 public class FormularioEmpleados extends javax.swing.JInternalFrame {
 
     EmpleadoData eData = new EmpleadoData();
+    GestorEmpleados gEmpleados;
 
     /**
      * Creates new form FormularioEmpleados
      */
-    public FormularioEmpleados() {
+
+    public FormularioEmpleados(GestorEmpleados ventanaPrincipal) {
         initComponents();
+        this.gEmpleados = ventanaPrincipal;
     }
 
     /**
@@ -64,6 +67,7 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
         jLNombre.setText("Nombre");
 
         jTextNombre.setBackground(new java.awt.Color(102, 102, 102));
+        jTextNombre.setForeground(new java.awt.Color(204, 204, 204));
 
         crearBtn.setBackground(new java.awt.Color(51, 51, 51));
         crearBtn.setForeground(new java.awt.Color(51, 51, 51));
@@ -239,10 +243,8 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 
-    public void cerrarVentana() {
+    private void cerrarVentana() {
         dispose();
-
-        GestorEmpleados gEmpleados = new GestorEmpleados();
-        gEmpleados.setVisible(true);
+        gEmpleados.actualizarTabla();
     }
 }

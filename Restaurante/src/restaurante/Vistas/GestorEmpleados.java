@@ -1,6 +1,8 @@
 package restaurante.Vistas;
 
+import java.util.List;
 import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -14,7 +16,19 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
     private DefaultTableModel modelo = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int x, int y) {
-            return false;
+            if (y == 0 || y == 3) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        @Override
+        public Class<?> getColumnClass(int c) {
+            if (c == 0 || c == 1) {
+                return Integer.class;
+            }
+            return String.class;
         }
     };
 
@@ -49,7 +63,8 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Gestor de Empleados");
         setToolTipText("");
-        setMaximumSize(new java.awt.Dimension(500, 600));
+        setMaximumSize(new java.awt.Dimension(500, 500));
+        setNormalBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setPreferredSize(new java.awt.Dimension(500, 500));
 
         jPanel1.setBackground(new java.awt.Color(25, 25, 25));
@@ -71,9 +86,15 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTEmpleados.setSelectionForeground(new java.awt.Color(204, 204, 204));
         jTEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTEmpleadosMouseClicked(evt);
+            }
+        });
+        jTEmpleados.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jTEmpleadosPropertyChange(evt);
             }
         });
         jScrollPane1.setViewportView(jTEmpleados);
@@ -182,76 +203,102 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(63, 63, 63)
                         .addComponent(agregarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(modificarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(eliminarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(eliminarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(agregarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(modificarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(eliminarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAgregarMouseClicked
-        FormularioEmpleados formulario = new FormularioEmpleados();
+        FormularioEmpleados formulario = new FormularioEmpleados(this);
         JDesktopPane desktopPane = getDesktopPane();
 
         desktopPane.add(formulario);
-        
+
         int x = (desktopPane.getWidth() - formulario.getWidth()) / 2;
         int y = (desktopPane.getHeight() - formulario.getHeight()) / 2;
 
         formulario.setLocation(x, y);
         formulario.setVisible(true);
-
-
     }//GEN-LAST:event_jLAgregarMouseClicked
 
     private void jLModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLModificarMouseClicked
-        // TODO add your handling code here:
+        int filas = jTEmpleados.getRowCount();
+
+        for (int f = 0; f < filas; f++) {
+            int idEmpleado = (Integer) modelo.getValueAt(jTEmpleados.getSelectedRow(), 0);
+            int dni = (Integer) modelo.getValueAt(jTEmpleados.getSelectedRow(), 1);
+            String nombre = (String) modelo.getValueAt(jTEmpleados.getSelectedRow(), 2);
+
+            boolean actualizacionPendiente = false;
+
+            for (Empleado e : edata.listarEmpleadosActivos()) {
+                if (e.getIdEmpleado() == idEmpleado && (e.getDni() != dni || !e.getNombre().equals(nombre))) {
+                    
+                    actualizacionPendiente = true;
+                    System.out.println("Actualizado: " + idEmpleado + " " + dni + " " + nombre);
+                    break;
+                }
+            }
+            if (!actualizacionPendiente) {
+                JOptionPane.showMessageDialog(this, "No hay modificaciones.");
+            }
+        }
+
     }//GEN-LAST:event_jLModificarMouseClicked
 
     private void jLEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLEliminarMouseClicked
-        // TODO add your handling code here:
+        int dni = (Integer) modelo.getValueAt(jTEmpleados.getSelectedRow(), 1);
+        edata.eliminarEmpleado(dni);
+        actualizarTabla();
     }//GEN-LAST:event_jLEliminarMouseClicked
 
     private void jTEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTEmpleadosMouseClicked
         // TODO add your handling code here:
-        jLModificar.setEnabled(true);
-        modificarBtn.setEnabled(true);
         jLEliminar.setEnabled(true);
         eliminarBtn.setEnabled(true);
 
     }//GEN-LAST:event_jTEmpleadosMouseClicked
+
+    private void jTEmpleadosPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTEmpleadosPropertyChange
+        // TODO add your handling code here:
+        if (jTEmpleados.isEditing()) {
+            jLModificar.setEnabled(true);
+            modificarBtn.setEnabled(true);
+        }
+    }//GEN-LAST:event_jTEmpleadosPropertyChange
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -281,6 +328,9 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         jTEmpleados.setDefaultRenderer(Object.class, centerRenderer);
+
+        jTEmpleados.setEditingColumn(1);
+        jTEmpleados.setEditingColumn(2);
     }
 
     private void cargarTabla() {
@@ -295,13 +345,25 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
         }
     }
 
+    public void actualizarTabla() {
+
+        modelo.setRowCount(0);
+
+        for (Empleado empleado : edata.listarEmpleadosActivos()) {
+            modelo.addRow(new Object[]{
+                empleado.getIdEmpleado(),
+                empleado.getDni(),
+                empleado.getNombre(),
+                empleado.isEstado() == true ? "Activo" : "Inactivo"
+            });
+        }
+    }
+
     private void eliminarFilas() {
-        int filas = jTEmpleados.getRowCount() - 1; //al ser un indice le resto 1
-        //Como ya iniciamos la variable contadora no la incluimos en el for.
+        int filas = jTEmpleados.getRowCount() - 1;
         for (; filas >= 0; filas--) {
             modelo.removeRow(filas);
         }
-
     }
 
 }
