@@ -281,7 +281,7 @@ public class GestorMesa extends javax.swing.JInternalFrame {
 
             boolean actualizacionPendiente = false;
 
-            for (Mesa e : edata.listarEmpleadosActivos()) {
+            /*for (Mesa m : mData) {
                 if (e.getIdEmpleado() == idEmpleado && (e.getDni() != dni || !e.getNombre().equals(nombre))) {
 
                     actualizacionPendiente = true;
@@ -291,14 +291,14 @@ public class GestorMesa extends javax.swing.JInternalFrame {
             }
             if (!actualizacionPendiente) {
                 JOptionPane.showMessageDialog(this, "No hay modificaciones.");
-            }
+            }*/
         }
     }//GEN-LAST:event_jLModificarMouseClicked
 
     private void jLEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLEliminarMouseClicked
         int dni = (Integer) modelo.getValueAt(jTMesas.getSelectedRow(), 1);
-        edata.eliminarEmpleado(dni);
-        actualizarTabla();
+        /*edata.eliminarEmpleado(dni);
+        actualizarTabla();*/
     }//GEN-LAST:event_jLEliminarMouseClicked
 
 

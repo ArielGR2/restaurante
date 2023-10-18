@@ -245,6 +245,6 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
 
     private void cerrarVentana() {
         dispose();
-        gEmpleados.actualizarTabla();
+        gEmpleados.cargarTabla();
     }
 }

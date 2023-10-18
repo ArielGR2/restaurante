@@ -14,7 +14,7 @@ public class FormularioMesa extends javax.swing.JInternalFrame {
     /**
      * Creates new form FormularioMesa
      */
-    public FormularioMesa() {
+    public FormularioMesa(GestorMesa ventanaPrincipal) {
         initComponents();
     }
 

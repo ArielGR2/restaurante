@@ -272,7 +272,6 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
                     e.setDni(dni);
                     e.setNombre(nombre);
                     eData.modificarEmpleado(e);
-                    System.out.println(e + "Modificado");
                     pendientes.add(e);
                 }
             }
@@ -282,13 +281,12 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "No hay modificaciones.");
             return;
         }
-
     }//GEN-LAST:event_jLModificarMouseClicked
 
     private void jLEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLEliminarMouseClicked
         int dni = (Integer) modelo.getValueAt(jTEmpleados.getSelectedRow(), 1);
         eData.eliminarEmpleado(dni);
-        actualizarTabla();
+        cargarTabla();
     }//GEN-LAST:event_jLEliminarMouseClicked
 
     private void jTEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTEmpleadosMouseClicked
@@ -339,22 +337,8 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
         jTEmpleados.setEditingColumn(2);
     }
 
-    private void cargarTabla() {
+    public void cargarTabla() {
         eliminarFilas();
-        for (Empleado empleado : eData.listarEmpleadosActivos()) {
-            modelo.addRow(new Object[]{
-                empleado.getIdEmpleado(),
-                empleado.getDni(),
-                empleado.getNombre(),
-                empleado.isEstado() == true ? "Activo" : "Inactivo"
-            });
-        }
-    }
-
-    public void actualizarTabla() {
-
-        modelo.setRowCount(0);
-
         for (Empleado empleado : eData.listarEmpleadosActivos()) {
             modelo.addRow(new Object[]{
                 empleado.getIdEmpleado(),
