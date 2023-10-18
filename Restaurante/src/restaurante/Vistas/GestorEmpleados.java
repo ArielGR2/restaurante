@@ -1,5 +1,6 @@
 package restaurante.Vistas;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
@@ -11,7 +12,7 @@ import restaurante.Entidades.Empleado;
 
 public class GestorEmpleados extends javax.swing.JInternalFrame {
 
-    EmpleadoData edata = new EmpleadoData();
+    EmpleadoData eData = new EmpleadoData();
 
     private DefaultTableModel modelo = new DefaultTableModel() {
         @Override
@@ -224,7 +225,7 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
                     .addComponent(agregarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(modificarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(eliminarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -235,7 +236,9 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -256,32 +259,35 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
 
     private void jLModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLModificarMouseClicked
         int filas = jTEmpleados.getRowCount();
+        List<Empleado> pendientes = new ArrayList<>();
 
         for (int f = 0; f < filas; f++) {
-            int idEmpleado = (Integer) modelo.getValueAt(jTEmpleados.getSelectedRow(), 0);
-            int dni = (Integer) modelo.getValueAt(jTEmpleados.getSelectedRow(), 1);
-            String nombre = (String) modelo.getValueAt(jTEmpleados.getSelectedRow(), 2);
+            int idFila = (Integer) modelo.getValueAt(f, 0);
+            int dni = (Integer) modelo.getValueAt(f, 1);
+            String nombre = (String) modelo.getValueAt(f, 2);
 
-            boolean actualizacionPendiente = false;
-
-            for (Empleado e : edata.listarEmpleadosActivos()) {
-                if (e.getIdEmpleado() == idEmpleado && (e.getDni() != dni || !e.getNombre().equals(nombre))) {
-                    
-                    actualizacionPendiente = true;
-                    System.out.println("Actualizado: " + idEmpleado + " " + dni + " " + nombre);
-                    break;
+            //Revisamos si hay modificación, si la hay agregamos el empleado a un array de pendientes a actualizar, si no el array queda vacío.
+            for (Empleado e : eData.listarEmpleadosActivos()) {
+                if (e.getIdEmpleado() == idFila && (e.getDni() != dni || !e.getNombre().equals(nombre))) {
+                    e.setDni(dni);
+                    e.setNombre(nombre);
+                    eData.modificarEmpleado(e);
+                    System.out.println(e + "Modificado");
+                    pendientes.add(e);
                 }
             }
-            if (!actualizacionPendiente) {
-                JOptionPane.showMessageDialog(this, "No hay modificaciones.");
-            }
+        }
+        //Si el array está vacío no hay modificaciones
+        if (pendientes.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay modificaciones.");
+            return;
         }
 
     }//GEN-LAST:event_jLModificarMouseClicked
 
     private void jLEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLEliminarMouseClicked
         int dni = (Integer) modelo.getValueAt(jTEmpleados.getSelectedRow(), 1);
-        edata.eliminarEmpleado(dni);
+        eData.eliminarEmpleado(dni);
         actualizarTabla();
     }//GEN-LAST:event_jLEliminarMouseClicked
 
@@ -335,7 +341,7 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
 
     private void cargarTabla() {
         eliminarFilas();
-        for (Empleado empleado : edata.listarEmpleadosActivos()) {
+        for (Empleado empleado : eData.listarEmpleadosActivos()) {
             modelo.addRow(new Object[]{
                 empleado.getIdEmpleado(),
                 empleado.getDni(),
@@ -349,7 +355,7 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
 
         modelo.setRowCount(0);
 
-        for (Empleado empleado : edata.listarEmpleadosActivos()) {
+        for (Empleado empleado : eData.listarEmpleadosActivos()) {
             modelo.addRow(new Object[]{
                 empleado.getIdEmpleado(),
                 empleado.getDni(),
