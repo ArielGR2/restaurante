@@ -34,6 +34,8 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
         jTextDni = new javax.swing.JTextField();
         jLNombre = new javax.swing.JLabel();
         jTextNombre = new javax.swing.JTextField();
+        jLApellido = new javax.swing.JLabel();
+        jTextApellido = new javax.swing.JTextField();
         crearBtn = new javax.swing.JPanel();
         jLCrear = new javax.swing.JLabel();
         cancelarBtn = new javax.swing.JPanel();
@@ -68,6 +70,13 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
 
         jTextNombre.setBackground(new java.awt.Color(102, 102, 102));
         jTextNombre.setForeground(new java.awt.Color(204, 204, 204));
+
+        jLApellido.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLApellido.setForeground(new java.awt.Color(204, 204, 204));
+        jLApellido.setText("Apellido");
+
+        jTextApellido.setBackground(new java.awt.Color(102, 102, 102));
+        jTextApellido.setForeground(new java.awt.Color(204, 204, 204));
 
         crearBtn.setBackground(new java.awt.Color(51, 51, 51));
         crearBtn.setForeground(new java.awt.Color(51, 51, 51));
@@ -145,43 +154,52 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
         backgroundLayout.setHorizontalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(backgroundLayout.createSequentialGroup()
-                            .addComponent(crearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cancelarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jSeparator1)
-                        .addGroup(backgroundLayout.createSequentialGroup()
-                            .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLDni, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(45, 45, 45)
-                            .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextDni, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(backgroundLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
+                        .addGap(19, 19, 19)
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(backgroundLayout.createSequentialGroup()
+                                .addComponent(crearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cancelarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSeparator1)
+                            .addGroup(backgroundLayout.createSequentialGroup()
+                                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLDni, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(45, 45, 45)
+                                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextDni, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(backgroundLayout.createSequentialGroup()
+                                .addComponent(jLApellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(45, 45, 45)
+                                .addComponent(jTextApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addGap(42, 42, 42)
                         .addComponent(titulo)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(12, 12, 12)
                 .addComponent(titulo)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextDni)
                     .addComponent(jLDni, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextNombre)
                     .addComponent(jLNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextApellido)
+                    .addComponent(jLApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cancelarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                     .addComponent(crearBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
@@ -210,11 +228,11 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
         try {
             int dni = Integer.parseInt(jTextDni.getText());
             String nombre = jTextNombre.getText();
-            //traer verificacion de String
+            String apellido = jTextApellido.getText();
             Empleado encontrado = eData.buscarEmpleadoDni(dni);
             //Si no lo encuentra lo crea, si lo encuentra lo da de alta
-            if (encontrado == null) {
-                Empleado empleado = new Empleado(dni, nombre);
+            if (encontrado == null && verificarString(nombre) && verificarString(apellido)) {
+                Empleado empleado = new Empleado(dni, nombre, apellido);
                 eData.agregarEmpleado(empleado);
             } else if (encontrado.isEstado()) {
                 JOptionPane.showMessageDialog(this, "El empleado ya existe, no es necesario crearlo.");
@@ -233,11 +251,13 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
     private javax.swing.JPanel background;
     private javax.swing.JPanel cancelarBtn;
     private javax.swing.JPanel crearBtn;
+    private javax.swing.JLabel jLApellido;
     private javax.swing.JLabel jLCancelar;
     private javax.swing.JLabel jLCrear;
     private javax.swing.JLabel jLDni;
     private javax.swing.JLabel jLNombre;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextField jTextApellido;
     private javax.swing.JTextField jTextDni;
     private javax.swing.JTextField jTextNombre;
     private javax.swing.JLabel titulo;
@@ -246,5 +266,20 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
     private void cerrarVentana() {
         dispose();
         gEmpleados.cargarTabla();
+    }
+    
+      private boolean verificarString(String texto) {
+        // Verifica que el string no este vacio
+        if (texto.isEmpty()) {
+            return false;
+        }
+        // Verifica que el string no contenga numeros 
+        for (int i = 0; i < texto.length(); i++) {
+            char letra = texto.charAt(i);
+            if ((letra < 65 || letra > 90) && (letra < 97 || letra > 122)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

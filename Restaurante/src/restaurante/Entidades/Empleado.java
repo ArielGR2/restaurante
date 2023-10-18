@@ -1,22 +1,25 @@
 package restaurante.Entidades;
 
 public class Empleado {
-    
+
     private int idEmpleado;
     private int dni;
     private String nombre;
+    private String apellido;
     private boolean estado;
 
-    public Empleado(int idEmpleado, int dni, String nombre, boolean estado) {
+    public Empleado(int idEmpleado, int dni, String nombre, String apellido, boolean estado) {
         this.idEmpleado = idEmpleado;
         this.dni = dni;
         this.nombre = nombre;
+        this.apellido = apellido;
         this.estado = estado;
     }
 
-    public Empleado(int dni, String nombre) {
+    public Empleado(int dni, String nombre, String apellido) {
         this.dni = dni;
         this.nombre = nombre;
+        this.apellido = apellido;
     }
 
     public Empleado() {
@@ -46,6 +49,14 @@ public class Empleado {
         this.nombre = nombre;
     }
 
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
     public boolean isEstado() {
         return estado;
     }
@@ -56,6 +67,6 @@ public class Empleado {
 
     @Override
     public String toString() {
-        return "Empleado{" + "idEmpleado=" + idEmpleado + ", dni=" + dni + ", nombre=" + nombre + ", estado=" + estado + '}';
+        return "Empleado{" + "idEmpleado=" + idEmpleado + ", dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", estado=" + estado + '}';
     }
 }

@@ -15,13 +15,11 @@ import restaurante.AccesoDatos.MesaData;
  * @author Glori
  */
 public class GestorMesa extends javax.swing.JInternalFrame {
-    
-   MesaData mData=new MesaData();
-    
-     private DefaultTableModel modelo = new DefaultTableModel() {
-         
-         
-         
+
+    MesaData mData = new MesaData();
+
+    private DefaultTableModel modelo = new DefaultTableModel() {
+
         @Override
         public boolean isCellEditable(int x, int y) {
             if (y == 0 || y == 3) {
@@ -33,12 +31,13 @@ public class GestorMesa extends javax.swing.JInternalFrame {
 
         @Override
         public Class<?> getColumnClass(int c) {
-            if (c == 0 || c == 1) {
-                return Integer.class;
+            if (c == 3) {
+                return String.class;
             }
-            return String.class;
+            return Integer.class;
         }
     };
+
     /**
      * Creates new form GestorMesa
      */

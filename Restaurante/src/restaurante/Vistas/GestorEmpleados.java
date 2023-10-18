@@ -17,7 +17,7 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
     private DefaultTableModel modelo = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int x, int y) {
-            if (y == 0 || y == 3) {
+            if (y == 0 || y == 4) {
                 return false;
             } else {
                 return true;
@@ -265,12 +265,18 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
             int idFila = (Integer) modelo.getValueAt(f, 0);
             int dni = (Integer) modelo.getValueAt(f, 1);
             String nombre = (String) modelo.getValueAt(f, 2);
+            String apellido = (String) modelo.getValueAt(f, 3);
 
+            if (!verificarString(nombre) || !verificarString(apellido)) {
+                JOptionPane.showMessageDialog(this, "Error en: "+ idFila +"\nEl NOMBRE y/o APELLIDO no debe estar vacío y solo contener letras.");
+                continue;
+            }
             //Revisamos si hay modificación, si la hay agregamos el empleado a un array de pendientes a actualizar, si no el array queda vacío.
             for (Empleado e : eData.listarEmpleadosActivos()) {
-                if (e.getIdEmpleado() == idFila && (e.getDni() != dni || !e.getNombre().equals(nombre))) {
+                if (e.getIdEmpleado() == idFila && (e.getDni() != dni || !e.getNombre().equals(nombre) || !e.getApellido().equals(apellido))) {
                     e.setDni(dni);
                     e.setNombre(nombre);
+                    e.setApellido(apellido);
                     eData.modificarEmpleado(e);
                     pendientes.add(e);
                 }
@@ -321,6 +327,7 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
         modelo.addColumn("Id Mesero");
         modelo.addColumn("DNI");
         modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido");
         modelo.addColumn("Estado");
 
         jTEmpleados.setModel(modelo);
@@ -335,6 +342,7 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
 
         jTEmpleados.setEditingColumn(1);
         jTEmpleados.setEditingColumn(2);
+        jTEmpleados.setEditingColumn(3);
     }
 
     public void cargarTabla() {
@@ -344,6 +352,7 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
                 empleado.getIdEmpleado(),
                 empleado.getDni(),
                 empleado.getNombre(),
+                empleado.getApellido(),
                 empleado.isEstado() == true ? "Activo" : "Inactivo"
             });
         }
@@ -356,4 +365,18 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
         }
     }
 
+    private boolean verificarString(String texto) {
+        // Verifica que el string no este vacio
+        if (texto.isEmpty()) {
+            return false;
+        }
+        // Verifica que el string no contenga numeros 
+        for (int i = 0; i < texto.length(); i++) {
+            char letra = texto.charAt(i);
+            if ((letra < 65 || letra > 90) && (letra < 97 || letra > 122)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

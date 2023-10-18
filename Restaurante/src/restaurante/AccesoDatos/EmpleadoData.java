@@ -23,13 +23,14 @@ public class EmpleadoData {
     }
 
     public void agregarEmpleado(Empleado empleado) {
-        sql = "INSERT INTO empleado (dni, nombre) VALUES (?,?)";
+        sql = "INSERT INTO empleado (dni, nombre, apellido) VALUES (?,?,?)";
 
         try {
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, empleado.getDni());
             ps.setString(2, empleado.getNombre());
-            ps.setBoolean(3, empleado.isEstado());
+            ps.setString(3, empleado.getApellido());
+            ps.setBoolean(4, empleado.isEstado());
 
             ps.executeUpdate();
 
@@ -51,7 +52,7 @@ public class EmpleadoData {
 
     public Empleado buscarEmpleado(int idEmpleado) {
         Empleado empleado = null;
-        sql = "SELECT dni, nombre, estado FROM empleado WHERE idEmpleado = ?";
+        sql = "SELECT dni, nombre, apellido, estado FROM empleado WHERE idEmpleado = ?";
 
         try {
             ps = con.prepareStatement(sql);
@@ -64,6 +65,7 @@ public class EmpleadoData {
                 empleado.setIdEmpleado(idEmpleado);
                 empleado.setDni(rs.getInt("dni"));
                 empleado.setNombre(rs.getString("nombre"));
+                empleado.setApellido(rs.getString("apellido"));
                 empleado.setEstado(rs.getBoolean("estado"));
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el empleado.");
@@ -80,7 +82,7 @@ public class EmpleadoData {
 
     public Empleado buscarEmpleadoDni(int dni) {
         Empleado empleado = null;
-        sql = "SELECT idEmpleado, nombre, estado FROM empleado WHERE dni = ?";
+        sql = "SELECT idEmpleado, nombre, apellido, estado FROM empleado WHERE dni = ?";
 
         try {
             ps = con.prepareStatement(sql);
@@ -93,6 +95,7 @@ public class EmpleadoData {
                 empleado.setIdEmpleado(rs.getInt("idEmpleado"));
                 empleado.setDni(dni);
                 empleado.setNombre(rs.getString("nombre"));
+                empleado.setApellido(rs.getString("apellido"));
                 empleado.setEstado(rs.getBoolean("estado"));
             }
 
@@ -122,6 +125,7 @@ public class EmpleadoData {
                 empleado.setIdEmpleado(rs.getInt("idEmpleado"));
                 empleado.setDni(rs.getInt("dni"));
                 empleado.setNombre(rs.getString("nombre"));
+                empleado.setApellido(rs.getString("apellido"));
                 empleado.setEstado(rs.getBoolean("estado"));
 
                 empleados.add(empleado);
@@ -153,6 +157,7 @@ public class EmpleadoData {
                 empleado.setIdEmpleado(rs.getInt("idEmpleado"));
                 empleado.setDni(rs.getInt("dni"));
                 empleado.setNombre(rs.getString("nombre"));
+                empleado.setApellido(rs.getString("apellido"));
                 empleado.setEstado(rs.getBoolean("estado"));
 
                 empleados.add(empleado);
@@ -169,15 +174,16 @@ public class EmpleadoData {
 
     public void modificarEmpleado(Empleado empleado) {
 
-        sql = "UPDATE empleado SET dni = ?, nombre = ?, estado = ? WHERE idEmpleado = ?";
+        sql = "UPDATE empleado SET dni = ?, nombre = ?, apellido = ?, estado = ? WHERE idEmpleado = ?";
 
         try {
             ps = con.prepareStatement(sql);
 
             ps.setInt(1, empleado.getDni());
             ps.setString(2, empleado.getNombre());
-            ps.setBoolean(3, empleado.isEstado());
-            ps.setInt(4, empleado.getIdEmpleado());
+            ps.setString(3, empleado.getApellido());
+            ps.setBoolean(4, empleado.isEstado());
+            ps.setInt(5, empleado.getIdEmpleado());
 
             int registroFilas = ps.executeUpdate();
 
