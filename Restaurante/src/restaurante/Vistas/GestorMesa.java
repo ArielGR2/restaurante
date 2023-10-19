@@ -7,8 +7,12 @@ package restaurante.Vistas;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import restaurante.AccesoDatos.MesaData;
+import restaurante.Entidades.Empleado;
+import restaurante.Entidades.Mesa;
 
 /**
  *
@@ -22,7 +26,7 @@ public class GestorMesa extends javax.swing.JInternalFrame {
 
         @Override
         public boolean isCellEditable(int x, int y) {
-            if (y == 0 || y == 3) {
+            if (y == 2) {
                 return false;
             } else {
                 return true;
@@ -31,7 +35,7 @@ public class GestorMesa extends javax.swing.JInternalFrame {
 
         @Override
         public Class<?> getColumnClass(int c) {
-            if (c == 3) {
+            if (c == 2) {
                 return String.class;
             }
             return Integer.class;
@@ -312,4 +316,44 @@ public class GestorMesa extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTMesas;
     private javax.swing.JPanel modificarBtn;
     // End of variables declaration//GEN-END:variables
+private void cabeceraTabla() {
+        modelo.addColumn("Numero");
+        modelo.addColumn("Capacidad");
+     
+        modelo.addColumn("Estado");
+
+        jTMesas.setModel(modelo);
+
+        //Centrar títulos de la tabla
+        DefaultTableCellRenderer headerRenderer = (DefaultTableCellRenderer) jTMesas.getTableHeader().getDefaultRenderer();
+        headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        //Centrar contenido de tabla
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        jTMesas.setDefaultRenderer(Object.class, centerRenderer);
+
+        jTMesas.setEditingColumn(0);
+        jTMesas.setEditingColumn(1);
+        
+    }
+
+    public void cargarTabla() {
+        eliminarFilas();
+        for (Mesa mesa : mData.listarMesas()) {
+            modelo.addRow(new Object[]{
+             
+                mesa.getNumMesa(),
+                mesa.getCapacidad(),
+                mesa.getEstado()
+            });
+        }
+    }
+
+    private void eliminarFilas() {
+        int filas = jTMesas.getRowCount() - 1;
+        for (; filas >= 0; filas--) {
+            modelo.removeRow(filas);
+        }
+    }
+
 }

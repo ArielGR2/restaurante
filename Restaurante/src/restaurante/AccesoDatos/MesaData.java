@@ -24,14 +24,14 @@ public class MesaData {
     }
 
     public void agregarMesa(Mesa mesa) {
-        sql = "INSERT INTO mesa (numMesa, capacidad, estado) VALUES (?,?,?)";
+        sql = "INSERT INTO mesa (numMesa, capacidad) VALUES (?,?)";
         
         
         try {
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, mesa.getNumMesa());
             ps.setInt(2, mesa.getCapacidad());
-            ps.setString(3, mesa.getEstado());
+            
 
             ps.executeUpdate();
 
@@ -51,20 +51,20 @@ public class MesaData {
         }
     }
 
-    public Mesa buscarMesa(int id) {
+    public Mesa buscarMesa(int numMesa) {
         Mesa mesa = null;
-        sql = "SELECT numMesa, capacidad, estado FROM mesa WHERE idMesa = ?";
+        sql = "SELECT idMesa, capacidad, estado FROM mesa WHERE numMesa = ?";
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setInt(1, numMesa);
 
             rs = ps.executeQuery();
 
             if (rs.next()) {
                 mesa = new Mesa();
-                mesa.setIdMesa(id);
-                mesa.setNumMesa(rs.getInt("numMesa"));
+                mesa.setIdMesa(rs.getInt("idMesa"));
+                mesa.setNumMesa(numMesa);
                 mesa.setCapacidad(rs.getInt("capacidad"));
                 mesa.setEstado((EstadoMesa.valueOf(rs.getString("estado"))));
             } else {

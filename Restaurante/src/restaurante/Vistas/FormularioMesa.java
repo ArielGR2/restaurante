@@ -5,17 +5,24 @@
  */
 package restaurante.Vistas;
 
+import javax.swing.JOptionPane;
+import restaurante.AccesoDatos.MesaData;
+import restaurante.Entidades.EstadoMesa;
+import restaurante.Entidades.Mesa;
+
 /**
  *
- * @author Glori
+ 
  */
 public class FormularioMesa extends javax.swing.JInternalFrame {
-
+      MesaData mData= new MesaData();
+      GestorMesa gMesa;
     /**
      * Creates new form FormularioMesa
      */
     public FormularioMesa(GestorMesa ventanaPrincipal) {
         initComponents();
+        this.gMesa= ventanaPrincipal;
     }
 
     /**
@@ -32,14 +39,12 @@ public class FormularioMesa extends javax.swing.JInternalFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLNumero = new javax.swing.JLabel();
         jLCapacidad = new javax.swing.JLabel();
-        jLEstado = new javax.swing.JLabel();
         crearBtn = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLCrear = new javax.swing.JLabel();
         cancelarBtn = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        jLCancelar = new javax.swing.JLabel();
+        jTNumero = new javax.swing.JTextField();
+        jTCapacidad = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(25, 25, 25));
         setBorder(null);
@@ -59,11 +64,12 @@ public class FormularioMesa extends javax.swing.JInternalFrame {
         jLCapacidad.setForeground(new java.awt.Color(204, 204, 255));
         jLCapacidad.setText("CAPACIDAD");
 
-        jLEstado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLEstado.setForeground(new java.awt.Color(204, 204, 255));
-        jLEstado.setText("ESTADO");
-
-        jLabel1.setText("CREAR");
+        jLCrear.setText("CREAR");
+        jLCrear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLCrearMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout crearBtnLayout = new javax.swing.GroupLayout(crearBtn);
         crearBtn.setLayout(crearBtnLayout);
@@ -71,18 +77,23 @@ public class FormularioMesa extends javax.swing.JInternalFrame {
             crearBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, crearBtnLayout.createSequentialGroup()
                 .addContainerGap(34, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(jLCrear)
                 .addGap(32, 32, 32))
         );
         crearBtnLayout.setVerticalGroup(
             crearBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(crearBtnLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLCrear)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel2.setText("CANCELAR");
+        jLCancelar.setText("CANCELAR");
+        jLCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLCancelarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout cancelarBtnLayout = new javax.swing.GroupLayout(cancelarBtn);
         cancelarBtn.setLayout(cancelarBtnLayout);
@@ -90,22 +101,20 @@ public class FormularioMesa extends javax.swing.JInternalFrame {
             cancelarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cancelarBtnLayout.createSequentialGroup()
                 .addContainerGap(40, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addComponent(jLCancelar)
                 .addGap(26, 26, 26))
         );
         cancelarBtnLayout.setVerticalGroup(
             cancelarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cancelarBtnLayout.createSequentialGroup()
                 .addContainerGap(12, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addComponent(jLCancelar)
                 .addContainerGap())
         );
 
-        jTextField1.setBackground(new java.awt.Color(204, 204, 204));
+        jTNumero.setBackground(new java.awt.Color(204, 204, 204));
 
-        jTextField2.setBackground(new java.awt.Color(204, 204, 204));
-
-        jTextField3.setBackground(new java.awt.Color(204, 204, 204));
+        jTCapacidad.setBackground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
         background.setLayout(backgroundLayout);
@@ -121,16 +130,13 @@ public class FormularioMesa extends javax.swing.JInternalFrame {
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(backgroundLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLNumero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLCapacidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLEstado))
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLNumero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLCapacidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(75, 75, 75)
                         .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))))
+                            .addComponent(jTNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                            .addComponent(jTCapacidad))))
                 .addContainerGap(69, Short.MAX_VALUE))
             .addGroup(backgroundLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
@@ -149,16 +155,12 @@ public class FormularioMesa extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLNumero)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLCapacidad)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLEstado)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                    .addComponent(jTCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cancelarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(crearBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -179,20 +181,53 @@ public class FormularioMesa extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jLCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLCrearMouseClicked
+        // TODO add your handling code here:
+        try{
+            int numero = Integer.parseInt(jTNumero.getText());
+            int capacidad = Integer.parseInt(jTCapacidad.getText());
+            
+            Mesa encontrada = mData.buscarMesa(numero);
+            //Si no lo encuentra lo crea, si lo encuentra lo da de alta
+            if (encontrada == null) {
+                Mesa mesa = new Mesa(numero,capacidad);
+                mData.agregarMesa(mesa);
+            } else  {
+                JOptionPane.showMessageDialog(this, "La mesa ya existe, no es necesario crearla.");
+            
+            }
+            cerrarVentana();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Introducir un numero válido");
+        }
+                                       
+
+
+        
+    }//GEN-LAST:event_jLCrearMouseClicked
+
+    private void jLCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLCancelarMouseClicked
+        // TODO add your handling code here:
+        cerrarVentana();
+    }//GEN-LAST:event_jLCancelarMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
     private javax.swing.JPanel cancelarBtn;
     private javax.swing.JPanel crearBtn;
+    private javax.swing.JLabel jLCancelar;
     private javax.swing.JLabel jLCapacidad;
-    private javax.swing.JLabel jLEstado;
+    private javax.swing.JLabel jLCrear;
     private javax.swing.JLabel jLNumero;
     private javax.swing.JLabel jLTitulo;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTCapacidad;
+    private javax.swing.JTextField jTNumero;
     // End of variables declaration//GEN-END:variables
+
+ private void cerrarVentana() {
+        dispose();
+        gMesa.cargarTabla();
+    }
 }

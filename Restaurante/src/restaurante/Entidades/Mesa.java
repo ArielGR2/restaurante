@@ -14,10 +14,10 @@ public class Mesa {
         this.estado = estado;
     }
 
-    public Mesa(int numMesa, int capacidad, EstadoMesa estado) {
+    public Mesa(int numMesa, int capacidad) {
         this.numMesa = numMesa;
         this.capacidad = capacidad;
-        this.estado = estado;
+        
     }
 
     public Mesa() {
