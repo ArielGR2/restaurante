@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package restaurante.Vistas;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -14,10 +11,6 @@ import restaurante.AccesoDatos.MesaData;
 import restaurante.Entidades.Empleado;
 import restaurante.Entidades.Mesa;
 
-/**
- *
- * @author Glori
- */
 public class GestorMesa extends javax.swing.JInternalFrame {
 
     MesaData mData = new MesaData();
@@ -47,6 +40,8 @@ public class GestorMesa extends javax.swing.JInternalFrame {
      */
     public GestorMesa() {
         initComponents();
+        cabeceraTabla();
+        cargarTabla();
     }
 
     /**
@@ -213,7 +208,7 @@ public class GestorMesa extends javax.swing.JInternalFrame {
                         .addComponent(modificarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(eliminarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,23 +220,18 @@ public class GestorMesa extends javax.swing.JInternalFrame {
                     .addComponent(agregarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(modificarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(eliminarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -276,32 +266,34 @@ public class GestorMesa extends javax.swing.JInternalFrame {
 
     private void jLModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLModificarMouseClicked
         int filas = jTMesas.getRowCount();
+        boolean pendiente = false;
 
         for (int f = 0; f < filas; f++) {
-            int idEmpleado = (Integer) modelo.getValueAt(jTMesas.getSelectedRow(), 0);
-            int dni = (Integer) modelo.getValueAt(jTMesas.getSelectedRow(), 1);
-            String nombre = (String) modelo.getValueAt(jTMesas.getSelectedRow(), 2);
+            int numMesa = (Integer) modelo.getValueAt(f, 0);
+            int capacidad = (Integer) modelo.getValueAt(f, 1);
+            int id = mData.buscarMesa(numMesa).getIdMesa();
 
-            boolean actualizacionPendiente = false;
-
-            /*for (Mesa m : mData) {
-                if (e.getIdEmpleado() == idEmpleado && (e.getDni() != dni || !e.getNombre().equals(nombre))) {
-
-                    actualizacionPendiente = true;
-                    System.out.println("Actualizado: " + idEmpleado + " " + dni + " " + nombre);
-                    break;
+            //Revisamos si hay modificación, si la hay modificamos la mesa y el booleano pasa a true.
+            for (Mesa m : mData.listarMesas()) {
+                if (m.getIdMesa() == id && (m.getNumMesa() != numMesa || m.getCapacidad() != capacidad)) {
+                    m.setNumMesa(numMesa);
+                    m.setCapacidad(capacidad);
+                    mData.modificarMesa(m);
+                    pendiente = true;
                 }
             }
-            if (!actualizacionPendiente) {
-                JOptionPane.showMessageDialog(this, "No hay modificaciones.");
-            }*/
+        }
+        //Si no queda en false y da el mensaje
+        if (!pendiente) {
+            JOptionPane.showMessageDialog(this, "No hay modificaciones.");
+            return;
         }
     }//GEN-LAST:event_jLModificarMouseClicked
 
     private void jLEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLEliminarMouseClicked
-        int dni = (Integer) modelo.getValueAt(jTMesas.getSelectedRow(), 1);
-        /*edata.eliminarEmpleado(dni);
-        actualizarTabla();*/
+        int numeroMesa = (Integer) modelo.getValueAt(jTMesas.getSelectedRow(), 0);
+        mData.eliminarMesa(numeroMesa);
+        cargarTabla();
     }//GEN-LAST:event_jLEliminarMouseClicked
 
 
@@ -316,10 +308,10 @@ public class GestorMesa extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTMesas;
     private javax.swing.JPanel modificarBtn;
     // End of variables declaration//GEN-END:variables
-private void cabeceraTabla() {
+
+    private void cabeceraTabla() {
         modelo.addColumn("Numero");
         modelo.addColumn("Capacidad");
-     
         modelo.addColumn("Estado");
 
         jTMesas.setModel(modelo);
@@ -334,14 +326,13 @@ private void cabeceraTabla() {
 
         jTMesas.setEditingColumn(0);
         jTMesas.setEditingColumn(1);
-        
+
     }
 
     public void cargarTabla() {
         eliminarFilas();
         for (Mesa mesa : mData.listarMesas()) {
             modelo.addRow(new Object[]{
-             
                 mesa.getNumMesa(),
                 mesa.getCapacidad(),
                 mesa.getEstado()
@@ -355,5 +346,4 @@ private void cabeceraTabla() {
             modelo.removeRow(filas);
         }
     }
-
 }
