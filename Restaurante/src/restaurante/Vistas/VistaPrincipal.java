@@ -119,11 +119,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jDesktopPane1.removeAll();
         jDesktopPane1.repaint();
         
-        GestorEmpleados empleadoVistas = new GestorEmpleados();
-        empleadoVistas.setVisible(true);
+        GestorEmpleados gestorEmpleados = new GestorEmpleados();
+        gestorEmpleados.setVisible(true);
         
-        jDesktopPane1.add(empleadoVistas);
-        jDesktopPane1.moveToFront(empleadoVistas);
+        jDesktopPane1.add(gestorEmpleados);
+        jDesktopPane1.moveToFront(gestorEmpleados);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -131,11 +131,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jDesktopPane1.removeAll();
         jDesktopPane1.repaint();
         //DESCOMENTAR Y REEMPLAZAR CON LA VENTANA INTERNA CORRESPONDIENTE
-        GestorMesa mesaVistas = new GestorMesa();
-        mesaVistas.setVisible(true);
+        GestorMesa gestorMesa = new GestorMesa();
+        gestorMesa.setVisible(true);
         
-        jDesktopPane1.add(mesaVistas);
-        jDesktopPane1.moveToFront(mesaVistas);
+        jDesktopPane1.add(gestorMesa);
+        jDesktopPane1.moveToFront(gestorMesa);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -143,11 +143,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jDesktopPane1.removeAll();
         jDesktopPane1.repaint();
         //DESCOMENTAR Y REEMPLAZAR CON LA VENTANA INTERNA CORRESPONDIENTE
-        //EmpleadoVistas empleadoVistas = new GestorEmpleados();
-        //empleadoVistas.setVisible(true);
+        GestorProductos gestorProductos = new GestorProductos();
+        gestorProductos.setVisible(true);
         
-        //jDesktopPane1.add(empleadoVistas);
-        //jDesktopPane1.moveToFront(empleadoVistas);
+        jDesktopPane1.add(gestorProductos);
+        jDesktopPane1.moveToFront(gestorProductos);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

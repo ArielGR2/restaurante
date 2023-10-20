@@ -126,7 +126,7 @@ public class ProductoData {
     public List<Producto> listarProductos() {
         List<Producto> productos = new ArrayList<>();
 
-        sql = "SELECT * FROM producto WHERE disponible = 1";
+        sql = "SELECT * FROM producto";
 
         try {
 
