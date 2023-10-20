@@ -19,6 +19,7 @@ public class GestorProductos extends javax.swing.JInternalFrame {
     ProductoData pData = new ProductoData();
     private static final int FILTRO_MIN = 0;
     private static final int FILTRO_MAX = 9999999;
+    private static final int ALERTA_STOCK = 100;
 
     private DefaultTableModel modelo = new DefaultTableModel() {
         @Override
@@ -46,7 +47,7 @@ public class GestorProductos extends javax.swing.JInternalFrame {
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             int stock = Integer.parseInt(value.toString());
-            if (stock < 100) {
+            if (stock < ALERTA_STOCK) {
                 c.setForeground(Color.RED);
             } else {
                 c.setForeground(new java.awt.Color(60,63,65));
