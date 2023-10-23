@@ -2,6 +2,7 @@ package restaurante.Vistas;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JDesktopPane;
@@ -17,9 +18,10 @@ import restaurante.Entidades.Producto;
 public class GestorProductos extends javax.swing.JInternalFrame {
 
     ProductoData pData = new ProductoData();
-    private static final int FILTRO_MIN = 0;
+    private static final int FILTRO_MIN = 1;
     private static final int FILTRO_MAX = 9999999;
     private static final int ALERTA_STOCK = 100;
+    private boolean BUSCANDO = false;
 
     private DefaultTableModel modelo = new DefaultTableModel() {
         @Override
@@ -127,13 +129,8 @@ public class GestorProductos extends javax.swing.JInternalFrame {
             }
         });
         jTFPNombre.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTFPNombreMouseClicked(evt);
-            }
-        });
-        jTFPNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFPNombreActionPerformed(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTFPNombreMouseReleased(evt);
             }
         });
         jTFPNombre.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -158,8 +155,8 @@ public class GestorProductos extends javax.swing.JInternalFrame {
             }
         });
         jTFPStockMin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTFPStockMinMouseClicked(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTFPStockMinMouseReleased(evt);
             }
         });
         jTFPStockMin.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -176,8 +173,8 @@ public class GestorProductos extends javax.swing.JInternalFrame {
             }
         });
         jTFPStockMax.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTFPStockMaxMouseClicked(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTFPStockMaxMouseReleased(evt);
             }
         });
         jTFPStockMax.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -202,8 +199,8 @@ public class GestorProductos extends javax.swing.JInternalFrame {
             }
         });
         jTFPPrecioMin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTFPPrecioMinMouseClicked(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTFPPrecioMinMouseReleased(evt);
             }
         });
         jTFPPrecioMin.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -220,8 +217,8 @@ public class GestorProductos extends javax.swing.JInternalFrame {
             }
         });
         jTFPPrecioMax.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTFPPrecioMaxMouseClicked(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTFPPrecioMaxMouseReleased(evt);
             }
         });
         jTFPPrecioMax.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -240,6 +237,11 @@ public class GestorProductos extends javax.swing.JInternalFrame {
         jLBuscar.setText("Buscar");
         jLBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLBuscar.setEnabled(false);
+        jLBuscar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jLBuscarFocusGained(evt);
+            }
+        });
         jLBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLBuscarMouseClicked(evt);
@@ -250,17 +252,11 @@ public class GestorProductos extends javax.swing.JInternalFrame {
         buscarBtn.setLayout(buscarBtnLayout);
         buscarBtnLayout.setHorizontalGroup(
             buscarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(buscarBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
         );
         buscarBtnLayout.setVerticalGroup(
             buscarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(buscarBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLBuscar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
         LimpiarBtn.setBackground(new java.awt.Color(51, 51, 51));
@@ -331,17 +327,11 @@ public class GestorProductos extends javax.swing.JInternalFrame {
         agregarBtn.setLayout(agregarBtnLayout);
         agregarBtnLayout.setHorizontalGroup(
             agregarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(agregarBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLAgregar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
         );
         agregarBtnLayout.setVerticalGroup(
             agregarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(agregarBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLAgregar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
         modificarBtn.setBackground(new java.awt.Color(51, 51, 51));
@@ -363,17 +353,11 @@ public class GestorProductos extends javax.swing.JInternalFrame {
         modificarBtn.setLayout(modificarBtnLayout);
         modificarBtnLayout.setHorizontalGroup(
             modificarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(modificarBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLModificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
         );
         modificarBtnLayout.setVerticalGroup(
             modificarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(modificarBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLModificar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
         eliminarBtn.setBackground(new java.awt.Color(51, 51, 51));
@@ -396,17 +380,11 @@ public class GestorProductos extends javax.swing.JInternalFrame {
         eliminarBtn.setLayout(eliminarBtnLayout);
         eliminarBtnLayout.setHorizontalGroup(
             eliminarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(eliminarBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
         );
         eliminarBtnLayout.setVerticalGroup(
             eliminarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(eliminarBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLEliminar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
         jCBFPNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -481,10 +459,11 @@ public class GestorProductos extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFPNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLFPNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCBFPNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCBFPNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTFPNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLFPNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(LimpiarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -591,10 +570,6 @@ public class GestorProductos extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jTProductosMouseClicked
 
-    private void jTFPNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFPNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFPNombreActionPerformed
-
     private void jTFPNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFPNombreKeyReleased
         // TODO add your handling code here:
         eliminarFilas();
@@ -606,8 +581,8 @@ public class GestorProductos extends javax.swing.JInternalFrame {
                     prod.getIdProducto(),
                     prod.getNombre(),
                     prod.getStock(),
-                    prod.getPrecio(),
-                    prod.isDisponible()
+                    "$"+prod.getPrecio(),
+                    prod.isDisponible() == true ? "Si " : "No "
                 });
             }
         }
@@ -617,32 +592,15 @@ public class GestorProductos extends javax.swing.JInternalFrame {
             jTFPNombreKeyReleased(evt);
         }
     }//GEN-LAST:event_jTFPNombreKeyReleased
-    // STOCK
-    private void jTFPStockMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFPStockMinMouseClicked
-        // TODO add your handling code here:
-        if (!jTFPStockMin.isEnabled()){
-            return;
-        }
-        if (jTFPStockMin.getText().equals("MIN")) {
-            jTFPStockMin.setText("");
-        }
-    }//GEN-LAST:event_jTFPStockMinMouseClicked
-
-    private void jTFPStockMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFPStockMaxMouseClicked
-        // TODO add your handling code here:
-        if (!jTFPStockMax.isEnabled()){
-            return;
-        }
-        if (jTFPStockMax.getText().equals("MAX")) {
-            jTFPStockMax.setText("");
-
-        }
-    }//GEN-LAST:event_jTFPStockMaxMouseClicked
 
     private void jTFPStockMinFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFPStockMinFocusLost
         // TODO add your handling code here:
         if (jTFPStockMin.getText().isEmpty()){
             jTFPStockMin.setText("MIN");
+        }
+        
+        if (numTFVerificacion(jTFPStockMin.getText())) {
+           jTFPStockMin.setText(correccionFiltros(jTFPStockMin.getText(),jTFPStockMax.getText(),"MAX",FILTRO_MAX));
         }
     }//GEN-LAST:event_jTFPStockMinFocusLost
 
@@ -651,6 +609,10 @@ public class GestorProductos extends javax.swing.JInternalFrame {
         if (jTFPStockMax.getText().isEmpty()){
             jTFPStockMax.setText("MAX");
         }
+        
+        if (numTFVerificacion(jTFPStockMax.getText())) {
+           jTFPStockMax.setText(correccionFiltros(jTFPStockMax.getText(),jTFPStockMin.getText(),"MIN",FILTRO_MIN));
+        }
     }//GEN-LAST:event_jTFPStockMaxFocusLost
     // PRECIO
     private void jTFPPrecioMinFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFPPrecioMinFocusLost
@@ -658,42 +620,24 @@ public class GestorProductos extends javax.swing.JInternalFrame {
         if (jTFPPrecioMin.getText().isEmpty()){
             jTFPPrecioMin.setText("MIN");
         }
+        
+        if (numTFVerificacion(jTFPPrecioMin.getText())) {
+           jTFPPrecioMin.setText(correccionFiltros(jTFPPrecioMin.getText(),jTFPPrecioMax.getText(),"MAX",FILTRO_MAX));
+        }
     }//GEN-LAST:event_jTFPPrecioMinFocusLost
-
-    private void jTFPPrecioMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFPPrecioMinMouseClicked
-        // TODO add your handling code here:
-        if (!jTFPPrecioMin.isEnabled()){
-            return;
-        }
-        if (jTFPPrecioMin.getText().equals("MIN")) {
-            jTFPPrecioMin.setText("");
-
-        }
-    }//GEN-LAST:event_jTFPPrecioMinMouseClicked
 
     private void jTFPPrecioMaxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFPPrecioMaxFocusLost
         // TODO add your handling code here:
         if (jTFPPrecioMax.getText().isEmpty()){
             jTFPPrecioMax.setText("MAX");
         }
+        
+        if (numTFVerificacion(jTFPPrecioMax.getText())) {
+           jTFPPrecioMax.setText(correccionFiltros(jTFPPrecioMax.getText(),jTFPPrecioMin.getText(),"MIN",FILTRO_MIN));
+        }
     }//GEN-LAST:event_jTFPPrecioMaxFocusLost
 
-    private void jTFPPrecioMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFPPrecioMaxMouseClicked
-        // TODO add your handling code here:
-        if (!jTFPPrecioMax.isEnabled()){
-            return;
-        }
-        if (jTFPPrecioMax.getText().equals("MAX")) {
-            jTFPPrecioMax.setText("");
-
-        }
-    }//GEN-LAST:event_jTFPPrecioMaxMouseClicked
-    // BUSQUEDAD CON 1 O MAS FILTROS
-    private void jLBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBuscarMouseClicked
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Deberia buscar..");
-    }//GEN-LAST:event_jLBuscarMouseClicked
-    // Limpia la vista de filtros
+   // Limpia la vista de filtros
     private void jLLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLLimpiarMouseClicked
         // TODO add your handling code here:
         jTFPNombre.setText("Ingresa el nombre del producto");
@@ -716,7 +660,7 @@ public class GestorProductos extends javax.swing.JInternalFrame {
         }
         filtroSeleccionado();
     }//GEN-LAST:event_jCBFPNombreActionPerformed
-
+    // ACTIVAR COMBOBOX
     private void jCBFPStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBFPStockActionPerformed
         // TODO add your handling code here:
         if (jCBFPStock.isSelected()){
@@ -748,33 +692,11 @@ public class GestorProductos extends javax.swing.JInternalFrame {
         }
         filtroSeleccionado();
     }//GEN-LAST:event_jCBFPPrecioActionPerformed
-
-    private void jTFPNombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFPNombreMouseClicked
-        // TODO add your handling code here:
-        
-        if (!jTFPNombre.isEnabled()){
-            return;
-        }
-        System.out.println(jTFPNombre.getText());
-        if (jTFPNombre.getText().equals("Ingresa el nombre del producto")) {
-            jTFPNombre.setText("");
-        }
-    }//GEN-LAST:event_jTFPNombreMouseClicked
-
-    private void jTFPNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFPNombreFocusLost
-        // TODO add your handling code here:
-        if (jTFPNombre.getText().isEmpty()){
-            jTFPNombre.setText("Ingresa el nombre del producto");
-        }
-    }//GEN-LAST:event_jTFPNombreFocusLost
-
+    // EVENTOS AL TECLEAR
     private void jTFPStockMinKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFPStockMinKeyReleased
         // TODO add your handling code here:
         if (!checkFiltroNum(evt.getKeyChar())){
             jTFPStockMin.setText(jTFPStockMin.getText().substring(0, jTFPStockMin.getText().length()-1));
-        }
-        if (!checkFiltroMenorMayor(Integer.valueOf(jTFPStockMin.getText()),jTFPStockMax.getText().equals("MAX")?FILTRO_MAX:Integer.valueOf(jTFPStockMax.getText()))){
-            jTFPStockMin.setText(jTFPStockMax.getText().equals("MAX")?FILTRO_MAX-1+"":Integer.valueOf(jTFPStockMax.getText())-1+"");
         }
     }//GEN-LAST:event_jTFPStockMinKeyReleased
 
@@ -798,6 +720,112 @@ public class GestorProductos extends javax.swing.JInternalFrame {
             jTFPPrecioMax.setText(jTFPPrecioMax.getText().substring(0, jTFPPrecioMax.getText().length()-1));
         }
     }//GEN-LAST:event_jTFPPrecioMaxKeyReleased
+    /// EVENTOS AL CLICKEAR
+    private void jTFPStockMinMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFPStockMinMouseReleased
+        // TODO add your handling code here:
+        if (!jTFPStockMin.isEnabled()){
+            return;
+        }
+        if (!numTFVerificacion(jTFPStockMin.getText())) {
+            jTFPStockMin.setText("");
+        }
+    }//GEN-LAST:event_jTFPStockMinMouseReleased
+
+    private void jTFPStockMaxMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFPStockMaxMouseReleased
+        // TODO add your handling code here:
+        if (!jTFPStockMax.isEnabled()){
+            return;
+        }
+        if (!numTFVerificacion(jTFPStockMax.getText())) {
+            jTFPStockMax.setText("");
+        }
+    }//GEN-LAST:event_jTFPStockMaxMouseReleased
+
+    private void jTFPPrecioMinMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFPPrecioMinMouseReleased
+        // TODO add your handling code here:
+        if (!jTFPPrecioMin.isEnabled()){
+            return;
+        }
+        if (!numTFVerificacion(jTFPPrecioMin.getText())) {
+            jTFPPrecioMin.setText("");
+        }
+    }//GEN-LAST:event_jTFPPrecioMinMouseReleased
+
+    private void jTFPPrecioMaxMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFPPrecioMaxMouseReleased
+        // TODO add your handling code here:
+        if (!jTFPPrecioMax.isEnabled()){
+            return;
+        }
+        if (!numTFVerificacion(jTFPPrecioMax.getText())) {
+            jTFPPrecioMax.setText("");
+        }
+    }//GEN-LAST:event_jTFPPrecioMaxMouseReleased
+
+    private void jTFPNombreMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFPNombreMouseReleased
+        // TODO add your handling code here:
+        if (!jTFPNombre.isEnabled()){
+            return;
+        }
+
+        if (jTFPNombre.getText().equals("Ingresa el nombre del producto")) {
+            jTFPNombre.setText("");
+        }
+    }//GEN-LAST:event_jTFPNombreMouseReleased
+
+    private void jTFPNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFPNombreFocusLost
+        // TODO add your handling code here:
+        if (jTFPNombre.getText().isEmpty()){
+            jTFPNombre.setText("Ingresa el nombre del producto");
+        }
+    }//GEN-LAST:event_jTFPNombreFocusLost
+
+    private void jLBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBuscarMouseClicked
+        // TODO add your handling code here:
+        if (!jLBuscar.isEnabled()){
+            return;
+        }
+        BUSCANDO = true;
+        int fsMin = jTFPStockMin.getText().equals("MIN")?FILTRO_MIN:Integer.valueOf(jTFPStockMin.getText());
+        int fsMax = jTFPStockMax.getText().equals("MAX")?FILTRO_MAX:Integer.valueOf(jTFPStockMax.getText());
+        int fpMin = jTFPPrecioMin.getText().equals("MIN")?FILTRO_MIN:Integer.valueOf(jTFPPrecioMin.getText());
+        int fpMax = jTFPPrecioMax.getText().equals("MAX")?FILTRO_MAX:Integer.valueOf(jTFPPrecioMax.getText());
+        
+        if (fsMin > fsMax){
+            JOptionPane.showMessageDialog(this, "El numero "+ fsMin +" no puede ser mayor al establecido como MAX("+fsMax+"). ");
+            return;
+        }else if (fsMax < fsMin){
+            JOptionPane.showMessageDialog(this, "El numero "+ fsMax +" no puede ser menor al establecido como MIN("+fsMin+"). ");
+            return;
+        }else if (fpMin > fpMax){
+            JOptionPane.showMessageDialog(this, "El numero "+ fsMin +" no puede ser mayor al establecido como MAX("+fsMax+"). ");
+            return;
+        }else if (fpMax < fpMin){
+            JOptionPane.showMessageDialog(this, "El numero "+ fsMax +" no puede ser menor al establecido como MIN("+fsMin+"). ");
+            return;
+        }
+        
+        eliminarFilas();
+
+        String texto = jTFPNombre.getText().toLowerCase();
+        for (Producto prod : pData.listarProductosXFiltros(
+                jCBFPNombre.isSelected()?jTFPNombre.getText().toLowerCase():"",fsMin+"",fsMax+"",fpMin+"",fpMax+""
+        )) {
+           modelo.addRow(new Object[]{
+           prod.getIdProducto(),
+           prod.getNombre(),
+           prod.getStock(),
+           "$"+prod.getPrecio(),
+           prod.isDisponible() == true ? "Si " : "No "
+           });
+        }
+        if (jTProductos.getRowCount() == 0){
+            JOptionPane.showMessageDialog(this, "No se han encontrado productos. ");
+        }
+    }//GEN-LAST:event_jLBuscarMouseClicked
+
+    private void jLBuscarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jLBuscarFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLBuscarFocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel LimpiarBtn;
@@ -905,7 +933,7 @@ public class GestorProductos extends javax.swing.JInternalFrame {
         }
     }
     
-    private boolean checkFiltroNum(int t){
+    private boolean checkFiltroNum(int t){ // CHECK SOLO NUMEROS EN INT
         if (!(t == 8 || t == 10 || t == 27 || (t >= 48 && t <= 57))){
             JOptionPane.showMessageDialog(this, "Solo puedes ingresar numeros. ");
             return false;
@@ -913,14 +941,55 @@ public class GestorProductos extends javax.swing.JInternalFrame {
         return true;
     }
     
-    private boolean checkFiltroMenorMayor(int m, int M){
-        if (m > M){
-            JOptionPane.showMessageDialog(this, "El numero "+ m +" no puede ser mayor al establecido como MAX("+M+"). ");
-            return false;
-        }else if (M < m){
-            JOptionPane.showMessageDialog(this, "El numero "+ M +" no puede ser menor al establecido como MIN("+m+"). ");
-            return false;
+    private boolean numTFVerificacion(String cad){ // CHECK SOLO NUMEROS EN STRING
+        byte[] t = cad.getBytes(StandardCharsets.US_ASCII);
+        for (int i = 0; i < cad.length(); i++) {
+            if (!(t[i] == 8 || t[i] == 10 || t[i] == 27 || (t[i] >= 48 && t[i] <= 57))){
+                return false;
+            }
         }
         return true;
+    }
+    
+    private boolean checkFiltroMenorMayor(int m, int M, String v){
+        if (m > M){
+            if (v.equals("MAX")){
+                if (!BUSCANDO){
+                    JOptionPane.showMessageDialog(this, "El numero "+ m +" no puede ser mayor al establecido como MAX("+M+"). ");
+                }
+                return false;
+            }else{
+                if (!BUSCANDO){
+                    JOptionPane.showMessageDialog(this, "El numero "+ M +" no puede ser menor al establecido como MIN("+m+"). ");
+                }
+                return false;
+            }
+        }
+        return true;
+    }
+   
+    private String correccionFiltros(String s, String t, String typet, int valuetypet){
+        try{
+            if (s.isEmpty() || t.isEmpty()) {
+                return "";
+            }
+            
+            if (typet.equals("MAX")){
+                if (!checkFiltroMenorMayor(Integer.valueOf(s),t.equals(typet)?valuetypet:Integer.valueOf(t),typet)){
+                    return t.equals(typet)?valuetypet-1+"":Integer.valueOf(t)-1+"";
+                }  
+            }
+            else if (typet.equals("MIN")) {
+                if (!checkFiltroMenorMayor(t.equals(typet)?valuetypet:Integer.valueOf(t),Integer.valueOf(s),typet)){
+                    return t.equals(typet)?valuetypet+1+"":Integer.valueOf(t)+1+"";
+                }
+            }
+            
+            BUSCANDO = false;
+            return s;
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this,"Error. Ingrese el numero nuevamente. ");
+            return "";
+        }
     }
 }

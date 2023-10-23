@@ -154,6 +154,38 @@ public class ProductoData {
 
         return productos;
     }
+    
+    public List<Producto> listarProductosXFiltros(String nombrep, String sMinp, String sMaxp, String pMinp, String pMaxp) {
+        List<Producto> productos = new ArrayList<>();
+
+        sql = "SELECT * FROM producto WHERE nombre like '%"+nombrep+"%' AND (stock >= "+sMinp+" AND stock <= "+sMaxp+") AND (precio >= "+pMinp+" AND precio <= "+pMaxp+")";
+
+        try {
+
+            ps = con.prepareStatement(sql);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Producto producto = new Producto();
+
+                producto.setIdProducto(rs.getInt("idProducto"));
+                producto.setNombre(rs.getString("nombre"));
+                producto.setStock(rs.getInt("stock"));
+                producto.setPrecio(rs.getDouble("precio"));
+                producto.setDisponible(rs.getBoolean("disponible"));
+
+                productos.add(producto);
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla producto. " + ex.getMessage());
+        }
+
+        return productos;
+    }
 
     public void modificarProducto(Producto producto) {
 
