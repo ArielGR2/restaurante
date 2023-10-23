@@ -237,11 +237,6 @@ public class GestorProductos extends javax.swing.JInternalFrame {
         jLBuscar.setText("Buscar");
         jLBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLBuscar.setEnabled(false);
-        jLBuscar.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jLBuscarFocusGained(evt);
-            }
-        });
         jLBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLBuscarMouseClicked(evt);
@@ -822,10 +817,6 @@ public class GestorProductos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "No se han encontrado productos. ");
         }
     }//GEN-LAST:event_jLBuscarMouseClicked
-
-    private void jLBuscarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jLBuscarFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLBuscarFocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel LimpiarBtn;
