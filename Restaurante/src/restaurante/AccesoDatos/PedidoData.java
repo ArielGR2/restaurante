@@ -26,11 +26,11 @@ public class PedidoData {
     }
 
     public void agregarPedido(Pedido pedido) {
-        sql = "INSERT INTO pedido (idMesa, idEmpleado, precioPedido) VALUES (?,?,?)";
-        
+        sql = "INSERT INTO pedido (numMesa, idEmpleado, precioPedido) VALUES (?,?,?)";
+
         try {
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, pedido.getMesa().getIdMesa());
+            ps.setInt(1, pedido.getMesa().getNumMesa());
             ps.setInt(2, pedido.getEmpleado().getIdEmpleado());
             ps.setDouble(3, pedido.getPrecioPedido());
 
@@ -65,7 +65,7 @@ public class PedidoData {
             if (rs.next()) {
                 pedido = new Pedido();
                 pedido.setIdPedido(idPedido);
-                pedido.setMesa(mData.buscarMesa(rs.getInt("idMesa")));
+                pedido.setMesa(mData.buscarMesa(rs.getInt("numMesa")));
                 pedido.setEmpleado(eData.buscarEmpleado(rs.getInt("idEmpleado")));
                 pedido.setPrecioPedido(rs.getDouble("precioPedido"));
                 pedido.setEstado(EstadoPedido.valueOf(rs.getString("estado")));
@@ -97,7 +97,41 @@ public class PedidoData {
                 Pedido pedido = new Pedido();
 
                 pedido.setIdPedido(rs.getInt("idPedido"));
-                pedido.setMesa(mData.buscarMesa(rs.getInt("idMesa")));
+                pedido.setMesa(mData.buscarMesa(rs.getInt("numMesa")));
+                pedido.setEmpleado(eData.buscarEmpleado(rs.getInt("idEmpleado")));
+                pedido.setPrecioPedido(rs.getDouble("precioPedido"));
+                pedido.setEstado(EstadoPedido.valueOf(rs.getString("estado")));
+
+                pedidos.add(pedido);
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pedido. " + ex.getMessage());
+        }
+
+        return pedidos;
+    }
+
+    public List<Pedido> listarPedidosMesa(int numMesa) {
+        List<Pedido> pedidos = new ArrayList<>();
+
+        sql = "SELECT idPedido, idEmpleado, precioPedido, p.estado FROM pedido p, mesa m "
+                + "WHERE p.numMesa = ? AND (p.numMesa = m.numMesa);";
+
+        try {
+
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, numMesa);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Pedido pedido = new Pedido();
+
+                pedido.setIdPedido(rs.getInt("idPedido"));
+                pedido.setMesa(mData.buscarMesa(numMesa));
                 pedido.setEmpleado(eData.buscarEmpleado(rs.getInt("idEmpleado")));
                 pedido.setPrecioPedido(rs.getDouble("precioPedido"));
                 pedido.setEstado(EstadoPedido.valueOf(rs.getString("estado")));
@@ -117,21 +151,21 @@ public class PedidoData {
     public List<Pedido> listarPedidosEmpleado(int idEmpleado) {
         List<Pedido> pedidos = new ArrayList<>();
 
-        sql = "SELECT idPedido, idMesa, precioPedido, estado FROM pedido p, empleado e"
-               + "WHERE p.idEmpleado = ? AND (p.idEmpleado = e.idEmpleado)";
+        sql = "SELECT idPedido, numMesa, precioPedido, estado FROM pedido WHERE idEmpleado = ?";
 
         try {
 
             ps = con.prepareStatement(sql);
             ps.setInt(1, idEmpleado);
-            
+
             rs = ps.executeQuery();
 
             while (rs.next()) {
                 Pedido pedido = new Pedido();
 
                 pedido.setIdPedido(rs.getInt("idPedido"));
-                pedido.setMesa(mData.buscarMesa(rs.getInt("idMesa")));
+                pedido.setMesa(mData.buscarMesa(rs.getInt("numMesa")));
+                pedido.setEmpleado(eData.buscarEmpleado(idEmpleado));
                 pedido.setPrecioPedido(rs.getDouble("precioPedido"));
                 pedido.setEstado(EstadoPedido.valueOf(rs.getString("estado")));
 
@@ -149,12 +183,12 @@ public class PedidoData {
 
     public void modificarPedido(Pedido pedido) {
 
-        sql = "UPDATE pedido SET idMesa = ?, idEmpleado = ?, precioPedido = ?, estado = ? WHERE idPedido = ?";
+        sql = "UPDATE pedido SET numMesa = ?, idEmpleado = ?, precioPedido = ?, estado = ? WHERE idPedido = ?";
 
         try {
             ps = con.prepareStatement(sql);
 
-            ps.setInt(1, pedido.getMesa().getIdMesa());
+            ps.setInt(1, pedido.getMesa().getNumMesa());
             ps.setInt(2, pedido.getEmpleado().getIdEmpleado());
             ps.setDouble(3, pedido.getPrecioPedido());
             ps.setString(4, pedido.getEstado());

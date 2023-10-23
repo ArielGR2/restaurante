@@ -67,6 +67,9 @@ public class Empleado {
 
     @Override
     public String toString() {
-        return "Empleado{" + "idEmpleado=" + idEmpleado + ", dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", estado=" + estado + '}';
+        if (idEmpleado == 0) {
+            return "Selecione Mesero";
+        }
+        return idEmpleado + ". " + dni + ", " + nombre + "," + apellido + ", " + estado;
     }
 }

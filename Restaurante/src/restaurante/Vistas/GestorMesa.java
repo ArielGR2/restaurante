@@ -1,14 +1,11 @@
 package restaurante.Vistas;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import restaurante.AccesoDatos.MesaData;
-import restaurante.Entidades.Empleado;
 import restaurante.Entidades.Mesa;
 
 public class GestorMesa extends javax.swing.JInternalFrame {
