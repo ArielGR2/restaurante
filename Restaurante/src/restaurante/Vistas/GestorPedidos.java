@@ -203,6 +203,7 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
 
         anularBtn.setBackground(new java.awt.Color(51, 51, 51));
         anularBtn.setForeground(new java.awt.Color(51, 51, 51));
+        anularBtn.setEnabled(false);
 
         jLAnular.setBackground(new java.awt.Color(51, 51, 51));
         jLAnular.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -210,6 +211,7 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
         jLAnular.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLAnular.setText("ANULAR");
         jLAnular.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLAnular.setEnabled(false);
         jLAnular.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLAnularMouseClicked(evt);
@@ -229,6 +231,7 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
 
         modificarBtn.setBackground(new java.awt.Color(51, 51, 51));
         modificarBtn.setForeground(new java.awt.Color(51, 51, 51));
+        modificarBtn.setEnabled(false);
 
         jLModificar.setBackground(new java.awt.Color(51, 51, 51));
         jLModificar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -236,6 +239,7 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
         jLModificar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLModificar.setText("MODIFICAR");
         jLModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLModificar.setEnabled(false);
         jLModificar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLModificarMouseClicked(evt);
@@ -321,7 +325,8 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAgregarMouseClicked
-        FormularioPedidos formulario = new FormularioPedidos(this);
+        Pedido pedido = new Pedido();
+        FormularioPedidos formulario = new FormularioPedidos(this, pedido);
         JDesktopPane desktopPane = getDesktopPane();
 
         desktopPane.add(formulario);
@@ -334,15 +339,20 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jLAgregarMouseClicked
 
     private void jLAnularMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAnularMouseClicked
-        //pData.eliminarPedido(SOMEBITS);
+        int idPedido = (Integer) jTPedidos.getValueAt(jTPedidos.getSelectedRow(), 0);
+        pData.eliminarPedido(idPedido);
+        cargarTabla();
     }//GEN-LAST:event_jLAnularMouseClicked
 
     private void jTPedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPedidosMouseClicked
-        jLModificar.setEnabled(true);
-        modificarBtn.setEnabled(true);
+        int filaSeleccionada = jTPedidos.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            jLModificar.setEnabled(true);
+            modificarBtn.setEnabled(true);
 
-        jLAnular.setEnabled(true);
-        anularBtn.setEnabled(true);
+            jLAnular.setEnabled(true);
+            anularBtn.setEnabled(true);
+        }
     }//GEN-LAST:event_jTPedidosMouseClicked
 
     private void jLTodosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLTodosMouseClicked
@@ -350,7 +360,7 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jLTodosMouseClicked
 
     private void jLxMesaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLxMesaMouseClicked
-        int numMesa = Integer.valueOf(JOptionPane.showInputDialog("Introduzca el número de la mesa:"));
+        int numMesa = Integer.valueOf(JOptionPane.showInputDialog(this, "Introduzca el número de la mesa:", "", JOptionPane.QUESTION_MESSAGE));
 
         eliminarFilas();
 
@@ -363,6 +373,7 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
                 pedido.getEstado()
             });
         }
+        anularBotones();
     }//GEN-LAST:event_jLxMesaMouseClicked
 
     private void jLxMeseroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLxMeseroMouseClicked
@@ -432,6 +443,7 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
                 pedido.getEstado()
             });
         }
+        anularBotones();
     }
 
     private void eliminarFilas() {
@@ -452,6 +464,14 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
                 pedido.getEstado()
             });
         }
+        anularBotones();
+    }
+    
+    private void anularBotones(){
+        jLModificar.setEnabled(false);
+        modificarBtn.setEnabled(false);
 
+        jLAnular.setEnabled(false);
+        anularBtn.setEnabled(false);
     }
 }
