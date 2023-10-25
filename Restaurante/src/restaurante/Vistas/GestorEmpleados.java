@@ -1,5 +1,6 @@
 package restaurante.Vistas;
 
+import java.awt.CardLayout;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JDesktopPane;
@@ -13,6 +14,7 @@ import restaurante.Entidades.Empleado;
 public class GestorEmpleados extends javax.swing.JInternalFrame {
 
     EmpleadoData eData = new EmpleadoData();
+    Principal ventanaP;
 
     private DefaultTableModel modelo = new DefaultTableModel() {
         @Override
@@ -36,8 +38,9 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
     /**
      * Creates new form EmpleadoVistas
      */
-    public GestorEmpleados() {
+    public GestorEmpleados(Principal ventanaPrincipal) {
         initComponents();
+        ventanaP = ventanaPrincipal;
         cabeceraTabla();
         cargarTabla();
     }
@@ -68,6 +71,7 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
         setMinimumSize(new java.awt.Dimension(500, 500));
         setNormalBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setPreferredSize(new java.awt.Dimension(500, 500));
+        getContentPane().setLayout(new java.awt.CardLayout());
 
         jPanel1.setBackground(new java.awt.Color(25, 25, 25));
         jPanel1.setMaximumSize(new java.awt.Dimension(500, 500));
@@ -228,28 +232,19 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        getContentPane().add(jPanel1, "card2");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAgregarMouseClicked
         FormularioEmpleados formulario = new FormularioEmpleados(this);
-        JDesktopPane desktopPane = getDesktopPane();
 
-        desktopPane.add(formulario);
+        int x = (ventanaP.getWidth() - formulario.getWidth()) / 2;
+        int y = (ventanaP.getHeight() - formulario.getHeight()) / 2;
 
-        int x = (desktopPane.getWidth() - formulario.getWidth()) / 2;
-        int y = (desktopPane.getHeight() - formulario.getHeight()) / 2;
+        // Agregar el formulario al principio de la lista de componentes.
+        ventanaP.add(formulario, 0);
 
         formulario.setLocation(x, y);
         formulario.setVisible(true);
@@ -266,7 +261,7 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
             String apellido = (String) modelo.getValueAt(f, 3);
 
             if (!verificarString(nombre) || !verificarString(apellido)) {
-                JOptionPane.showMessageDialog(this, "Error en: "+ idFila +"\nEl NOMBRE y/o APELLIDO no debe estar vacío y solo contener letras.");
+                JOptionPane.showMessageDialog(this, "Error en: " + idFila + "\nEl NOMBRE y/o APELLIDO no debe estar vacío y solo contener letras.");
                 continue;
             }
             //Revisamos si hay modificación, si la hay agregamos el empleado a un array de pendientes a actualizar, si no el array queda vacío.
