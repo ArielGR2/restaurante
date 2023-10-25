@@ -25,13 +25,12 @@ public class DetalleData {
     }
 
     public void agregarDetalle(Detalle detalle) {
-        sql = "INSERT INTO detalle (idPedido, idProducto, cantProducto) VALUES (?,?,?)";
+        sql = "INSERT INTO detalle (idProducto, cantProducto) VALUES (?,?)";
 
         try {
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, detalle.getPedido().getIdPedido());
-            ps.setInt(2, detalle.getProducto().getIdProducto());
-            ps.setInt(3, detalle.getCantProducto());
+            ps.setInt(1, detalle.getProducto().getIdProducto());
+            ps.setInt(2, detalle.getCantProducto());
 
             ps.executeUpdate();
 

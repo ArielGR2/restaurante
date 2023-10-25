@@ -3,8 +3,6 @@ package restaurante.Vistas;
 import java.awt.Color;
 import java.awt.Component;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JDesktopPane;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
