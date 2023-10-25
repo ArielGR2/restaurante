@@ -30,14 +30,14 @@ public class FormularioProductos extends javax.swing.JInternalFrame {
         background = new javax.swing.JPanel();
         titulo = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLDni = new javax.swing.JLabel();
-        jTextDni = new javax.swing.JTextField();
         jLNombre = new javax.swing.JLabel();
-        jTextNombre = new javax.swing.JTextField();
-        jLApellido = new javax.swing.JLabel();
-        jTextApellido = new javax.swing.JTextField();
-        crearBtn = new javax.swing.JPanel();
-        jLCrear = new javax.swing.JLabel();
+        jTNombre = new javax.swing.JTextField();
+        jLStock = new javax.swing.JLabel();
+        jTStock = new javax.swing.JTextField();
+        jLPrecio = new javax.swing.JLabel();
+        jTPrecio = new javax.swing.JTextField();
+        agregarBtn = new javax.swing.JPanel();
+        jLAgregar = new javax.swing.JLabel();
         cancelarBtn = new javax.swing.JPanel();
         jLCancelar = new javax.swing.JLabel();
 
@@ -53,65 +53,69 @@ public class FormularioProductos extends javax.swing.JInternalFrame {
         titulo.setBackground(new java.awt.Color(25, 25, 25));
         titulo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         titulo.setForeground(new java.awt.Color(204, 204, 204));
-        titulo.setText("AGREGAR EMPLEADOS");
+        titulo.setText("AGREGAR PRODUCTOS");
 
         jSeparator1.setBackground(new java.awt.Color(204, 204, 204));
-
-        jLDni.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLDni.setForeground(new java.awt.Color(204, 204, 204));
-        jLDni.setText("DNI");
-
-        jTextDni.setBackground(new java.awt.Color(102, 102, 102));
-        jTextDni.setForeground(new java.awt.Color(204, 204, 204));
 
         jLNombre.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLNombre.setForeground(new java.awt.Color(204, 204, 204));
         jLNombre.setText("Nombre");
 
-        jTextNombre.setBackground(new java.awt.Color(102, 102, 102));
-        jTextNombre.setForeground(new java.awt.Color(204, 204, 204));
+        jTNombre.setBackground(new java.awt.Color(102, 102, 102));
+        jTNombre.setForeground(new java.awt.Color(204, 204, 204));
 
-        jLApellido.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLApellido.setForeground(new java.awt.Color(204, 204, 204));
-        jLApellido.setText("Apellido");
+        jLStock.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLStock.setForeground(new java.awt.Color(204, 204, 204));
+        jLStock.setText("Stock");
 
-        jTextApellido.setBackground(new java.awt.Color(102, 102, 102));
-        jTextApellido.setForeground(new java.awt.Color(204, 204, 204));
-
-        crearBtn.setBackground(new java.awt.Color(51, 51, 51));
-        crearBtn.setForeground(new java.awt.Color(51, 51, 51));
-        crearBtn.setMaximumSize(new java.awt.Dimension(100, 30));
-        crearBtn.setMinimumSize(new java.awt.Dimension(100, 30));
-        crearBtn.setPreferredSize(new java.awt.Dimension(100, 30));
-
-        jLCrear.setBackground(new java.awt.Color(51, 51, 51));
-        jLCrear.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLCrear.setForeground(new java.awt.Color(204, 204, 204));
-        jLCrear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLCrear.setText("CREAR");
-        jLCrear.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jLCrear.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLCrear.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLCrearMouseClicked(evt);
+        jTStock.setBackground(new java.awt.Color(102, 102, 102));
+        jTStock.setForeground(new java.awt.Color(204, 204, 204));
+        jTStock.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTStockKeyReleased(evt);
             }
         });
 
-        javax.swing.GroupLayout crearBtnLayout = new javax.swing.GroupLayout(crearBtn);
-        crearBtn.setLayout(crearBtnLayout);
-        crearBtnLayout.setHorizontalGroup(
-            crearBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(crearBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLCrear, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-                .addContainerGap())
+        jLPrecio.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLPrecio.setForeground(new java.awt.Color(204, 204, 204));
+        jLPrecio.setText("Precio");
+
+        jTPrecio.setBackground(new java.awt.Color(102, 102, 102));
+        jTPrecio.setForeground(new java.awt.Color(204, 204, 204));
+        jTPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTPrecioKeyReleased(evt);
+            }
+        });
+
+        agregarBtn.setBackground(new java.awt.Color(51, 51, 51));
+        agregarBtn.setForeground(new java.awt.Color(51, 51, 51));
+        agregarBtn.setMaximumSize(new java.awt.Dimension(100, 30));
+        agregarBtn.setMinimumSize(new java.awt.Dimension(100, 30));
+        agregarBtn.setPreferredSize(new java.awt.Dimension(100, 30));
+
+        jLAgregar.setBackground(new java.awt.Color(51, 51, 51));
+        jLAgregar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLAgregar.setForeground(new java.awt.Color(204, 204, 204));
+        jLAgregar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLAgregar.setText("AGREGAR");
+        jLAgregar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLAgregar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLAgregarMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout agregarBtnLayout = new javax.swing.GroupLayout(agregarBtn);
+        agregarBtn.setLayout(agregarBtnLayout);
+        agregarBtnLayout.setHorizontalGroup(
+            agregarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
-        crearBtnLayout.setVerticalGroup(
-            crearBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(crearBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLCrear)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        agregarBtnLayout.setVerticalGroup(
+            agregarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLAgregar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         cancelarBtn.setBackground(new java.awt.Color(51, 51, 51));
@@ -136,17 +140,11 @@ public class FormularioProductos extends javax.swing.JInternalFrame {
         cancelarBtn.setLayout(cancelarBtnLayout);
         cancelarBtnLayout.setHorizontalGroup(
             cancelarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cancelarBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
         cancelarBtnLayout.setVerticalGroup(
             cancelarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cancelarBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLCancelar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
@@ -159,22 +157,22 @@ public class FormularioProductos extends javax.swing.JInternalFrame {
                         .addGap(19, 19, 19)
                         .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(backgroundLayout.createSequentialGroup()
-                                .addComponent(crearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(agregarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cancelarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jSeparator1)
                             .addGroup(backgroundLayout.createSequentialGroup()
                                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLDni, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLStock, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(45, 45, 45)
                                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextDni, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jTStock, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(backgroundLayout.createSequentialGroup()
-                                .addComponent(jLApellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(45, 45, 45)
-                                .addComponent(jTextApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jTPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(backgroundLayout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(titulo)))
@@ -189,20 +187,20 @@ public class FormularioProductos extends javax.swing.JInternalFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextDni)
-                    .addComponent(jLDni, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTNombre)
+                    .addComponent(jLNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextNombre)
-                    .addComponent(jLNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTStock)
+                    .addComponent(jLStock, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextApellido)
-                    .addComponent(jLApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTPrecio)
+                    .addComponent(jLPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cancelarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(crearBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
+                    .addComponent(agregarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
                 .addGap(25, 25, 25))
         );
 
@@ -224,42 +222,59 @@ public class FormularioProductos extends javax.swing.JInternalFrame {
         cerrarVentana();
     }//GEN-LAST:event_jLCancelarMouseClicked
 
-    private void jLCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLCrearMouseClicked
- /*       try {
-            int dni = Integer.parseInt(jTextDni.getText());
-            String nombre = jTextNombre.getText();
-            String apellido = jTextApellido.getText();
-            Empleado encontrado = eData.buscarEmpleadoDni(dni);
+    private void jLAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAgregarMouseClicked
+        try {
+            
+           if (verificacionCampos()){
+               return;
+           }
+            
+            String nombre = jTNombre.getText();
+            int stock = Integer.parseInt(jTStock.getText());
+            int precio = Integer.parseInt(jTPrecio.getText());
+
+            Producto encontrado = pData.buscarProducto(nombre);
             //Si no lo encuentra lo crea, si lo encuentra lo da de alta
-            if (encontrado == null && verificarString(nombre) && verificarString(apellido)) {
-                Empleado empleado = new Empleado(dni, nombre, apellido);
-                eData.agregarEmpleado(empleado);
-            } else if (encontrado.isEstado()) {
-                JOptionPane.showMessageDialog(this, "El empleado ya existe, no es necesario crearlo.");
+            if (encontrado == null) {
+                Producto producto = new Producto(nombre, stock, precio, true);
+                pData.agregarProducto(producto);
             } else {
-                encontrado.setEstado(true);
-                eData.modificarEmpleado(encontrado);
+                JOptionPane.showMessageDialog(this, "El producto ya existe, no es necesario crearlo.");
             }
             cerrarVentana();
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Introducir un DNI válido");
-        }*/
-    }//GEN-LAST:event_jLCrearMouseClicked
+            JOptionPane.showMessageDialog(this, "Error al añadir producto. Stock y Precio no pueden contener letras. ");
+        }
+    }//GEN-LAST:event_jLAgregarMouseClicked
+
+    private void jTStockKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTStockKeyReleased
+        // TODO add your handling code here:
+        if (!checkFiltroNum(evt.getKeyChar())){
+            jTStock.setText(jTStock.getText().substring(0, jTStock.getText().length()-1));
+        }
+    }//GEN-LAST:event_jTStockKeyReleased
+
+    private void jTPrecioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTPrecioKeyReleased
+        // TODO add your handling code here:
+        if (!checkFiltroNum(evt.getKeyChar())){
+            jTPrecio.setText(jTPrecio.getText().substring(0, jTPrecio.getText().length()-1));
+        }
+    }//GEN-LAST:event_jTPrecioKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel agregarBtn;
     private javax.swing.JPanel background;
     private javax.swing.JPanel cancelarBtn;
-    private javax.swing.JPanel crearBtn;
-    private javax.swing.JLabel jLApellido;
+    private javax.swing.JLabel jLAgregar;
     private javax.swing.JLabel jLCancelar;
-    private javax.swing.JLabel jLCrear;
-    private javax.swing.JLabel jLDni;
     private javax.swing.JLabel jLNombre;
+    private javax.swing.JLabel jLPrecio;
+    private javax.swing.JLabel jLStock;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextApellido;
-    private javax.swing.JTextField jTextDni;
-    private javax.swing.JTextField jTextNombre;
+    private javax.swing.JTextField jTNombre;
+    private javax.swing.JTextField jTPrecio;
+    private javax.swing.JTextField jTStock;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 
@@ -268,18 +283,33 @@ public class FormularioProductos extends javax.swing.JInternalFrame {
         gProductos.cargarTabla();
     }
     
-      private boolean verificarString(String texto) {
-        // Verifica que el string no este vacio
-        if (texto.isEmpty()) {
+    private boolean checkFiltroNum(int t){ // CHECK SOLO NUMEROS EN INT
+        if (!(t == 8 || t == 10 || t == 27 || (t >= 48 && t <= 57))){
+            JOptionPane.showMessageDialog(this, "Solo puedes ingresar numeros. ");
             return false;
         }
-        // Verifica que el string no contenga numeros 
-        for (int i = 0; i < texto.length(); i++) {
-            char letra = texto.charAt(i);
-            if ((letra < 65 || letra > 90) && (letra < 97 || letra > 122)) {
-                return false;
-            }
+        return true;
+    }
+    
+    private boolean verificacionCampos() {
+        if (jTNombre.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Introduce el nombre del producto. ");
+            return false;
+        } else if (jTStock.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Introduce el Stock del producto. ");
+            return false;
+        } else if (jTPrecio.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Introduce el Precio del producto. ");
+            return false;
         }
+        if (jTStock.getText().startsWith("-")){
+            JOptionPane.showMessageDialog(this, "No puedes ingresar numeros negativos al Stock. ");
+            return false;
+        }else if (jTPrecio.getText().startsWith("-")){
+           JOptionPane.showMessageDialog(this, "No puedes ingresar numeros negativos al Stock. ");
+           return false;
+        }
+        
         return true;
     }
 }

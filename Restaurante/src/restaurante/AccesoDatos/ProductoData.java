@@ -110,9 +110,9 @@ public class ProductoData {
                 producto.setStock(rs.getInt("stock"));
                 producto.setPrecio(rs.getDouble("precio"));
                 producto.setDisponible(rs.getBoolean("disponible"));
-            } else {
+            }/* else {
                 JOptionPane.showMessageDialog(null, "No existe el producto.");
-            }
+            }*/
 
             ps.close();
 
@@ -217,7 +217,7 @@ public class ProductoData {
 
     public void eliminarProducto(int id) {
 
-        sql = "UPDATE producto SET disponible = 0 WHERE idProducto = ?";
+        sql = "DELETE FROM producto WHERE idProducto = ?";
 
         try {
             ps = con.prepareStatement(sql);
