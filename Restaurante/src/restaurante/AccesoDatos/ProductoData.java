@@ -79,8 +79,6 @@ public class ProductoData {
                 producto.setStock(rs.getInt("stock"));
                 producto.setPrecio(rs.getDouble("precio"));
                 producto.setDisponible(rs.getBoolean("disponible"));
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe el producto.");
             }
 
             ps.close();
@@ -110,9 +108,7 @@ public class ProductoData {
                 producto.setStock(rs.getInt("stock"));
                 producto.setPrecio(rs.getDouble("precio"));
                 producto.setDisponible(rs.getBoolean("disponible"));
-            }/* else {
-                JOptionPane.showMessageDialog(null, "No existe el producto.");
-            }*/
+            }
 
             ps.close();
 

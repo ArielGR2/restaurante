@@ -1,10 +1,11 @@
 package restaurante.Vistas;
 
+import java.nio.charset.StandardCharsets;
 import javax.swing.JOptionPane;
 import restaurante.AccesoDatos.ProductoData;
 import restaurante.Entidades.Producto;
 
-public class FormularioProductos extends javax.swing.JInternalFrame {
+public class FormularioProductosA extends javax.swing.JInternalFrame {
 
     ProductoData pData = new ProductoData();
     GestorProductos gProductos;
@@ -13,7 +14,7 @@ public class FormularioProductos extends javax.swing.JInternalFrame {
      * Creates new form FormularioEmpleados
      */
 
-    public FormularioProductos(GestorProductos ventanaPrincipal) {
+    public FormularioProductosA(GestorProductos ventanaPrincipal) {
         initComponents();
         this.gProductos = ventanaPrincipal;
     }
@@ -63,6 +64,7 @@ public class FormularioProductos extends javax.swing.JInternalFrame {
 
         jTNombre.setBackground(new java.awt.Color(102, 102, 102));
         jTNombre.setForeground(new java.awt.Color(204, 204, 204));
+        jTNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLStock.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLStock.setForeground(new java.awt.Color(204, 204, 204));
@@ -70,6 +72,7 @@ public class FormularioProductos extends javax.swing.JInternalFrame {
 
         jTStock.setBackground(new java.awt.Color(102, 102, 102));
         jTStock.setForeground(new java.awt.Color(204, 204, 204));
+        jTStock.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTStock.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTStockKeyReleased(evt);
@@ -82,6 +85,7 @@ public class FormularioProductos extends javax.swing.JInternalFrame {
 
         jTPrecio.setBackground(new java.awt.Color(102, 102, 102));
         jTPrecio.setForeground(new java.awt.Color(204, 204, 204));
+        jTPrecio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTPrecioKeyReleased(evt);
@@ -224,14 +228,12 @@ public class FormularioProductos extends javax.swing.JInternalFrame {
 
     private void jLAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAgregarMouseClicked
         try {
-            
-           if (verificacionCampos()){
+           if (!verificacionCampos()){
                return;
            }
-            
             String nombre = jTNombre.getText();
             int stock = Integer.parseInt(jTStock.getText());
-            int precio = Integer.parseInt(jTPrecio.getText());
+            double precio = Double.parseDouble(jTPrecio.getText());
 
             Producto encontrado = pData.buscarProducto(nombre);
             //Si no lo encuentra lo crea, si lo encuentra lo da de alta
@@ -250,14 +252,14 @@ public class FormularioProductos extends javax.swing.JInternalFrame {
     private void jTStockKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTStockKeyReleased
         // TODO add your handling code here:
         if (!checkFiltroNum(evt.getKeyChar())){
-            jTStock.setText(jTStock.getText().substring(0, jTStock.getText().length()-1));
+            jTStock.setText(quitarLetrasString(jTStock.getText()));
         }
     }//GEN-LAST:event_jTStockKeyReleased
 
     private void jTPrecioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTPrecioKeyReleased
         // TODO add your handling code here:
         if (!checkFiltroNum(evt.getKeyChar())){
-            jTPrecio.setText(jTPrecio.getText().substring(0, jTPrecio.getText().length()-1));
+            jTPrecio.setText(quitarLetrasString(jTPrecio.getText()));
         }
     }//GEN-LAST:event_jTPrecioKeyReleased
 
@@ -291,6 +293,16 @@ public class FormularioProductos extends javax.swing.JInternalFrame {
         return true;
     }
     
+    private boolean numTFVerificacion(String cad){ // CHECK SOLO NUMEROS EN STRING
+        byte[] t = cad.getBytes(StandardCharsets.US_ASCII);
+        for (int i = 0; i < cad.length(); i++) {
+            if (!(t[i] == 8 || t[i] == 10 || t[i] == 27 || (t[i] >= 48 && t[i] <= 57))){
+                return false;
+            }
+        }
+        return true;
+    }
+    
     private boolean verificacionCampos() {
         if (jTNombre.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Introduce el nombre del producto. ");
@@ -311,5 +323,16 @@ public class FormularioProductos extends javax.swing.JInternalFrame {
         }
         
         return true;
+    }
+    
+    private String quitarLetrasString(String text){
+        String textf = "";
+        for (int i=0;i<text.length();i++){
+            String letra = text.charAt(i)+"";
+            if (numTFVerificacion(letra)){
+                textf = textf.concat(letra);
+            }
+        }
+        return textf;
     }
 }
