@@ -289,10 +289,9 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
             System.out.println("click" + cantidad);
             if (cantidad < producto.getStock()) {
                 Detalle detalle = new Detalle(pedido, producto, cantidad);
-//                pedido.getListaDetalles().add(detalle);
-//                dData.agregarDetalle(detalle);
-//                cerrarVentana();
-                System.out.println(detalle);
+                pedido.getListaDetalles().add(detalle);
+                dData.agregarDetalle(detalle);
+                cerrarVentana();
             } else {
                 JOptionPane.showMessageDialog(this, "La cantidad deseada supera el stock.");
             }
