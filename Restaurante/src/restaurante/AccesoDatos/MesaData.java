@@ -81,7 +81,7 @@ public class MesaData {
     public List<Mesa> listarMesas() {
         List<Mesa> mesas = new ArrayList<>();
 
-        sql = "SELECT * FROM mesa";
+        sql = "SELECT * FROM mesa ORDER BY numMesa ASC";
 
         try {
 

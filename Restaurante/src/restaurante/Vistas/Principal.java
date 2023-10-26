@@ -1,11 +1,10 @@
 package restaurante.Vistas;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -27,7 +26,7 @@ public final class Principal extends javax.swing.JFrame {
 
         getContentPane().add(background);
         background.add(bg, 1);
-        
+
         rellenarHora();
         rellenarFecha();
 
@@ -91,7 +90,7 @@ public final class Principal extends javax.swing.JFrame {
         bg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/restaurante/img/CapybaraRestó.png"))); // NOI18N
         bg.setFocusable(false);
         bg.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        bg.setPreferredSize(new java.awt.Dimension(1024, 720));
+        bg.setPreferredSize(new java.awt.Dimension(1200, 720));
 
         menu.setBackground(new java.awt.Color(25, 25, 25));
         menu.setForeground(new java.awt.Color(255, 150, 0));
@@ -142,10 +141,7 @@ public final class Principal extends javax.swing.JFrame {
         );
         empleadoBtnLayout.setVerticalGroup(
             empleadoBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, empleadoBtnLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLEmpleados)
-                .addContainerGap())
+            .addComponent(jLEmpleados, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
         mesasBtn.setBackground(new java.awt.Color(25, 25, 25));
@@ -176,10 +172,7 @@ public final class Principal extends javax.swing.JFrame {
         );
         mesasBtnLayout.setVerticalGroup(
             mesasBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mesasBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLMesas)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLMesas, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
         productosBtn.setBackground(new java.awt.Color(25, 25, 25));
@@ -210,10 +203,7 @@ public final class Principal extends javax.swing.JFrame {
         );
         productosBtnLayout.setVerticalGroup(
             productosBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(productosBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLProductos)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLProductos, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
         jSeparator2.setBackground(new java.awt.Color(204, 204, 204));
@@ -252,10 +242,7 @@ public final class Principal extends javax.swing.JFrame {
         );
         pedidosBtnLayout.setVerticalGroup(
             pedidosBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pedidosBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLPedidos)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
         reservasBtn.setBackground(new java.awt.Color(25, 25, 25));
@@ -286,10 +273,7 @@ public final class Principal extends javax.swing.JFrame {
         );
         reservasBtnLayout.setVerticalGroup(
             reservasBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(reservasBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLReservas)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLReservas, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
         jSeparator3.setBackground(new java.awt.Color(204, 204, 204));
@@ -328,10 +312,7 @@ public final class Principal extends javax.swing.JFrame {
         );
         consultasBtnLayout.setVerticalGroup(
             consultasBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, consultasBtnLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jLConsultas, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
         jLHora.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
@@ -607,22 +588,23 @@ public final class Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(header, javax.swing.GroupLayout.DEFAULT_SIZE, 1024, Short.MAX_VALUE)
                     .addGroup(backgroundLayout.createSequentialGroup()
                         .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(131, 131, 131)
-                        .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
-                        .addGap(162, 162, 162))
-                    .addComponent(header, javax.swing.GroupLayout.DEFAULT_SIZE, 1203, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 852, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(menu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)))
+                    .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE))))
         );
 
         getContentPane().add(background);
@@ -683,7 +665,7 @@ public final class Principal extends javax.swing.JFrame {
         int x = (this.getWidth() - gestorEmpleados.getWidth()) / 2;
         int y = (this.getHeight() - gestorEmpleados.getHeight()) / 2;
 
-        background.add(gestorEmpleados,0);
+        background.add(gestorEmpleados, 0);
         background.revalidate();
         background.repaint();
 
@@ -700,7 +682,17 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jLMesasMouseExited
 
     private void jLMesasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLMesasMouseClicked
-        //Abir Vista Mesas
+        GestorMesa gestorMesa = new GestorMesa(this);
+
+        int x = (this.getWidth() - gestorMesa.getWidth()) / 2;
+        int y = (this.getHeight() - gestorMesa.getHeight()) / 2;
+
+        background.add(gestorMesa, 0);
+        background.revalidate();
+        background.repaint();
+
+        gestorMesa.setVisible(true);
+        gestorMesa.setLocation(x, y);
     }//GEN-LAST:event_jLMesasMouseClicked
 
     private void jLProductosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLProductosMouseEntered
@@ -724,12 +716,12 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jLPedidosMouseExited
 
     private void jLPedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLPedidosMouseClicked
-         GestorPedidos gestorPedidos = new GestorPedidos(this);
+        GestorPedidos gestorPedidos = new GestorPedidos(this);
 
         int x = (this.getWidth() - gestorPedidos.getWidth()) / 2;
         int y = (this.getHeight() - gestorPedidos.getHeight()) / 2;
 
-        background.add(gestorPedidos,0);
+        background.add(gestorPedidos, 0);
         background.revalidate();
         background.repaint();
 
@@ -890,4 +882,5 @@ public final class Principal extends javax.swing.JFrame {
         });
         timer.start();
     }
+
 }

@@ -420,7 +420,7 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
     private void cabeceraTabla() {
         modelo.addColumn("ID");
         modelo.addColumn("Mesa");
-        modelo.addColumn("Detalle");
+        modelo.addColumn("Empleado");
         modelo.addColumn("Monto");
         modelo.addColumn("Estado");
         
@@ -441,7 +441,7 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
             modelo.addRow(new Object[]{
                 pedido.getIdPedido(),
                 pedido.getMesa().getNumMesa(),
-                pedido.getListaDetalles(),
+                pedido.getEmpleado(),
                 pedido.getPrecioPedido(),
                 pedido.getEstado()
             });

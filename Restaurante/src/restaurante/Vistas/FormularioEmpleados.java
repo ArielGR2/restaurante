@@ -228,15 +228,18 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
             if (encontrado == null && verificarString(nombre) && verificarString(apellido)) {
                 Empleado empleado = new Empleado(dni, nombre, apellido);
                 eData.agregarEmpleado(empleado);
-            } else if (encontrado.isEstado()) {
+            }
+            if (encontrado != null && encontrado.isEstado()) {
                 JOptionPane.showMessageDialog(this, "El empleado ya existe, no es necesario crearlo.");
             } else {
                 encontrado.setEstado(true);
                 eData.modificarEmpleado(encontrado);
             }
             cerrarVentana();
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(this, "Introducir un DNI válido");
+        } catch (NullPointerException npe){
+            JOptionPane.showMessageDialog(this, "No debe haber campos vacíos");
         }
     }//GEN-LAST:event_jLCrearMouseClicked
 

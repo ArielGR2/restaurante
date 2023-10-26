@@ -222,6 +222,7 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
         );
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
         jLabel1.setText("TOTAL PEDIDO:");
 
         jTextTotal.setBackground(new java.awt.Color(102, 102, 102));
@@ -309,7 +310,6 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
 
         formulario.setVisible(true);
         formulario.setLocation(x, y);
-        System.out.println("ventana abierta?");
     }//GEN-LAST:event_jLAgregarMouseClicked
 
     private void jLQuitarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLQuitarMouseClicked

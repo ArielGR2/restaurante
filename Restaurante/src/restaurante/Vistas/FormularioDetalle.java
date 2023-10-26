@@ -5,7 +5,9 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import restaurante.AccesoDatos.DetalleData;
+import restaurante.AccesoDatos.EmpleadoData;
 import restaurante.AccesoDatos.ProductoData;
+import restaurante.Entidades.Empleado;
 import restaurante.Entidades.Pedido;
 import restaurante.Entidades.Producto;
 
@@ -17,6 +19,7 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
     Pedido pedido;
     Producto producto;
 
+    EmpleadoData eData = new EmpleadoData();
     DetalleData dData = new DetalleData();
     ProductoData pData = new ProductoData();
 
@@ -64,6 +67,10 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
         jTextCantidad = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTDetalle = new javax.swing.JTable();
+        jLMesa = new javax.swing.JLabel();
+        jTextMesa = new javax.swing.JTextField();
+        jLMesa1 = new javax.swing.JLabel();
+        jComboEmpleados = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(25, 25, 25));
         setBorder(null);
@@ -206,6 +213,28 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTDetalle);
 
+        jLMesa.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLMesa.setForeground(new java.awt.Color(204, 204, 204));
+        jLMesa.setText("Mesa:");
+
+        jTextMesa.setBackground(new java.awt.Color(102, 102, 102));
+        jTextMesa.setForeground(new java.awt.Color(204, 204, 204));
+        jTextMesa.setEnabled(false);
+        jTextMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextMesaActionPerformed(evt);
+            }
+        });
+        jTextMesa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextMesaKeyReleased(evt);
+            }
+        });
+
+        jLMesa1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLMesa1.setForeground(new java.awt.Color(204, 204, 204));
+        jLMesa1.setText("Mesero:");
+
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
         background.setLayout(backgroundLayout);
         backgroundLayout.setHorizontalGroup(
@@ -223,20 +252,27 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cancelarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jSeparator1)
-                            .addGroup(backgroundLayout.createSequentialGroup()
-                                .addComponent(jLApellido1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLMesa1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLMesa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLApellido1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(122, 122, 122))))
                     .addGroup(backgroundLayout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jComboEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(25, Short.MAX_VALUE))
             .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(backgroundLayout.createSequentialGroup()
                     .addGap(17, 17, 17)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(28, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(24, Short.MAX_VALUE)))
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,10 +283,18 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
+                .addGap(149, 149, 149)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextCantidad))
+                .addGap(18, 18, 18)
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLMesa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(13, 13, 13)
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLMesa1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cancelarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
@@ -260,7 +304,7 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
                 .addGroup(backgroundLayout.createSequentialGroup()
                     .addGap(100, 100, 100)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(114, Short.MAX_VALUE)))
+                    .addContainerGap(201, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -360,18 +404,30 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTextCantidadActionPerformed
 
+    private void jTextMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextMesaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextMesaActionPerformed
+
+    private void jTextMesaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextMesaKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextMesaKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
     private javax.swing.JPanel cancelarBtn;
     private javax.swing.JPanel crearBtn;
+    private javax.swing.JComboBox<Empleado> jComboEmpleados;
     private javax.swing.JLabel jLApellido1;
     private javax.swing.JLabel jLCancelar;
     private javax.swing.JLabel jLCrear;
+    private javax.swing.JLabel jLMesa;
+    private javax.swing.JLabel jLMesa1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTDetalle;
     private javax.swing.JTextField jTextCantidad;
+    private javax.swing.JTextField jTextMesa;
     private javax.swing.JTextField jTextNombre;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
@@ -414,6 +470,13 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
         int filas = jTDetalle.getRowCount() - 1;
         for (; filas >= 0; filas--) {
             modelo.removeRow(filas);
+        }
+    }
+
+    private void cargarCombo() {
+        jComboEmpleados.addItem(new Empleado());
+        for (Empleado mesero : eData.listarEmpleadosActivos()) {
+            jComboEmpleados.addItem(mesero);
         }
     }
 }

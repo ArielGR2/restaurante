@@ -38,17 +38,17 @@ public class FormularioMesa extends javax.swing.JInternalFrame {
         jLTitulo = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLNumero = new javax.swing.JLabel();
+        jTNumero = new javax.swing.JTextField();
         jLCapacidad = new javax.swing.JLabel();
+        jTCapacidad = new javax.swing.JTextField();
         crearBtn = new javax.swing.JPanel();
         jLCrear = new javax.swing.JLabel();
         cancelarBtn = new javax.swing.JPanel();
         jLCancelar = new javax.swing.JLabel();
-        jTNumero = new javax.swing.JTextField();
-        jTCapacidad = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(25, 25, 25));
         setBorder(null);
-        setPreferredSize(new java.awt.Dimension(300, 300));
+        setPreferredSize(new java.awt.Dimension(300, 250));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         background.setBackground(new java.awt.Color(25, 25, 25));
@@ -62,9 +62,16 @@ public class FormularioMesa extends javax.swing.JInternalFrame {
         jLNumero.setForeground(new java.awt.Color(204, 204, 204));
         jLNumero.setText("NUMERO");
 
+        jTNumero.setBackground(new java.awt.Color(102, 102, 102));
+
         jLCapacidad.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLCapacidad.setForeground(new java.awt.Color(204, 204, 204));
         jLCapacidad.setText("CAPACIDAD");
+
+        jTCapacidad.setBackground(new java.awt.Color(102, 102, 102));
+
+        crearBtn.setBackground(new java.awt.Color(51, 51, 51));
+        crearBtn.setForeground(new java.awt.Color(51, 51, 51));
 
         jLCrear.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLCrear.setForeground(new java.awt.Color(204, 204, 204));
@@ -87,6 +94,9 @@ public class FormularioMesa extends javax.swing.JInternalFrame {
             .addComponent(jLCrear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
         );
 
+        cancelarBtn.setBackground(new java.awt.Color(51, 51, 51));
+        cancelarBtn.setForeground(new java.awt.Color(51, 51, 51));
+
         jLCancelar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLCancelar.setForeground(new java.awt.Color(204, 204, 204));
         jLCancelar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -107,10 +117,6 @@ public class FormularioMesa extends javax.swing.JInternalFrame {
             cancelarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
         );
-
-        jTNumero.setBackground(new java.awt.Color(102, 102, 102));
-
-        jTCapacidad.setBackground(new java.awt.Color(102, 102, 102));
 
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
         background.setLayout(backgroundLayout);
@@ -140,26 +146,26 @@ public class FormularioMesa extends javax.swing.JInternalFrame {
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addContainerGap()
                 .addComponent(jLTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(18, 18, 18)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLNumero))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLCapacidad))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                    .addComponent(jLCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cancelarBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(crearBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 280));
+        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 230));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
