@@ -37,6 +37,7 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form EmpleadoVistas
+     * @param ventanaPrincipal
      */
     public GestorEmpleados(Principal ventanaPrincipal) {
         initComponents();

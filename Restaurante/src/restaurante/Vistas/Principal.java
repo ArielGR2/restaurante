@@ -724,7 +724,17 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jLPedidosMouseExited
 
     private void jLPedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLPedidosMouseClicked
-        //Abrir Vista Pedidos
+         GestorPedidos gestorPedidos = new GestorPedidos(this);
+
+        int x = (this.getWidth() - gestorPedidos.getWidth()) / 2;
+        int y = (this.getHeight() - gestorPedidos.getHeight()) / 2;
+
+        background.add(gestorPedidos,0);
+        background.revalidate();
+        background.repaint();
+
+        gestorPedidos.setVisible(true);
+        gestorPedidos.setLocation(x, y);
     }//GEN-LAST:event_jLPedidosMouseClicked
 
     private void jLReservasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLReservasMouseEntered

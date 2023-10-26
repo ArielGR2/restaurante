@@ -1,13 +1,11 @@
 package restaurante.Vistas;
 
 import java.awt.Color;
-import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import restaurante.AccesoDatos.DetalleData;
 import restaurante.AccesoDatos.ProductoData;
-import restaurante.Entidades.Detalle;
 import restaurante.Entidades.Pedido;
 import restaurante.Entidades.Producto;
 
@@ -38,10 +36,10 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
         }
     };
 
-    public FormularioDetalle(FormularioPedidos ventanaPrincipal, Pedido pedido) {
+    public FormularioDetalle(FormularioPedidos fPedidos, Pedido pedido) {
         initComponents();
         this.pedido = pedido;
-        this.fPedidos = ventanaPrincipal;
+        this.fPedidos = fPedidos;
         cabeceraTabla();
     }
 
@@ -285,7 +283,7 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
 
     private void jLCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLCrearMouseClicked
         //Agregar un funcionamiento para que si ya existe un detalle con el producto sume a la cantidad ya pedida
-        try {
+/*        try {
             System.out.println("click" + cantidad);
             if (cantidad < producto.getStock()) {
                 Detalle detalle = new Detalle(pedido, producto, cantidad);
@@ -298,7 +296,7 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Introducir una cantidad válida.");
-        }
+        }*/
     }//GEN-LAST:event_jLCrearMouseClicked
 
     private void jTextNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextNombreFocusLost
@@ -347,7 +345,6 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
         } else {
             jTextCantidad.setForeground(new Color(204, 204, 204));
         }
-        System.out.println("Tecleando" + cantidad);
     }//GEN-LAST:event_jTextCantidadKeyReleased
 
     private void jTextCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCantidadActionPerformed
@@ -361,7 +358,6 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
             crearBtn.setEnabled(false);
             jLCrear.setEnabled(false);
         }
-        System.out.println("Cambio de propiedad" + cantidad);
     }//GEN-LAST:event_jTextCantidadActionPerformed
 
 

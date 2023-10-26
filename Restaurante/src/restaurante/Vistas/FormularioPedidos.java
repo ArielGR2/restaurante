@@ -1,6 +1,7 @@
 package restaurante.Vistas;
 
 import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -38,10 +39,10 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
     /**
      * Creates new form FormularioPedidos
      */
-    public FormularioPedidos(GestorPedidos ventanaPrincipal, Pedido pedido) {
+    public FormularioPedidos(GestorPedidos gPedidos, Pedido pedido) {
         initComponents();
         this.pedido = pedido;
-        this.gPedidos = ventanaPrincipal;
+        this.gPedidos = gPedidos;
         cabeceraTabla();
     }
 
@@ -70,7 +71,7 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextTotal = new javax.swing.JTextField();
 
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setPreferredSize(new java.awt.Dimension(400, 500));
 
         jPanel1.setBackground(new java.awt.Color(25, 25, 25));
         jPanel1.setForeground(new java.awt.Color(204, 204, 204));
@@ -280,7 +281,16 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
                 .addGap(42, 42, 42))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -291,15 +301,15 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
 
     private void jLAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAgregarMouseClicked
         FormularioDetalle formulario = new FormularioDetalle(this, pedido);
-        JDesktopPane desktopPane = getDesktopPane();
 
-        desktopPane.add(formulario);
+        int x = (this.getWidth() - formulario.getWidth()) / 2;
+        int y = (this.getHeight() - formulario.getHeight()) / 2;
 
-        int x = (desktopPane.getWidth() - formulario.getWidth()) / 2;
-        int y = (desktopPane.getHeight() - formulario.getHeight()) / 2;
+        add(formulario, 0);
 
-        formulario.setLocation(x, y);
         formulario.setVisible(true);
+        formulario.setLocation(x, y);
+        System.out.println("ventana abierta?");
     }//GEN-LAST:event_jLAgregarMouseClicked
 
     private void jLQuitarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLQuitarMouseClicked
@@ -318,7 +328,7 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTDetalleMouseClicked
 
     private void jLAnularMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAnularMouseClicked
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jLAnularMouseClicked
 
 
@@ -358,16 +368,21 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
     }
 
     public void cargarTabla() {
-        eliminarFilas();
-        for (Detalle detalle : pedido.getListaDetalles()) {
-            modelo.addRow(new Object[]{
-                detalle.getProducto().getNombre(),
-                detalle.getCantProducto(),
-                detalle.getProducto().getPrecio(),
-                detalle.calcularSubtotal(detalle)
-            });
+        try {
+            eliminarFilas();
+            for (Detalle detalle : pedido.getListaDetalles()) {
+                modelo.addRow(new Object[]{
+                    detalle.getProducto().getNombre(),
+                    detalle.getCantProducto(),
+                    detalle.getProducto().getPrecio(),
+                    detalle.calcularSubtotal(detalle)
+                });
+            }
+            jTextTotal.setText(String.valueOf(pedido.getPrecioPedido()));
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "No hay productos para mostrar");
         }
-        jTextTotal.setText(String.valueOf(pedido.getPrecioPedido()));
+
     }
 
     private void eliminarFilas() {

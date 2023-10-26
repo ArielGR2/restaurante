@@ -9,16 +9,17 @@ import restaurante.AccesoDatos.PedidoData;
 import restaurante.Entidades.Pedido;
 
 public class GestorPedidos extends javax.swing.JInternalFrame {
-
+    
     PedidoData pData = new PedidoData();
-
+    Principal ventanaPrincipal;
+    
     private DefaultTableModel modelo = new DefaultTableModel() {
-
+        
         @Override
         public boolean isCellEditable(int x, int y) {
             return false;
         }
-
+        
         @Override
         public Class<?> getColumnClass(int c) {
             if (c == 2 && c == 4) {
@@ -32,9 +33,12 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form GestorPedidos
+     *
+     * @param ventanaPrincipal
      */
-    public GestorPedidos() {
+    public GestorPedidos(Principal ventanaPrincipal) {
         initComponents();
+        this.ventanaPrincipal = ventanaPrincipal;
         cabeceraTabla();
         cargarTabla();
     }
@@ -266,13 +270,13 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(agregarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                         .addComponent(modificarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(57, 57, 57)
                         .addComponent(anularBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(todosBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(xMesaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(57, 57, 57)
                         .addComponent(xMeseroBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -327,15 +331,15 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
     private void jLAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAgregarMouseClicked
         Pedido pedido = new Pedido();
         FormularioPedidos formulario = new FormularioPedidos(this, pedido);
-        JDesktopPane desktopPane = getDesktopPane();
-
-        desktopPane.add(formulario);
-
-        int x = (desktopPane.getWidth() - formulario.getWidth()) / 2;
-        int y = (desktopPane.getHeight() - formulario.getHeight()) / 2;
-
-        formulario.setLocation(x, y);
+        formulario.setSize(400, 500);
+        
+        int x = (this.getWidth() - formulario.getWidth()) / 2;
+        int y = (this.getHeight() - formulario.getHeight()) / 2;
+        
+        add(formulario, 0);
+        
         formulario.setVisible(true);
+        formulario.setLocation(x, y);
     }//GEN-LAST:event_jLAgregarMouseClicked
 
     private void jLAnularMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAnularMouseClicked
@@ -349,7 +353,7 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
         if (filaSeleccionada != -1) {
             jLModificar.setEnabled(true);
             modificarBtn.setEnabled(true);
-
+            
             jLAnular.setEnabled(true);
             anularBtn.setEnabled(true);
         }
@@ -361,9 +365,9 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
 
     private void jLxMesaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLxMesaMouseClicked
         int numMesa = Integer.valueOf(JOptionPane.showInputDialog(this, "Introduzca el número de la mesa:", "", JOptionPane.QUESTION_MESSAGE));
-
+        
         eliminarFilas();
-
+        
         for (Pedido pedido : pData.listarPedidosMesa(numMesa)) {
             modelo.addRow(new Object[]{
                 pedido.getIdPedido(),
@@ -377,17 +381,16 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jLxMesaMouseClicked
 
     private void jLxMeseroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLxMeseroMouseClicked
-
+        
         MensajeMeseros mensaje = new MensajeMeseros(this);
-        JDesktopPane desktopPane = getDesktopPane();
-
-        desktopPane.add(mensaje);
-
-        int x = (desktopPane.getWidth() - mensaje.getWidth()) / 2;
-        int y = (desktopPane.getHeight() - mensaje.getHeight()) / 2;
-
-        mensaje.setLocation(x, y);
+        
+        int x = (this.getWidth() - mensaje.getWidth()) / 2;
+        int y = (this.getHeight() - mensaje.getHeight()) / 2;
+        
+        add(mensaje, 0);
         mensaje.setVisible(true);
+        mensaje.setLocation(x, y);
+        
     }//GEN-LAST:event_jLxMeseroMouseClicked
 
     private void jLModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLModificarMouseClicked
@@ -420,7 +423,7 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
         modelo.addColumn("Detalle");
         modelo.addColumn("Monto");
         modelo.addColumn("Estado");
-
+        
         jTPedidos.setModel(modelo);
 
         //Centrar títulos de la tabla
@@ -431,7 +434,7 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         jTPedidos.setDefaultRenderer(Object.class, centerRenderer);
     }
-
+    
     public void cargarTabla() {
         eliminarFilas();
         for (Pedido pedido : pData.listarPedidos()) {
@@ -445,14 +448,14 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
         }
         anularBotones();
     }
-
+    
     private void eliminarFilas() {
         int filas = jTPedidos.getRowCount() - 1;
         for (; filas >= 0; filas--) {
             modelo.removeRow(filas);
         }
     }
-
+    
     public void cargarTablaMesero(int idEmpleado) {
         eliminarFilas();
         for (Pedido pedido : pData.listarPedidosEmpleado(idEmpleado)) {
@@ -467,10 +470,10 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
         anularBotones();
     }
     
-    private void anularBotones(){
+    private void anularBotones() {
         jLModificar.setEnabled(false);
         modificarBtn.setEnabled(false);
-
+        
         jLAnular.setEnabled(false);
         anularBtn.setEnabled(false);
     }

@@ -13,9 +13,9 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
      * Creates new form FormularioEmpleados
      */
 
-    public FormularioEmpleados(GestorEmpleados ventanaPrincipal) {
+    public FormularioEmpleados(GestorEmpleados gEmpleados) {
         initComponents();
-        this.gEmpleados = ventanaPrincipal;
+        this.gEmpleados = gEmpleados;
     }
 
     /**
