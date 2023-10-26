@@ -1,12 +1,14 @@
 package restaurante.Vistas;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import restaurante.AccesoDatos.DetalleData;
 import restaurante.AccesoDatos.EmpleadoData;
 import restaurante.AccesoDatos.ProductoData;
+import restaurante.Entidades.Detalle;
 import restaurante.Entidades.Empleado;
 import restaurante.Entidades.Pedido;
 import restaurante.Entidades.Producto;
@@ -44,6 +46,7 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
         this.pedido = pedido;
         this.fPedidos = fPedidos;
         cabeceraTabla();
+        cargarCombo();
     }
 
     /**
@@ -58,25 +61,25 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
         background = new javax.swing.JPanel();
         titulo = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jTextNombre = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTDetalle = new javax.swing.JTable();
+        jLCantidad = new javax.swing.JLabel();
+        jTextCantidad = new javax.swing.JTextField();
+        jLMesa = new javax.swing.JLabel();
+        jTextMesa = new javax.swing.JTextField();
+        jLMesero = new javax.swing.JLabel();
+        jComboEmpleados = new javax.swing.JComboBox<>();
         crearBtn = new javax.swing.JPanel();
         jLCrear = new javax.swing.JLabel();
         cancelarBtn = new javax.swing.JPanel();
         jLCancelar = new javax.swing.JLabel();
-        jTextNombre = new javax.swing.JTextField();
-        jLApellido1 = new javax.swing.JLabel();
-        jTextCantidad = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTDetalle = new javax.swing.JTable();
-        jLMesa = new javax.swing.JLabel();
-        jTextMesa = new javax.swing.JTextField();
-        jLMesa1 = new javax.swing.JLabel();
-        jComboEmpleados = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(25, 25, 25));
         setBorder(null);
         setMaximumSize(new java.awt.Dimension(300, 300));
         setMinimumSize(new java.awt.Dimension(300, 300));
-        setPreferredSize(new java.awt.Dimension(300, 350));
+        setPreferredSize(new java.awt.Dimension(400, 500));
 
         background.setBackground(new java.awt.Color(25, 25, 25));
         background.setForeground(new java.awt.Color(204, 204, 204));
@@ -87,6 +90,88 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
         titulo.setText("AGREGAR PRODUCTOS");
 
         jSeparator1.setBackground(new java.awt.Color(204, 204, 204));
+
+        jTextNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextNombre.setText("Ingresa el nombre del producto");
+        jTextNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextNombreFocusLost(evt);
+            }
+        });
+        jTextNombre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTextNombreMouseReleased(evt);
+            }
+        });
+        jTextNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextNombreKeyReleased(evt);
+            }
+        });
+
+        jScrollPane1.setForeground(new java.awt.Color(60, 63, 65));
+
+        jTDetalle.setForeground(new java.awt.Color(60, 63, 65));
+        jTDetalle.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTDetalle.setSelectionForeground(new java.awt.Color(204, 204, 204));
+        jTDetalle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTDetalleMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTDetalle);
+
+        jLCantidad.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLCantidad.setForeground(new java.awt.Color(204, 204, 204));
+        jLCantidad.setText("Cantidad:");
+
+        jTextCantidad.setBackground(new java.awt.Color(102, 102, 102));
+        jTextCantidad.setForeground(new java.awt.Color(204, 204, 204));
+        jTextCantidad.setEnabled(false);
+        jTextCantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextCantidadActionPerformed(evt);
+            }
+        });
+        jTextCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextCantidadKeyReleased(evt);
+            }
+        });
+
+        jLMesa.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLMesa.setForeground(new java.awt.Color(204, 204, 204));
+        jLMesa.setText("Mesa:");
+
+        jTextMesa.setBackground(new java.awt.Color(102, 102, 102));
+        jTextMesa.setForeground(new java.awt.Color(204, 204, 204));
+        jTextMesa.setEnabled(false);
+        jTextMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextMesaActionPerformed(evt);
+            }
+        });
+        jTextMesa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextMesaKeyReleased(evt);
+            }
+        });
+
+        jLMesero.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLMesero.setForeground(new java.awt.Color(204, 204, 204));
+        jLMesero.setText("Mesero:");
+
+        jComboEmpleados.setEnabled(false);
 
         crearBtn.setBackground(new java.awt.Color(51, 51, 51));
         crearBtn.setForeground(new java.awt.Color(51, 51, 51));
@@ -113,17 +198,11 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
         crearBtn.setLayout(crearBtnLayout);
         crearBtnLayout.setHorizontalGroup(
             crearBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(crearBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLCrear, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jLCrear, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
         crearBtnLayout.setVerticalGroup(
             crearBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(crearBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLCrear)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLCrear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
         cancelarBtn.setBackground(new java.awt.Color(51, 51, 51));
@@ -155,86 +234,6 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
             .addComponent(jLCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTextNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextNombre.setText("Ingresa el nombre del producto");
-        jTextNombre.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextNombreFocusLost(evt);
-            }
-        });
-        jTextNombre.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jTextNombreMouseReleased(evt);
-            }
-        });
-        jTextNombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextNombreKeyReleased(evt);
-            }
-        });
-
-        jLApellido1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLApellido1.setForeground(new java.awt.Color(204, 204, 204));
-        jLApellido1.setText("Cantidad:");
-
-        jTextCantidad.setBackground(new java.awt.Color(102, 102, 102));
-        jTextCantidad.setForeground(new java.awt.Color(204, 204, 204));
-        jTextCantidad.setEnabled(false);
-        jTextCantidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextCantidadActionPerformed(evt);
-            }
-        });
-        jTextCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextCantidadKeyReleased(evt);
-            }
-        });
-
-        jScrollPane1.setForeground(new java.awt.Color(60, 63, 65));
-
-        jTDetalle.setForeground(new java.awt.Color(60, 63, 65));
-        jTDetalle.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jTDetalle.setSelectionForeground(new java.awt.Color(204, 204, 204));
-        jTDetalle.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTDetalleMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTDetalle);
-
-        jLMesa.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLMesa.setForeground(new java.awt.Color(204, 204, 204));
-        jLMesa.setText("Mesa:");
-
-        jTextMesa.setBackground(new java.awt.Color(102, 102, 102));
-        jTextMesa.setForeground(new java.awt.Color(204, 204, 204));
-        jTextMesa.setEnabled(false);
-        jTextMesa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextMesaActionPerformed(evt);
-            }
-        });
-        jTextMesa.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextMesaKeyReleased(evt);
-            }
-        });
-
-        jLMesa1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLMesa1.setForeground(new java.awt.Color(204, 204, 204));
-        jLMesa1.setText("Mesero:");
-
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
         background.setLayout(backgroundLayout);
         backgroundLayout.setHorizontalGroup(
@@ -242,37 +241,34 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
             .addGroup(backgroundLayout.createSequentialGroup()
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgroundLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(titulo))
-                    .addGroup(backgroundLayout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(backgroundLayout.createSequentialGroup()
-                                .addComponent(crearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cancelarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jSeparator1)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
                                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLMesa1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLMesero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLMesa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLApellido1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(122, 122, 122))))
+                                    .addComponent(jTextMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(14, 14, 14))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(crearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cancelarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(9, 9, 9))))
                     .addGroup(backgroundLayout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jComboEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(25, Short.MAX_VALUE))
-            .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(backgroundLayout.createSequentialGroup()
-                    .addGap(17, 17, 17)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(24, Short.MAX_VALUE)))
+                        .addGap(93, 93, 93)
+                        .addComponent(titulo))
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,9 +279,11 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(149, 149, 149)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextCantidad))
                 .addGap(18, 18, 18)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -293,18 +291,13 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
                     .addComponent(jLMesa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(13, 13, 13)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLMesa1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLMesero, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(36, 36, 36)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cancelarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(crearBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
-                .addGap(25, 25, 25))
-            .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(backgroundLayout.createSequentialGroup()
-                    .addGap(100, 100, 100)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(201, Short.MAX_VALUE)))
+                    .addComponent(crearBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -327,7 +320,7 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
 
     private void jLCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLCrearMouseClicked
         //Agregar un funcionamiento para que si ya existe un detalle con el producto sume a la cantidad ya pedida
-/*        try {
+        try {
             System.out.println("click" + cantidad);
             if (cantidad < producto.getStock()) {
                 Detalle detalle = new Detalle(pedido, producto, cantidad);
@@ -340,7 +333,7 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Introducir una cantidad válida.");
-        }*/
+        }
     }//GEN-LAST:event_jLCrearMouseClicked
 
     private void jTextNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextNombreFocusLost
@@ -379,6 +372,9 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
             int idProducto = (Integer) jTDetalle.getValueAt(jTDetalle.getSelectedRow(), 0);
             producto = pData.buscarProducto(idProducto);
             jTextCantidad.setEnabled(true);
+            jTextMesa.setEnabled(true);
+            jComboEmpleados.setEnabled(true);
+            
         }
     }//GEN-LAST:event_jTDetalleMouseClicked
 
@@ -418,11 +414,11 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
     private javax.swing.JPanel cancelarBtn;
     private javax.swing.JPanel crearBtn;
     private javax.swing.JComboBox<Empleado> jComboEmpleados;
-    private javax.swing.JLabel jLApellido1;
     private javax.swing.JLabel jLCancelar;
+    private javax.swing.JLabel jLCantidad;
     private javax.swing.JLabel jLCrear;
     private javax.swing.JLabel jLMesa;
-    private javax.swing.JLabel jLMesa1;
+    private javax.swing.JLabel jLMesero;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTDetalle;
