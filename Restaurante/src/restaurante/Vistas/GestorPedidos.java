@@ -328,8 +328,7 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAgregarMouseClicked
-        Pedido pedido = new Pedido();
-        FormularioPedidos formulario = new FormularioPedidos(this, pedido);
+        FormularioPedidos formulario = new FormularioPedidos(this);
         
         
         int x = (this.getWidth() - formulario.getWidth()) / 2;
@@ -371,7 +370,7 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
             modelo.addRow(new Object[]{
                 pedido.getIdPedido(),
                 pedido.getMesa().getNumMesa(),
-                pedido.getListaDetalles(),
+                pedido.getEmpleado(),
                 pedido.getPrecioPedido(),
                 pedido.getEstado()
             });

@@ -57,6 +57,9 @@ public class Mesa {
 
     @Override
     public String toString() {
-        return "Mesa{" + "idMesa=" + idMesa + ", numMesa=" + numMesa + ", capacidad=" + capacidad + ", estado=" + estado + '}';
+        if (idMesa == 0) {
+            return "Selecione Mesa";
+        }
+        return String.valueOf(numMesa);
     }
 }

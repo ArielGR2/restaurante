@@ -8,7 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import restaurante.Entidades.Empleado;
 import restaurante.Entidades.EstadoPedido;
+import restaurante.Entidades.Mesa;
 import restaurante.Entidades.Pedido;
 
 public class PedidoData {
@@ -30,8 +32,8 @@ public class PedidoData {
 
         try {
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, pedido.getMesa().getNumMesa());
-            ps.setInt(2, pedido.getEmpleado().getIdEmpleado());
+            ps.setInt(1, pedido.getMesa() == null ? 0 :  pedido.getMesa().getNumMesa());
+            ps.setInt(2, pedido.getEmpleado() == null ? 0 : pedido.getEmpleado().getIdEmpleado());
             ps.setDouble(3, pedido.getPrecioPedido());
 
             ps.executeUpdate();
@@ -40,7 +42,6 @@ public class PedidoData {
 
             if (rs.next()) {
                 pedido.setIdPedido(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Alta exitosa.");
             } else {
                 JOptionPane.showMessageDialog(null, "Error al obtener el id.");
             }
@@ -82,6 +83,35 @@ public class PedidoData {
         return pedido;
     }
 
+    public Pedido buscarPedido(Mesa mesa, Empleado empleado) {
+        Pedido pedido = null;
+        sql = "SELECT * FROM pedido WHERE  numMesa = ? AND idEmpleado = ?";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, mesa.getIdMesa());
+            ps.setInt(2, empleado.getIdEmpleado());
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                pedido = new Pedido();
+                pedido.setIdPedido(rs.getInt("idPedido"));
+                pedido.setMesa(mesa);
+                pedido.setEmpleado(empleado);
+                pedido.setPrecioPedido(rs.getDouble("precioPedido"));
+                pedido.setEstado(EstadoPedido.valueOf(rs.getString("estado")));
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pedido. " + ex.getMessage());
+        }
+
+        return pedido;
+    }
+    
     public List<Pedido> listarPedidos() {
         List<Pedido> pedidos = new ArrayList<>();
 

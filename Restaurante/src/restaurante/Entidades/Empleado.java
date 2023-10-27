@@ -70,6 +70,6 @@ public class Empleado {
         if (idEmpleado == 0) {
             return "Selecione Mesero";
         }
-        return idEmpleado + ". " + dni + ", " + nombre + "," + apellido + ", " + estado;
+        return idEmpleado + " - " + nombre + "," + apellido;
     }
 }

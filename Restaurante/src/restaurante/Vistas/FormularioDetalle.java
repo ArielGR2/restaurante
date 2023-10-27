@@ -1,15 +1,17 @@
 package restaurante.Vistas;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import restaurante.AccesoDatos.DetalleData;
 import restaurante.AccesoDatos.EmpleadoData;
+import restaurante.AccesoDatos.MesaData;
 import restaurante.AccesoDatos.ProductoData;
 import restaurante.Entidades.Detalle;
-import restaurante.Entidades.Empleado;
 import restaurante.Entidades.Pedido;
 import restaurante.Entidades.Producto;
 
@@ -23,6 +25,7 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
 
     EmpleadoData eData = new EmpleadoData();
     DetalleData dData = new DetalleData();
+    MesaData mData = new MesaData();
     ProductoData pData = new ProductoData();
 
     private DefaultTableModel modelo = new DefaultTableModel() {
@@ -46,7 +49,7 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
         this.pedido = pedido;
         this.fPedidos = fPedidos;
         cabeceraTabla();
-        cargarCombo();
+        cargarTabla();
     }
 
     /**
@@ -66,10 +69,6 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
         jTDetalle = new javax.swing.JTable();
         jLCantidad = new javax.swing.JLabel();
         jTextCantidad = new javax.swing.JTextField();
-        jLMesa = new javax.swing.JLabel();
-        jTextMesa = new javax.swing.JTextField();
-        jLMesero = new javax.swing.JLabel();
-        jComboEmpleados = new javax.swing.JComboBox<>();
         crearBtn = new javax.swing.JPanel();
         jLCrear = new javax.swing.JLabel();
         cancelarBtn = new javax.swing.JPanel();
@@ -79,7 +78,7 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
         setBorder(null);
         setMaximumSize(new java.awt.Dimension(300, 300));
         setMinimumSize(new java.awt.Dimension(300, 300));
-        setPreferredSize(new java.awt.Dimension(400, 500));
+        setPreferredSize(new java.awt.Dimension(400, 370));
 
         background.setBackground(new java.awt.Color(25, 25, 25));
         background.setForeground(new java.awt.Color(204, 204, 204));
@@ -148,30 +147,6 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
                 jTextCantidadKeyReleased(evt);
             }
         });
-
-        jLMesa.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLMesa.setForeground(new java.awt.Color(204, 204, 204));
-        jLMesa.setText("Mesa:");
-
-        jTextMesa.setBackground(new java.awt.Color(102, 102, 102));
-        jTextMesa.setForeground(new java.awt.Color(204, 204, 204));
-        jTextMesa.setEnabled(false);
-        jTextMesa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextMesaActionPerformed(evt);
-            }
-        });
-        jTextMesa.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextMesaKeyReleased(evt);
-            }
-        });
-
-        jLMesero.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLMesero.setForeground(new java.awt.Color(204, 204, 204));
-        jLMesero.setText("Mesero:");
-
-        jComboEmpleados.setEnabled(false);
 
         crearBtn.setBackground(new java.awt.Color(51, 51, 51));
         crearBtn.setForeground(new java.awt.Color(51, 51, 51));
@@ -246,16 +221,10 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(backgroundLayout.createSequentialGroup()
-                                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLMesero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLMesa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(14, 14, 14))
+                                .addComponent(jLCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(206, 206, 206))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
                                 .addGap(14, 14, 14)
                                 .addComponent(crearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -285,19 +254,11 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextCantidad))
-                .addGap(18, 18, 18)
-                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLMesa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(13, 13, 13)
-                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLMesero, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addGap(30, 30, 30)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cancelarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                     .addComponent(crearBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38))
+                .addGap(36, 36, 36))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -321,16 +282,31 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
     private void jLCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLCrearMouseClicked
         //Agregar un funcionamiento para que si ya existe un detalle con el producto sume a la cantidad ya pedida
         try {
-            System.out.println("click" + cantidad);
-            if (cantidad < producto.getStock()) {
-                Detalle detalle = new Detalle(pedido, producto, cantidad);
-                pedido.getListaDetalles().add(detalle);
-                dData.agregarDetalle(detalle);
-                cerrarVentana();
-            } else {
-                JOptionPane.showMessageDialog(this, "La cantidad deseada supera el stock.");
-            }
+            List<Detalle> listaDetalles = dData.listarDetallesPedido(pedido.getIdPedido());
 
+            if (listaDetalles.isEmpty() && cantidad <= producto.getStock()) {
+                 Detalle detalle = new Detalle(pedido, producto, cantidad);
+                dData.agregarDetalle(detalle);
+
+                producto.setStock(producto.getStock() - cantidad);
+                pData.modificarProducto(producto);
+
+                cerrarVentana();
+            } else if (cantidad > producto.getStock()) {
+                JOptionPane.showMessageDialog(this, "La cantidad deseada supera el stock.");
+            } else {
+                for (Detalle d : listaDetalles) {
+                    if (d.getProducto().getIdProducto() == producto.getIdProducto()) {
+                        d.setCantProducto(d.getCantProducto() + cantidad);
+                        dData.modificarDetalle(d);
+
+                        producto.setStock(producto.getStock() - cantidad);
+                        pData.modificarProducto(producto);
+
+                        cerrarVentana();
+                    }
+                }
+            }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Introducir una cantidad válida.");
         }
@@ -372,19 +348,23 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
             int idProducto = (Integer) jTDetalle.getValueAt(jTDetalle.getSelectedRow(), 0);
             producto = pData.buscarProducto(idProducto);
             jTextCantidad.setEnabled(true);
-            jTextMesa.setEnabled(true);
-            jComboEmpleados.setEnabled(true);
-            
+
         }
     }//GEN-LAST:event_jTDetalleMouseClicked
 
     private void jTextCantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextCantidadKeyReleased
-        int num = Integer.parseInt(jTextCantidad.getText());
-        if (num > producto.getStock()) {
-            jTextCantidad.setForeground(Color.red);
-        } else {
-            jTextCantidad.setForeground(new Color(204, 204, 204));
+        int num;
+        try {
+            num = Integer.parseInt(jTextCantidad.getText());
+            if (num > producto.getStock()) {
+                jTextCantidad.setForeground(Color.red);
+            } else {
+                jTextCantidad.setForeground(new Color(204, 204, 204));
+            }
+        } catch (Exception e) {
+            num = 0;
         }
+
     }//GEN-LAST:event_jTextCantidadKeyReleased
 
     private void jTextCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCantidadActionPerformed
@@ -400,37 +380,24 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTextCantidadActionPerformed
 
-    private void jTextMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextMesaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextMesaActionPerformed
-
-    private void jTextMesaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextMesaKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextMesaKeyReleased
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
     private javax.swing.JPanel cancelarBtn;
     private javax.swing.JPanel crearBtn;
-    private javax.swing.JComboBox<Empleado> jComboEmpleados;
     private javax.swing.JLabel jLCancelar;
     private javax.swing.JLabel jLCantidad;
     private javax.swing.JLabel jLCrear;
-    private javax.swing.JLabel jLMesa;
-    private javax.swing.JLabel jLMesero;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTDetalle;
     private javax.swing.JTextField jTextCantidad;
-    private javax.swing.JTextField jTextMesa;
     private javax.swing.JTextField jTextNombre;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 
     private void cerrarVentana() {
         dispose();
-        fPedidos.cargarTabla();
+        fPedidos.cargarTablaPedido();
     }
 
     private void cabeceraTabla() {
@@ -446,7 +413,9 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
         //Centrar contenido de tabla
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        jTDetalle.setDefaultRenderer(Object.class, centerRenderer);
+        jTDetalle
+                .setDefaultRenderer(Object.class,
+                        centerRenderer);
     }
 
     public void cargarTabla() {
@@ -466,13 +435,6 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
         int filas = jTDetalle.getRowCount() - 1;
         for (; filas >= 0; filas--) {
             modelo.removeRow(filas);
-        }
-    }
-
-    private void cargarCombo() {
-        jComboEmpleados.addItem(new Empleado());
-        for (Empleado mesero : eData.listarEmpleadosActivos()) {
-            jComboEmpleados.addItem(mesero);
         }
     }
 }
