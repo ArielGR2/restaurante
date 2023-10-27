@@ -1,7 +1,6 @@
 package restaurante.Vistas;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -77,8 +76,8 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
         setBackground(new java.awt.Color(25, 25, 25));
         setBorder(null);
         setMaximumSize(new java.awt.Dimension(300, 300));
-        setMinimumSize(new java.awt.Dimension(300, 300));
-        setPreferredSize(new java.awt.Dimension(400, 370));
+        setMinimumSize(new java.awt.Dimension(400, 400));
+        setPreferredSize(new java.awt.Dimension(400, 400));
 
         background.setBackground(new java.awt.Color(25, 25, 25));
         background.setForeground(new java.awt.Color(204, 204, 204));
@@ -216,28 +215,27 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
             .addGroup(backgroundLayout.createSequentialGroup()
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgroundLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(backgroundLayout.createSequentialGroup()
-                                .addComponent(jLCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(206, 206, 206))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(crearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cancelarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(9, 9, 9))))
-                    .addGroup(backgroundLayout.createSequentialGroup()
                         .addGap(93, 93, 93)
                         .addComponent(titulo))
                     .addGroup(backgroundLayout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                        .addGap(82, 82, 82)
+                        .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(backgroundLayout.createSequentialGroup()
+                                .addComponent(crearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cancelarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                            .addComponent(jSeparator1))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                .addContainerGap(39, Short.MAX_VALUE)
+                .addComponent(jLCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(221, Short.MAX_VALUE))
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,19 +244,19 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
                 .addComponent(titulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextCantidad))
-                .addGap(30, 30, 30)
+                .addGap(44, 44, 44)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cancelarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                     .addComponent(crearBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36))
+                .addGap(54, 54, 54))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -284,30 +282,36 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
         try {
             List<Detalle> listaDetalles = dData.listarDetallesPedido(pedido.getIdPedido());
 
-            if (listaDetalles.isEmpty() && cantidad <= producto.getStock()) {
-                 Detalle detalle = new Detalle(pedido, producto, cantidad);
-                dData.agregarDetalle(detalle);
+            if (cantidad <= producto.getStock()) {
+                boolean productoExistente = false;
 
-                producto.setStock(producto.getStock() - cantidad);
-                pData.modificarProducto(producto);
-
-                cerrarVentana();
-            } else if (cantidad > producto.getStock()) {
-                JOptionPane.showMessageDialog(this, "La cantidad deseada supera el stock.");
-            } else {
                 for (Detalle d : listaDetalles) {
                     if (d.getProducto().getIdProducto() == producto.getIdProducto()) {
+                        // El producto ya existe en la lista de detalles, aumenta la cantidad
                         d.setCantProducto(d.getCantProducto() + cantidad);
                         dData.modificarDetalle(d);
 
                         producto.setStock(producto.getStock() - cantidad);
                         pData.modificarProducto(producto);
 
-                        cerrarVentana();
+                        productoExistente = true;
+                        break; // Sal del bucle ya que encontraste el producto
                     }
                 }
+
+                if (!productoExistente) {
+                    // El producto no existe en la lista de detalles, crea un nuevo detalle
+                    Detalle detalle = new Detalle(pedido, producto, cantidad);
+                    dData.agregarDetalle(detalle);
+                    producto.setStock(producto.getStock() - cantidad);
+                    pData.modificarProducto(producto);
+                }
+
+                cerrarVentana();
+            } else {
+                JOptionPane.showMessageDialog(this, "La cantidad deseada supera el stock.");
             }
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(this, "Introducir una cantidad válida.");
         }
     }//GEN-LAST:event_jLCrearMouseClicked
@@ -396,8 +400,8 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void cerrarVentana() {
-        dispose();
         fPedidos.cargarTablaPedido();
+        dispose();
     }
 
     private void cabeceraTabla() {
@@ -413,9 +417,7 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
         //Centrar contenido de tabla
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        jTDetalle
-                .setDefaultRenderer(Object.class,
-                        centerRenderer);
+        jTDetalle.setDefaultRenderer(Object.class, centerRenderer);
     }
 
     public void cargarTabla() {

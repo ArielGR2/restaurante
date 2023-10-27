@@ -123,10 +123,8 @@ public class MesaData {
 
             int registroFilas = ps.executeUpdate();
 
-            if (registroFilas == 1) {
-                JOptionPane.showMessageDialog(null, "Mesa modificada exitosamente.");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontró la mesa.");
+            if (registroFilas != 1) {
+                 JOptionPane.showMessageDialog(null, "No se encontró la mesa.");
             }
 
             ps.close();

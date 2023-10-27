@@ -12,6 +12,7 @@ import restaurante.AccesoDatos.PedidoData;
 import restaurante.AccesoDatos.ProductoData;
 import restaurante.Entidades.Detalle;
 import restaurante.Entidades.Empleado;
+import restaurante.Entidades.EstadoMesa;
 import restaurante.Entidades.Mesa;
 import restaurante.Entidades.Pedido;
 import restaurante.Entidades.Producto;
@@ -277,13 +278,9 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(agregarBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(crearBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(crearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(238, 238, 238)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(quitarBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(anularBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(anularBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLMesa)
@@ -293,7 +290,11 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
                                     .addComponent(jLMesero)
                                     .addGap(18, 18, 18)
                                     .addComponent(jComboEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(agregarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(238, 238, 238)
+                                    .addComponent(quitarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(174, 174, 174)
                         .addComponent(titulo)))
@@ -306,17 +307,17 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
                 .addComponent(titulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLMesa, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
                     .addComponent(jComboMesas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLMesero, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(quitarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(agregarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -345,6 +346,7 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
 
     private void jLCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLCrearMouseClicked
         JOptionPane.showMessageDialog(null, "Alta exitosa.");
+        pedido.setPrecioPedido(Double.parseDouble(jTextTotal.getText()));
         dispose();
     }//GEN-LAST:event_jLCrearMouseClicked
 
@@ -356,6 +358,9 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
         if (pData.buscarPedido(mesa, empleado) == null) {
             pedido = new Pedido(mesa, empleado);
             pData.agregarPedido(pedido);
+            
+            mesa.setEstado(EstadoMesa.ATENDIDA);
+            mData.modificarMesa(mesa);
         } else {
             pedido = pData.buscarPedido(mesa, empleado);
         }
@@ -446,10 +451,9 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
                     detalle.getProducto().getPrecio(),
                     detalle.calcularSubtotal(detalle)
                 });
-                pedido.setPrecioPedido(pedido.getPrecioPedido() + detalle.calcularSubtotal(detalle));
             }
-            double sumaSubtotales = calcularSumaColumna(jTDetalle, 3);
-            jTextTotal.setText(String.valueOf(sumaSubtotales));
+            double suma = calcularSumaColumna(jTDetalle, 3);
+            jTextTotal.setText(String.valueOf(suma));
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "No hay productos para mostrar");
         }
@@ -478,15 +482,11 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
 
     public double calcularSumaColumna(JTable tabla, int col) {
         double suma = 0.0;
-
         int rowCount = modelo.getRowCount();
-
         for (int i = 0; i < rowCount; i++) {
             double valorCelda = (double) modelo.getValueAt(i, col);
             suma += valorCelda;
         }
-
         return suma;
     }
-
 }
