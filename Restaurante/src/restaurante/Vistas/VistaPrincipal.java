@@ -144,14 +144,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        jDesktopPane1.removeAll();
-        jDesktopPane1.repaint();
-        //DESCOMENTAR Y REEMPLAZAR CON LA VENTANA INTERNA CORRESPONDIENTE
-        GestorMesa gestorMesa = new GestorMesa();
-        gestorMesa.setVisible(true);
-        
-        jDesktopPane1.add(gestorMesa);
-        jDesktopPane1.moveToFront(gestorMesa);
+//        jDesktopPane1.removeAll();
+//        jDesktopPane1.repaint();
+//        //DESCOMENTAR Y REEMPLAZAR CON LA VENTANA INTERNA CORRESPONDIENTE
+//        GestorMesa gestorMesa = new GestorMesa();
+//        gestorMesa.setVisible(true);
+//        
+//        jDesktopPane1.add(gestorMesa);
+//        jDesktopPane1.moveToFront(gestorMesa);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
