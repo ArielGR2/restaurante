@@ -228,12 +228,12 @@ public class FormularioProductosA extends javax.swing.JInternalFrame {
 
     private void jLAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAgregarMouseClicked
         try {
-           if (!verificacionCampos()){
-               return;
-           }
+            if (!verificacionCampos()) {
+                return;
+            }
             String nombre = jTNombre.getText();
             int stock = Integer.parseInt(jTStock.getText());
-            double precio = Double.parseDouble(jTPrecio.getText());
+            double precio = Double.parseDouble(!jTPrecio.getText().startsWith("$")?jTPrecio.getText():jTPrecio.getText().substring(1,jTPrecio.getText().length()));
 
             Producto encontrado = pData.buscarProducto(nombre);
             //Si no lo encuentra lo crea, si lo encuentra lo da de alta
@@ -258,6 +258,9 @@ public class FormularioProductosA extends javax.swing.JInternalFrame {
 
     private void jTPrecioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTPrecioKeyReleased
         // TODO add your handling code here:
+        if (!jTPrecio.getText().startsWith("$")){
+            jTPrecio.setText("$".concat(jTPrecio.getText()));
+        }
         if (!checkFiltroNum(evt.getKeyChar())){
             jTPrecio.setText(quitarLetrasString(jTPrecio.getText()));
         }
@@ -329,7 +332,7 @@ public class FormularioProductosA extends javax.swing.JInternalFrame {
         String textf = "";
         for (int i=0;i<text.length();i++){
             String letra = text.charAt(i)+"";
-            if (numTFVerificacion(letra)){
+            if (numTFVerificacion(letra) || (letra.equals("$") && i == 0)){
                 textf = textf.concat(letra);
             }
         }
