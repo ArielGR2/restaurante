@@ -347,6 +347,8 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
     private void jLCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLCrearMouseClicked
         JOptionPane.showMessageDialog(null, "Alta exitosa.");
         pedido.setPrecioPedido(Double.parseDouble(jTextTotal.getText()));
+        pData.modificarPedido(pedido);
+        gPedidos.cargarTabla();
         dispose();
     }//GEN-LAST:event_jLCrearMouseClicked
 
