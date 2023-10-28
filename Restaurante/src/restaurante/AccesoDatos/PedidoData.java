@@ -83,14 +83,13 @@ public class PedidoData {
         return pedido;
     }
 
-    public Pedido buscarPedido(Mesa mesa, Empleado empleado) {
+    public Pedido buscarPedido(Mesa mesa) {
         Pedido pedido = null;
-        sql = "SELECT * FROM pedido WHERE  numMesa = ? AND idEmpleado = ?";
+        sql = "SELECT * FROM pedido WHERE  numMesa = ?";
 
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, mesa.getIdMesa());
-            ps.setInt(2, empleado.getIdEmpleado());
 
             rs = ps.executeQuery();
 
@@ -98,7 +97,7 @@ public class PedidoData {
                 pedido = new Pedido();
                 pedido.setIdPedido(rs.getInt("idPedido"));
                 pedido.setMesa(mesa);
-                pedido.setEmpleado(empleado);
+                pedido.setEmpleado(eData.buscarEmpleado(rs.getInt("idEmpleado")));
                 pedido.setPrecioPedido(rs.getDouble("precioPedido"));
                 pedido.setEstado(EstadoPedido.valueOf(rs.getString("estado")));
             }

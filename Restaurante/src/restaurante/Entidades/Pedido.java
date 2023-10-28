@@ -22,6 +22,7 @@ public class Pedido {
         this.mesa = mesa;
         this.empleado = empleado;
         this.precioPedido = 0;
+        this.estado = EstadoPedido.PENDIENTE;
     }
 
     public Pedido() {

@@ -38,15 +38,15 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
 
         @Override
         public Class<?> getColumnClass(int c) {
-            if (c == 0) {
+            if (c == 1) {
                 return String.class;
-            } else if (c == 1) {
+            } else if (c == 0 && c == 2) {
                 return Integer.class;
             }
             return Double.class;
         }
     };
-
+    
     /**
      * Creates new form FormularioPedidos
      */
@@ -135,6 +135,7 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
 
         quitarBtn.setBackground(new java.awt.Color(51, 51, 51));
         quitarBtn.setForeground(new java.awt.Color(51, 51, 51));
+        quitarBtn.setEnabled(false);
         quitarBtn.setMaximumSize(new java.awt.Dimension(100, 30));
         quitarBtn.setMinimumSize(new java.awt.Dimension(100, 30));
 
@@ -188,6 +189,7 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
 
         crearBtn.setBackground(new java.awt.Color(51, 51, 51));
         crearBtn.setForeground(new java.awt.Color(51, 51, 51));
+        crearBtn.setEnabled(false);
         crearBtn.setMaximumSize(new java.awt.Dimension(100, 30));
         crearBtn.setMinimumSize(new java.awt.Dimension(100, 30));
 
@@ -253,6 +255,12 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
         jTextTotal.setForeground(new java.awt.Color(204, 204, 204));
         jTextTotal.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
+        jComboMesas.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboMesasItemStateChanged(evt);
+            }
+        });
+
         jLMesa.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLMesa.setForeground(new java.awt.Color(204, 204, 204));
         jLMesa.setText("Mesa:");
@@ -260,6 +268,8 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
         jLMesero.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLMesero.setForeground(new java.awt.Color(204, 204, 204));
         jLMesero.setText("Mesero:");
+
+        jComboEmpleados.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -353,22 +363,21 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jLCrearMouseClicked
 
     private void jLAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAgregarMouseClicked
-
+        FormularioDetalle formulario;
         Mesa mesa = (Mesa) jComboMesas.getSelectedItem();
-        Empleado empleado = (Empleado) jComboEmpleados.getSelectedItem();
+        Empleado empleado;
 
-        if (pData.buscarPedido(mesa, empleado) == null) {
-            pedido = new Pedido(mesa, empleado);
-            pData.agregarPedido(pedido);
-            
+        if (pData.buscarPedido(mesa) == null) {
+            empleado = (Empleado) jComboEmpleados.getSelectedItem();
             mesa.setEstado(EstadoMesa.ATENDIDA);
             mData.modificarMesa(mesa);
         } else {
-            pedido = pData.buscarPedido(mesa, empleado);
+            empleado = pData.buscarPedido(mesa).getEmpleado();
         }
+        pedido = new Pedido(mesa, empleado);
+        pData.agregarPedido(pedido);
 
-        FormularioDetalle formulario = new FormularioDetalle(this, pedido);
-
+        formulario = new FormularioDetalle(this, pedido);
         int x = (this.getWidth() - formulario.getWidth()) / 2;
         int y = (this.getHeight() - formulario.getHeight()) / 2;
 
@@ -378,30 +387,74 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
         formulario.setLocation(x, y);
     }//GEN-LAST:event_jLAgregarMouseClicked
 
-    private void jLQuitarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLQuitarMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLQuitarMouseClicked
-
     private void jTDetalleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTDetalleMouseClicked
         int filaSeleccionada = jTDetalle.getSelectedRow();
         if (filaSeleccionada != -1) {
             jLAnular.setEnabled(true);
             anularBtn.setEnabled(true);
+
+            jLQuitar.setEnabled(true);
+            quitarBtn.setEnabled(true);
         } else {
+            jLQuitar.setEnabled(false);
+            quitarBtn.setEnabled(false);
+
             jLAnular.setEnabled(false);
             anularBtn.setEnabled(false);
         }
     }//GEN-LAST:event_jTDetalleMouseClicked
 
     private void jLAnularMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAnularMouseClicked
-        for (Detalle detalle : dData.listarDetallesPedido(pedido.getIdPedido())) {
-            Producto producto = detalle.getProducto();
-            producto.setStock(producto.getStock() + detalle.getCantProducto());
-            prData.modificarProducto(producto);
+        if (jLAnular.isEnabled()) {
+            for (Detalle detalle : dData.listarDetallesPedido(pedido.getIdPedido())) {
+                Producto producto = detalle.getProducto();
+                producto.setStock(producto.getStock() + detalle.getCantProducto());
+                prData.modificarProducto(producto);
+            }
+            pData.eliminarPedido(pedido.getIdPedido());
+            dispose();
         }
-        pData.eliminarPedido(pedido.getIdPedido());
-        dispose();
+
     }//GEN-LAST:event_jLAnularMouseClicked
+
+    private void jComboMesasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboMesasItemStateChanged
+        if (evt.getStateChange() == java.awt.event.ItemEvent.DESELECTED) {
+            Mesa mesa = (Mesa) jComboMesas.getSelectedItem();
+
+            if (pData.buscarPedido(mesa) == null) {
+                jComboEmpleados.setEnabled(true);
+            } else {
+                jComboEmpleados.setEnabled(false);
+            }
+        }
+    }//GEN-LAST:event_jComboMesasItemStateChanged
+
+    private void jLQuitarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLQuitarMouseClicked
+        int cantEliminar;
+        try {
+            Detalle detalle = dData.buscarDetalle((Integer) jTDetalle.getValueAt(jTDetalle.getSelectedRow(), 0));
+            cantEliminar = Integer.valueOf(JOptionPane.showInputDialog(this, "Introduzca la cantidad de productos a quitar:", "", JOptionPane.QUESTION_MESSAGE));
+
+            if (cantEliminar < detalle.getCantProducto()) {
+                detalle.setCantProducto(detalle.getCantProducto() - cantEliminar);
+                dData.modificarDetalle(detalle);
+                cargarTablaPedido();
+            } else if (cantEliminar == detalle.getCantProducto()) {
+                dData.eliminarDetalle(detalle.getIdDetalle());
+                cargarTablaPedido();
+            } else {
+                JOptionPane.showMessageDialog(this, "La cantidad a eliminar excede a la cantidad pedida.");
+            }
+
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "No Puede haber campos vacios");
+        } catch (NumberFormatException nfe) {
+            cantEliminar = 0;
+        } finally {
+            jLQuitar.setEnabled(false);
+            quitarBtn.setEnabled(false);
+        }
+    }//GEN-LAST:event_jLQuitarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -426,7 +479,9 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 
+  
     private void cabeceraTabla() {
+        modelo.addColumn("ID");
         modelo.addColumn("Nombre");
         modelo.addColumn("Cantidad");
         modelo.addColumn("Precio xU");
@@ -448,13 +503,14 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
             eliminarFilas();
             for (Detalle detalle : dData.listarDetallesPedido(pedido.getIdPedido())) {
                 modelo.addRow(new Object[]{
+                    detalle.getIdDetalle(),
                     detalle.getProducto().getNombre(),
                     detalle.getCantProducto(),
                     detalle.getProducto().getPrecio(),
                     detalle.calcularSubtotal(detalle)
                 });
             }
-            double suma = calcularSumaColumna(jTDetalle, 3);
+            double suma = calcularSumaColumna(4);
             jTextTotal.setText(String.valueOf(suma));
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "No hay productos para mostrar");
@@ -482,7 +538,12 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
         }
     }
 
-    public double calcularSumaColumna(JTable tabla, int col) {
+    public void habilitarCrear() {
+        crearBtn.setEnabled(true);
+        jLCrear.setEnabled(true);
+    }
+
+    private double calcularSumaColumna(int col) {
         double suma = 0.0;
         int rowCount = modelo.getRowCount();
         for (int i = 0; i < rowCount; i++) {

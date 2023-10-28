@@ -413,20 +413,26 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jLTodosMouseClicked
 
     private void jLxMesaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLxMesaMouseClicked
-        int numMesa = Integer.valueOf(JOptionPane.showInputDialog(this, "Introduzca el número de la mesa:", "", JOptionPane.QUESTION_MESSAGE));
+        int numMesa;
+        try {
+            numMesa = Integer.valueOf(JOptionPane.showInputDialog(this, "Introduzca el número de la mesa:", "", JOptionPane.QUESTION_MESSAGE));
 
-        eliminarFilas();
+            eliminarFilas();
 
-        for (Pedido pedido : pData.listarPedidosMesa(numMesa)) {
-            modelo.addRow(new Object[]{
-                pedido.getIdPedido(),
-                pedido.getMesa().getNumMesa(),
-                pedido.getEmpleado(),
-                pedido.getPrecioPedido(),
-                pedido.getEstado()
-            });
+            for (Pedido pedido : pData.listarPedidosMesa(numMesa)) {
+                modelo.addRow(new Object[]{
+                    pedido.getIdPedido(),
+                    pedido.getMesa().getNumMesa(),
+                    pedido.getEmpleado(),
+                    pedido.getPrecioPedido(),
+                    pedido.getEstado()
+                });
+            }
+            anularBotones();
+        } catch (NumberFormatException nfe) {
+            numMesa = 0;
         }
-        anularBotones();
+
     }//GEN-LAST:event_jLxMesaMouseClicked
 
     private void jLxMeseroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLxMeseroMouseClicked
