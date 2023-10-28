@@ -79,8 +79,6 @@ public class ProductoData {
                 producto.setStock(rs.getInt("stock"));
                 producto.setPrecio(rs.getDouble("precio"));
                 producto.setDisponible(rs.getBoolean("disponible"));
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe el producto.");
             }
 
             ps.close();
@@ -91,7 +89,7 @@ public class ProductoData {
 
         return producto;
     }
-    
+
     public Producto buscarProducto(int idProducto) {
         Producto producto = null;
         //Para que muestre Todos sin importar el estado
@@ -110,8 +108,6 @@ public class ProductoData {
                 producto.setStock(rs.getInt("stock"));
                 producto.setPrecio(rs.getDouble("precio"));
                 producto.setDisponible(rs.getBoolean("disponible"));
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe el producto.");
             }
 
             ps.close();
@@ -154,11 +150,11 @@ public class ProductoData {
 
         return productos;
     }
-    
+
     public List<Producto> listarProductosXFiltros(String nombrep, String sMinp, String sMaxp, String pMinp, String pMaxp) {
         List<Producto> productos = new ArrayList<>();
 
-        sql = "SELECT * FROM producto WHERE nombre like '%"+nombrep+"%' AND (stock >= "+sMinp+" AND stock <= "+sMaxp+") AND (precio >= "+pMinp+" AND precio <= "+pMaxp+")";
+        sql = "SELECT * FROM producto WHERE nombre like '%" + nombrep + "%' AND (stock >= " + sMinp + " AND stock <= " + sMaxp + ") AND (precio >= " + pMinp + " AND precio <= " + pMaxp + ")";
 
         try {
 
@@ -202,9 +198,7 @@ public class ProductoData {
 
             int registroFilas = ps.executeUpdate();
 
-            if (registroFilas == 1) {
-                JOptionPane.showMessageDialog(null, "Modificado exitosamente.");
-            } else {
+            if (registroFilas != 1) {
                 JOptionPane.showMessageDialog(null, "No se encontró el producto.");
             }
 
@@ -217,7 +211,7 @@ public class ProductoData {
 
     public void eliminarProducto(int id) {
 
-        sql = "UPDATE producto SET disponible = 0 WHERE idProducto = ?";
+        sql = "DELETE FROM producto WHERE idProducto = ?";
 
         try {
             ps = con.prepareStatement(sql);

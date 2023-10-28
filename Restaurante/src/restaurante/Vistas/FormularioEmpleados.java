@@ -13,9 +13,9 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
      * Creates new form FormularioEmpleados
      */
 
-    public FormularioEmpleados(GestorEmpleados ventanaPrincipal) {
+    public FormularioEmpleados(GestorEmpleados gEmpleados) {
         initComponents();
-        this.gEmpleados = ventanaPrincipal;
+        this.gEmpleados = gEmpleados;
     }
 
     /**
@@ -136,17 +136,11 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
         cancelarBtn.setLayout(cancelarBtnLayout);
         cancelarBtnLayout.setHorizontalGroup(
             cancelarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cancelarBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
         cancelarBtnLayout.setVerticalGroup(
             cancelarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cancelarBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLCancelar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
@@ -162,7 +156,6 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
                                 .addComponent(crearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cancelarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jSeparator1)
                             .addGroup(backgroundLayout.createSequentialGroup()
                                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -174,7 +167,8 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
                             .addGroup(backgroundLayout.createSequentialGroup()
                                 .addComponent(jLApellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(45, 45, 45)
-                                .addComponent(jTextApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jTextApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSeparator1)))
                     .addGroup(backgroundLayout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(titulo)))
@@ -187,11 +181,11 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
                 .addComponent(titulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextDni)
                     .addComponent(jLDni, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextNombre)
                     .addComponent(jLNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -234,15 +228,18 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
             if (encontrado == null && verificarString(nombre) && verificarString(apellido)) {
                 Empleado empleado = new Empleado(dni, nombre, apellido);
                 eData.agregarEmpleado(empleado);
-            } else if (encontrado.isEstado()) {
+            }
+            if (encontrado != null && encontrado.isEstado()) {
                 JOptionPane.showMessageDialog(this, "El empleado ya existe, no es necesario crearlo.");
             } else {
                 encontrado.setEstado(true);
                 eData.modificarEmpleado(encontrado);
             }
             cerrarVentana();
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(this, "Introducir un DNI válido");
+        } catch (NullPointerException npe){
+            JOptionPane.showMessageDialog(this, "No debe haber campos vacíos");
         }
     }//GEN-LAST:event_jLCrearMouseClicked
 

@@ -20,7 +20,7 @@ public class Detalle {
         this.producto = producto;
         this.cantProducto = cantProducto;
     }
-
+     
     public Detalle() {
     }
 

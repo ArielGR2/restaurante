@@ -10,6 +10,7 @@ import restaurante.Entidades.Mesa;
 
 public class GestorMesa extends javax.swing.JInternalFrame {
 
+    Principal ventanaPrincipal;
     MesaData mData = new MesaData();
 
     private DefaultTableModel modelo = new DefaultTableModel() {
@@ -35,8 +36,9 @@ public class GestorMesa extends javax.swing.JInternalFrame {
     /**
      * Creates new form GestorMesa
      */
-    public GestorMesa() {
+    public GestorMesa(Principal ventanaPrincipal) {
         initComponents();
+        this.ventanaPrincipal = ventanaPrincipal;
         cabeceraTabla();
         cargarTabla();
     }
@@ -250,15 +252,14 @@ public class GestorMesa extends javax.swing.JInternalFrame {
 
     private void jLAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAgregarMouseClicked
         FormularioMesa formulario = new FormularioMesa(this);
-        JDesktopPane desktopPane = getDesktopPane();
 
-        desktopPane.add(formulario);
+        int x = (this.getWidth() - formulario.getWidth()) / 2;
+        int y = (this.getHeight() - formulario.getHeight()) / 2;
 
-        int x = (desktopPane.getWidth() - formulario.getWidth()) / 2;
-        int y = (desktopPane.getHeight() - formulario.getHeight()) / 2;
-
-        formulario.setLocation(x, y);
+        add(formulario, 0);
+        
         formulario.setVisible(true);
+        formulario.setLocation(x, y);
     }//GEN-LAST:event_jLAgregarMouseClicked
 
     private void jLModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLModificarMouseClicked

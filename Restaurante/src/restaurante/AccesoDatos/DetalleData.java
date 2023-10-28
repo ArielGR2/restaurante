@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import restaurante.Entidades.Detalle;
+import restaurante.Entidades.Pedido;
 
 public class DetalleData {
 
@@ -80,7 +81,7 @@ public class DetalleData {
 
         return detalle;
     }
-
+    
     public List<Detalle> listarDetalles() {
         List<Detalle> detalles = new ArrayList<>();
 
@@ -153,7 +154,7 @@ public class DetalleData {
             ps.setInt(1, detalle.getPedido().getIdPedido());
             ps.setInt(2, detalle.getProducto().getIdProducto());
             ps.setInt(3, detalle.getCantProducto());
-            ps.setInt(5, detalle.getIdDetalle());
+            ps.setInt(4, detalle.getIdDetalle());
 
             int registroFilas = ps.executeUpdate();
 

@@ -21,6 +21,8 @@ public class Pedido {
     public Pedido(Mesa mesa, Empleado empleado) {
         this.mesa = mesa;
         this.empleado = empleado;
+        this.precioPedido = 0;
+        this.estado = EstadoPedido.PENDIENTE;
     }
 
     public Pedido() {
@@ -53,10 +55,6 @@ public class Pedido {
     public double getPrecioPedido() {
         return precioPedido;
     }
-
-    /*public void setPrecioPedido(double subtotal) {
-        this.precioPedido += subtotal;
-    }*/
 
     public void setPrecioPedido(double precioPedido) {
         this.precioPedido = precioPedido;

@@ -81,7 +81,7 @@ public class MesaData {
     public List<Mesa> listarMesas() {
         List<Mesa> mesas = new ArrayList<>();
 
-        sql = "SELECT * FROM mesa";
+        sql = "SELECT * FROM mesa ORDER BY numMesa ASC";
 
         try {
 
@@ -123,10 +123,8 @@ public class MesaData {
 
             int registroFilas = ps.executeUpdate();
 
-            if (registroFilas == 1) {
-                JOptionPane.showMessageDialog(null, "Mesa modificada exitosamente.");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontró la mesa.");
+            if (registroFilas != 1) {
+                 JOptionPane.showMessageDialog(null, "No se encontró la mesa.");
             }
 
             ps.close();
