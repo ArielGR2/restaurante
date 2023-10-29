@@ -1,5 +1,6 @@
 package restaurante.Entidades;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Pedido {
@@ -10,6 +11,15 @@ public class Pedido {
     private double precioPedido;
     private ArrayList<Detalle> listaDetalles;
     private EstadoPedido estado;
+    private LocalDate fechaHora;
+
+    public LocalDate getFechaHora() {
+        return fechaHora;
+    }
+
+    public void setFechaHora(LocalDate fechaHora) {
+        this.fechaHora = fechaHora;
+    }
 
     public Pedido(int idPedido, Mesa mesa, Empleado empleado) {
         this.idPedido = idPedido;

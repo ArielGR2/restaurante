@@ -5,8 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import restaurante.Entidades.Empleado;
 import restaurante.Entidades.EstadoPedido;
@@ -32,7 +35,7 @@ public class PedidoData {
 
         try {
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, pedido.getMesa() == null ? 0 :  pedido.getMesa().getNumMesa());
+            ps.setInt(1, pedido.getMesa() == null ? 0 : pedido.getMesa().getNumMesa());
             ps.setInt(2, pedido.getEmpleado() == null ? 0 : pedido.getEmpleado().getIdEmpleado());
             ps.setDouble(3, pedido.getPrecioPedido());
 
@@ -110,7 +113,7 @@ public class PedidoData {
 
         return pedido;
     }
-    
+
     public List<Pedido> listarPedidos() {
         List<Pedido> pedidos = new ArrayList<>();
 
@@ -259,6 +262,164 @@ public class PedidoData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pedido. " + ex.getMessage());
         }
+    }
+
+    public double calculaMontoDia(LocalDate dia) {
+        double suma = 0;
+        List<Pedido> lista = new ArrayList<>();
+        try {
+            sql = "SELECT precioPedido FROM pedido WHERE DATE(fechaHora) = ? AND estado = 'PAGADO';";
+
+            ps = con.prepareStatement(sql);
+            ps.setString(1, dia + "");
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                suma += rs.getDouble("precioPedido");
+
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pedido. " + ex.getMessage());
+        }
+        return suma;
+    }
+
+    public List<Pedido> listarConsulta1(LocalDate dia) {
+        List<Pedido> lista = new ArrayList<>();
+        try {
+            sql = "SELECT * FROM pedido WHERE DATE(fechaHora) = ? AND estado = 'PAGADO';";
+
+            ps = con.prepareStatement(sql);
+            ps.setString(1, dia + "");
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Pedido pedido = new Pedido();
+
+                pedido.setIdPedido(rs.getInt("idPedido"));
+                pedido.setMesa(mData.buscarMesa(rs.getInt("numMesa")));
+                pedido.setEmpleado(eData.buscarEmpleado(rs.getInt("idEmpleado")));
+                pedido.setPrecioPedido(rs.getDouble("precioPedido"));
+                pedido.setEstado(EstadoPedido.valueOf(rs.getString("estado")));
+
+                lista.add(pedido);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pedido. " + ex.getMessage());
+        }
+        return lista;
+
+    }
+
+    public double calculaMontoDiaMesero(LocalDate dia, Empleado mesero) {
+        double suma = 0;
+        try {
+            sql = "SELECT precioPedido FROM pedido WHERE DATE(fechaHora) = ? AND estado = 'PAGADO' AND idEmpleado = ?;";
+
+            ps = con.prepareStatement(sql);
+            ps.setString(1, dia + "");
+            ps.setInt(2, mesero.getIdEmpleado());
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                suma += rs.getDouble("precioPedido");
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pedido. " + ex.getMessage());
+        }
+        return suma;
+    }
+    
+    public List<Pedido> listarConsulta2(LocalDate dia,Empleado mesero){
+    List<Pedido> lista = new ArrayList<>();
+        try {
+            sql = "SELECT * FROM pedido WHERE DATE(fechaHora) = ? AND estado = 'PAGADO' AND idEmpleado = ?;";
+
+            ps = con.prepareStatement(sql);
+            ps.setString(1, dia + "");
+            ps.setInt(2, mesero.getIdEmpleado());
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Pedido pedido = new Pedido();
+
+                pedido.setIdPedido(rs.getInt("idPedido"));
+                pedido.setMesa(mData.buscarMesa(rs.getInt("numMesa")));
+                pedido.setEmpleado(mesero);
+                pedido.setPrecioPedido(rs.getDouble("precioPedido"));
+                pedido.setEstado(EstadoPedido.valueOf(rs.getString("estado")));
+
+                lista.add(pedido);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pedido. " + ex.getMessage());
+        }
+        return lista;
+
+        
+    }
+
+    public double calcularMontoEntreHoras(Mesa mesa, LocalDate dia, String hora1, String hora2) {
+        double suma = 0;
+        try {
+
+            sql = "SELECT precioPedido FROM pedido WHERE numMesa = ? AND DATE(fechaHora) = ? AND TIME(fechaHora) BETWEEN ? AND ? AND estado = 'PAGADO';";
+
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, mesa.getNumMesa());
+            ps.setString(2, dia + "");
+            ps.setString(3, hora1);
+            ps.setString(4, hora2);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                suma += rs.getDouble("precioPedido");
+            } ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pedido. " + ex.getMessage());
+        } return suma;
+    }
+    public List<Pedido> listarConsulta3(Mesa mesa,LocalDate dia,String horaEntrada,String horaSalida){
+        
+        List<Pedido> lista = new ArrayList<>();
+        try {
+        sql = "SELECT * FROM pedido WHERE numMesa = ? AND DATE(fechaHora) = ? AND TIME(fechaHora) BETWEEN ? AND ? AND estado = 'PAGADO';";
+
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, mesa.getNumMesa());
+            ps.setString(2, dia + "");
+            ps.setString(3, horaEntrada);
+            ps.setString(4, horaSalida);
+            
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Pedido pedido = new Pedido();
+
+                pedido.setIdPedido(rs.getInt("idPedido"));
+                pedido.setMesa(mesa);
+                pedido.setEmpleado(eData.buscarEmpleado(rs.getInt("idEmpleado")) );
+                pedido.setPrecioPedido(rs.getDouble("precioPedido"));
+                pedido.setEstado(EstadoPedido.valueOf(rs.getString("estado")));
+
+                lista.add(pedido);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pedido. " + ex.getMessage());
+        }
+        return lista;
+
+        
     }
 
 }
