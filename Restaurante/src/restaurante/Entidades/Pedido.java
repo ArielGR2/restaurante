@@ -9,7 +9,6 @@ public class Pedido {
     private Mesa mesa;
     private Empleado empleado;
     private double precioPedido;
-    private ArrayList<Detalle> listaDetalles;
     private EstadoPedido estado;
     private LocalDate fechaHora;
 
@@ -68,15 +67,6 @@ public class Pedido {
 
     public void setPrecioPedido(double precioPedido) {
         this.precioPedido = precioPedido;
-    }
-    
-
-    public ArrayList<Detalle> getListaDetalles() {
-        return listaDetalles;
-    }
-
-    public void setListaDetalles(ArrayList<Detalle> listaDetalles) {
-        this.listaDetalles = listaDetalles;
     }
     
     public String getEstado() {
