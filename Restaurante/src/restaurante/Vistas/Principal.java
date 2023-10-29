@@ -14,6 +14,8 @@ public final class Principal extends javax.swing.JFrame {
 
     int xMouse;
     int yMouse;
+    
+    boolean ventanaMesaAbierta;
 
     /**
      * Creates new form principal
@@ -288,7 +290,7 @@ public final class Principal extends javax.swing.JFrame {
         jLConsultas.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLConsultas.setForeground(new java.awt.Color(204, 204, 204));
         jLConsultas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLConsultas.setText("Consultas");
+        jLConsultas.setText("Informes de Ingresos");
         jLConsultas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLConsultas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -612,7 +614,6 @@ public final class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTxtMouseClicked
-        // TODO add your handling code here:
         int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea cerrar la aplicación?", null, JOptionPane.YES_NO_OPTION);
         if (respuesta == JOptionPane.YES_OPTION) {
             System.exit(0);
@@ -635,17 +636,14 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_exitTxtMouseEntered
 
     private void exitTxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTxtMouseExited
-        // TODO add your handling code here:
         exitBtn.setBackground(new Color(25, 25, 25));
     }//GEN-LAST:event_exitTxtMouseExited
 
     private void menuTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuTxtMouseEntered
-        // TODO add your handling code here:
         menuBtn.setBackground(new Color(255, 150, 0));
     }//GEN-LAST:event_menuTxtMouseEntered
 
     private void menuTxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuTxtMouseExited
-        // TODO add your handling code here:
         menuBtn.setBackground(new Color(25, 25, 25));
     }//GEN-LAST:event_menuTxtMouseExited
 
@@ -658,7 +656,6 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jLEmpleadosMouseExited
 
     private void jLEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLEmpleadosMouseClicked
-
         GestorEmpleados gestorEmpleados = new GestorEmpleados(this);
 
         int x = (this.getWidth() - gestorEmpleados.getWidth()) / 2;
@@ -714,7 +711,7 @@ public final class Principal extends javax.swing.JFrame {
 
         gestorProductos.setVisible(true);
         gestorProductos.setLocation(x, y);
-        */
+         */
     }//GEN-LAST:event_jLProductosMouseClicked
 
     private void jLPedidosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLPedidosMouseEntered
@@ -771,12 +768,11 @@ public final class Principal extends javax.swing.JFrame {
 
         gestorInformes.setVisible(true);
         gestorInformes.setLocation(x, y);
-        */
+         */
     }//GEN-LAST:event_jLConsultasMouseClicked
 
     private void minTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minTxtMouseClicked
         if (evt.getButton() == MouseEvent.BUTTON1) {
-            // Minimizar la ventana
             setState(Principal.ICONIFIED);
         }
     }//GEN-LAST:event_minTxtMouseClicked

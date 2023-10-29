@@ -1,9 +1,7 @@
 package restaurante.Vistas;
 
-import java.awt.CardLayout;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -37,6 +35,7 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form EmpleadoVistas
+     *
      * @param ventanaPrincipal
      */
     public GestorEmpleados(Principal ventanaPrincipal) {
@@ -72,7 +71,6 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
         setMinimumSize(new java.awt.Dimension(500, 500));
         setNormalBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setPreferredSize(new java.awt.Dimension(500, 500));
-        getContentPane().setLayout(new java.awt.CardLayout());
 
         jPanel1.setBackground(new java.awt.Color(25, 25, 25));
         jPanel1.setMaximumSize(new java.awt.Dimension(500, 500));
@@ -125,17 +123,11 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
         agregarBtn.setLayout(agregarBtnLayout);
         agregarBtnLayout.setHorizontalGroup(
             agregarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(agregarBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLAgregar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
         );
         agregarBtnLayout.setVerticalGroup(
             agregarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(agregarBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLAgregar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLAgregar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
         modificarBtn.setBackground(new java.awt.Color(51, 51, 51));
@@ -157,17 +149,11 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
         modificarBtn.setLayout(modificarBtnLayout);
         modificarBtnLayout.setHorizontalGroup(
             modificarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(modificarBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLModificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
         );
         modificarBtnLayout.setVerticalGroup(
             modificarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(modificarBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLModificar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
         eliminarBtn.setBackground(new java.awt.Color(51, 51, 51));
@@ -190,17 +176,11 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
         eliminarBtn.setLayout(eliminarBtnLayout);
         eliminarBtnLayout.setHorizontalGroup(
             eliminarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(eliminarBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
         );
         eliminarBtnLayout.setVerticalGroup(
             eliminarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(eliminarBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLEliminar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -217,23 +197,32 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(28, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(agregarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(modificarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(eliminarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, "card2");
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -241,52 +230,55 @@ public class GestorEmpleados extends javax.swing.JInternalFrame {
     private void jLAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAgregarMouseClicked
         FormularioEmpleados formulario = new FormularioEmpleados(this);
 
-        int x = (ventanaP.getWidth() - formulario.getWidth()) / 2;
-        int y = (ventanaP.getHeight() - formulario.getHeight()) / 2;
+        int x = (this.getWidth() - formulario.getWidth()) / 2;
+        int y = (this.getHeight() - formulario.getHeight()) / 2;
 
-        // Agregar el formulario al principio de la lista de componentes.
-        ventanaP.add(formulario, 0);
+        add(formulario, 0);
 
-        formulario.setLocation(x, y);
         formulario.setVisible(true);
+        formulario.setLocation(x, y);
     }//GEN-LAST:event_jLAgregarMouseClicked
 
     private void jLModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLModificarMouseClicked
-        int filas = jTEmpleados.getRowCount();
-        List<Empleado> pendientes = new ArrayList<>();
+        if (jLModificar.isEnabled() && modificarBtn.isEnabled()) {
+            int filas = jTEmpleados.getRowCount();
+            List<Empleado> pendientes = new ArrayList<>();
 
-        for (int f = 0; f < filas; f++) {
-            int idFila = (Integer) modelo.getValueAt(f, 0);
-            int dni = (Integer) modelo.getValueAt(f, 1);
-            String nombre = (String) modelo.getValueAt(f, 2);
-            String apellido = (String) modelo.getValueAt(f, 3);
+            for (int f = 0; f < filas; f++) {
+                int idFila = (Integer) modelo.getValueAt(f, 0);
+                int dni = (Integer) modelo.getValueAt(f, 1);
+                String nombre = (String) modelo.getValueAt(f, 2);
+                String apellido = (String) modelo.getValueAt(f, 3);
 
-            if (!verificarString(nombre) || !verificarString(apellido)) {
-                JOptionPane.showMessageDialog(this, "Error en: " + idFila + "\nEl NOMBRE y/o APELLIDO no debe estar vacío y solo contener letras.");
-                continue;
-            }
-            //Revisamos si hay modificación, si la hay agregamos el empleado a un array de pendientes a actualizar, si no el array queda vacío.
-            for (Empleado e : eData.listarEmpleadosActivos()) {
-                if (e.getIdEmpleado() == idFila && (e.getDni() != dni || !e.getNombre().equals(nombre) || !e.getApellido().equals(apellido))) {
-                    e.setDni(dni);
-                    e.setNombre(nombre);
-                    e.setApellido(apellido);
-                    eData.modificarEmpleado(e);
-                    pendientes.add(e);
+                if (!verificarString(nombre) || !verificarString(apellido)) {
+                    JOptionPane.showMessageDialog(this, "Error en: " + idFila + "\nEl NOMBRE y/o APELLIDO no debe estar vacío y solo contener letras.");
+                    continue;
+                }
+                //Revisamos si hay modificación, si la hay agregamos el empleado a un array de pendientes a actualizar, si no el array queda vacío.
+                for (Empleado e : eData.listarEmpleadosActivos()) {
+                    if (e.getIdEmpleado() == idFila && (e.getDni() != dni || !e.getNombre().equals(nombre) || !e.getApellido().equals(apellido))) {
+                        e.setDni(dni);
+                        e.setNombre(nombre);
+                        e.setApellido(apellido);
+                        eData.modificarEmpleado(e);
+                        pendientes.add(e);
+                    }
                 }
             }
-        }
-        //Si el array está vacío no hay modificaciones
-        if (pendientes.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No hay modificaciones.");
-            return;
+            //Si el array está vacío no hay modificaciones
+            if (pendientes.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No hay modificaciones.");
+                return;
+            }
         }
     }//GEN-LAST:event_jLModificarMouseClicked
 
     private void jLEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLEliminarMouseClicked
-        int dni = (Integer) modelo.getValueAt(jTEmpleados.getSelectedRow(), 1);
-        eData.eliminarEmpleado(dni);
-        cargarTabla();
+        if (jLEliminar.isEnabled() && eliminarBtn.isEnabled()) {
+            int dni = (Integer) modelo.getValueAt(jTEmpleados.getSelectedRow(), 1);
+            eData.eliminarEmpleado(dni);
+            cargarTabla();
+        }
     }//GEN-LAST:event_jLEliminarMouseClicked
 
     private void jTEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTEmpleadosMouseClicked

@@ -1,6 +1,5 @@
 package restaurante.Vistas;
 
-import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -35,6 +34,7 @@ public class GestorMesa extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form GestorMesa
+     * @param ventanaPrincipal
      */
     public GestorMesa(Principal ventanaPrincipal) {
         initComponents();
@@ -64,8 +64,9 @@ public class GestorMesa extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setTitle("Gestor de Mesas");
+        setPreferredSize(new java.awt.Dimension(500, 500));
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setBackground(new java.awt.Color(25, 25, 25));
 
         jScrollPane1.setForeground(new java.awt.Color(60, 63, 65));
 
@@ -113,17 +114,11 @@ public class GestorMesa extends javax.swing.JInternalFrame {
         agregarBtn.setLayout(agregarBtnLayout);
         agregarBtnLayout.setHorizontalGroup(
             agregarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(agregarBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
         );
         agregarBtnLayout.setVerticalGroup(
             agregarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(agregarBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLAgregar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
         modificarBtn.setBackground(new java.awt.Color(51, 51, 51));
@@ -145,17 +140,11 @@ public class GestorMesa extends javax.swing.JInternalFrame {
         modificarBtn.setLayout(modificarBtnLayout);
         modificarBtnLayout.setHorizontalGroup(
             modificarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(modificarBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
         );
         modificarBtnLayout.setVerticalGroup(
             modificarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(modificarBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLModificar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
         eliminarBtn.setBackground(new java.awt.Color(51, 51, 51));
@@ -178,17 +167,11 @@ public class GestorMesa extends javax.swing.JInternalFrame {
         eliminarBtn.setLayout(eliminarBtnLayout);
         eliminarBtnLayout.setHorizontalGroup(
             eliminarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(eliminarBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
         );
         eliminarBtnLayout.setVerticalGroup(
             eliminarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(eliminarBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLEliminar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -198,28 +181,28 @@ public class GestorMesa extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(63, 63, 63)
                         .addComponent(agregarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(modificarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(eliminarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                        .addComponent(eliminarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(agregarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(modificarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(eliminarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -237,13 +220,11 @@ public class GestorMesa extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTMesasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTMesasMouseClicked
-        // TODO add your handling code here:
         jLEliminar.setEnabled(true);
         eliminarBtn.setEnabled(true);
     }//GEN-LAST:event_jTMesasMouseClicked
 
     private void jTMesasPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTMesasPropertyChange
-        // TODO add your handling code here:
         if (jTMesas.isEditing()) {
             jLModificar.setEnabled(true);
             modificarBtn.setEnabled(true);
@@ -257,41 +238,45 @@ public class GestorMesa extends javax.swing.JInternalFrame {
         int y = (this.getHeight() - formulario.getHeight()) / 2;
 
         add(formulario, 0);
-        
+
         formulario.setVisible(true);
         formulario.setLocation(x, y);
     }//GEN-LAST:event_jLAgregarMouseClicked
 
     private void jLModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLModificarMouseClicked
-        int filas = jTMesas.getRowCount();
-        boolean pendiente = false;
+        if (jLModificar.isEnabled() && modificarBtn.isEnabled()) {
+            int filas = jTMesas.getRowCount();
+            boolean pendiente = false;
 
-        for (int f = 0; f < filas; f++) {
-            int numMesa = (Integer) modelo.getValueAt(f, 0);
-            int capacidad = (Integer) modelo.getValueAt(f, 1);
-            int id = mData.buscarMesa(numMesa).getIdMesa();
+            for (int f = 0; f < filas; f++) {
+                int numMesa = (Integer) modelo.getValueAt(f, 0);
+                int capacidad = (Integer) modelo.getValueAt(f, 1);
+                int id = mData.buscarMesa(numMesa).getIdMesa();
 
-            //Revisamos si hay modificación, si la hay modificamos la mesa y el booleano pasa a true.
-            for (Mesa m : mData.listarMesas()) {
-                if (m.getIdMesa() == id && (m.getNumMesa() != numMesa || m.getCapacidad() != capacidad)) {
-                    m.setNumMesa(numMesa);
-                    m.setCapacidad(capacidad);
-                    mData.modificarMesa(m);
-                    pendiente = true;
+                //Revisamos si hay modificación, si la hay, modificamos la mesa y el booleano pasa a true.
+                for (Mesa m : mData.listarMesas()) {
+                    if (m.getIdMesa() == id && (m.getNumMesa() != numMesa || m.getCapacidad() != capacidad)) {
+                        m.setNumMesa(numMesa);
+                        m.setCapacidad(capacidad);
+                        mData.modificarMesa(m);
+                        pendiente = true;
+                    }
                 }
             }
-        }
-        //Si no queda en false y da el mensaje
-        if (!pendiente) {
-            JOptionPane.showMessageDialog(this, "No hay modificaciones.");
-            return;
+            //Si no queda en false y da el mensaje
+            if (!pendiente) {
+                JOptionPane.showMessageDialog(this, "No hay modificaciones.");
+                return;
+            }
         }
     }//GEN-LAST:event_jLModificarMouseClicked
 
     private void jLEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLEliminarMouseClicked
-        int numeroMesa = (Integer) modelo.getValueAt(jTMesas.getSelectedRow(), 0);
-        mData.eliminarMesa(numeroMesa);
-        cargarTabla();
+        if (jLEliminar.isEnabled() && eliminarBtn.isEnabled()) {
+            int numeroMesa = (Integer) modelo.getValueAt(jTMesas.getSelectedRow(), 0);
+            mData.eliminarMesa(numeroMesa);
+            cargarTabla();
+        }
     }//GEN-LAST:event_jLEliminarMouseClicked
 
 

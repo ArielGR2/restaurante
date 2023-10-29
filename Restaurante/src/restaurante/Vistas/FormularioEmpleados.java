@@ -1,4 +1,4 @@
-package restaurante.Vistas;
+    package restaurante.Vistas;
 
 import javax.swing.JOptionPane;
 import restaurante.AccesoDatos.EmpleadoData;
@@ -12,7 +12,6 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
     /**
      * Creates new form FormularioEmpleados
      */
-
     public FormularioEmpleados(GestorEmpleados gEmpleados) {
         initComponents();
         this.gEmpleados = gEmpleados;
@@ -43,9 +42,8 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
 
         setBackground(new java.awt.Color(25, 25, 25));
         setBorder(null);
-        setMaximumSize(new java.awt.Dimension(300, 300));
-        setMinimumSize(new java.awt.Dimension(300, 300));
         setPreferredSize(new java.awt.Dimension(300, 300));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         background.setBackground(new java.awt.Color(25, 25, 25));
         background.setForeground(new java.awt.Color(204, 204, 204));
@@ -101,17 +99,11 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
         crearBtn.setLayout(crearBtnLayout);
         crearBtnLayout.setHorizontalGroup(
             crearBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(crearBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLCrear, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jLCrear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
         crearBtnLayout.setVerticalGroup(
             crearBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(crearBtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLCrear)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLCrear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         cancelarBtn.setBackground(new java.awt.Color(51, 51, 51));
@@ -140,7 +132,7 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
         );
         cancelarBtnLayout.setVerticalGroup(
             cancelarBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
@@ -181,15 +173,15 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
                 .addComponent(titulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextDni)
                     .addComponent(jLDni, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextNombre)
                     .addComponent(jLNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextApellido)
                     .addComponent(jLApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -197,19 +189,10 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cancelarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                     .addComponent(crearBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
-                .addGap(25, 25, 25))
+                .addGap(22, 22, 22))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 280));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -238,7 +221,7 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
             cerrarVentana();
         } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(this, "Introducir un DNI válido");
-        } catch (NullPointerException npe){
+        } catch (NullPointerException npe) {
             JOptionPane.showMessageDialog(this, "No debe haber campos vacíos");
         }
     }//GEN-LAST:event_jLCrearMouseClicked
@@ -264,8 +247,8 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
         dispose();
         gEmpleados.cargarTabla();
     }
-    
-      private boolean verificarString(String texto) {
+
+    private boolean verificarString(String texto) {
         // Verifica que el string no este vacio
         if (texto.isEmpty()) {
             return false;

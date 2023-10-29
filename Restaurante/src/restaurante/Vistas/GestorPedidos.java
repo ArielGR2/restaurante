@@ -1,16 +1,19 @@
 package restaurante.Vistas;
 
-import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import restaurante.AccesoDatos.MesaData;
 import restaurante.AccesoDatos.PedidoData;
+import restaurante.Entidades.EstadoMesa;
 import restaurante.Entidades.EstadoPedido;
+import restaurante.Entidades.Mesa;
 import restaurante.Entidades.Pedido;
 
 public class GestorPedidos extends javax.swing.JInternalFrame {
 
+    MesaData mData = new MesaData();
     PedidoData pData = new PedidoData();
     Principal ventanaPrincipal;
 
@@ -75,6 +78,8 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
         entregadoRadioBtn = new javax.swing.JRadioButton();
         pagadoRadioBtn = new javax.swing.JRadioButton();
         jSeparator2 = new javax.swing.JSeparator();
+        detalleBtn = new javax.swing.JPanel();
+        jLDetalle = new javax.swing.JLabel();
 
         buttonGroup.add(pendienteRadioBtn);
         buttonGroup.add(entregadoRadioBtn);
@@ -268,7 +273,7 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
         estadoBtn.setLayout(estadoBtnLayout);
         estadoBtnLayout.setHorizontalGroup(
             estadoBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLModEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+            .addComponent(jLModEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         estadoBtnLayout.setVerticalGroup(
             estadoBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,13 +289,51 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
         entregadoRadioBtn.setForeground(new java.awt.Color(204, 204, 204));
         entregadoRadioBtn.setText("ENTREGADO");
         entregadoRadioBtn.setEnabled(false);
+        entregadoRadioBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                entregadoRadioBtnMouseClicked(evt);
+            }
+        });
 
         pagadoRadioBtn.setBackground(new java.awt.Color(25, 25, 25));
         pagadoRadioBtn.setForeground(new java.awt.Color(204, 204, 204));
         pagadoRadioBtn.setText("PAGADO");
         pagadoRadioBtn.setEnabled(false);
+        pagadoRadioBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pagadoRadioBtnMouseClicked(evt);
+            }
+        });
 
         jSeparator2.setBackground(new java.awt.Color(204, 204, 204));
+
+        detalleBtn.setBackground(new java.awt.Color(51, 51, 51));
+        detalleBtn.setForeground(new java.awt.Color(51, 51, 51));
+        detalleBtn.setEnabled(false);
+
+        jLDetalle.setBackground(new java.awt.Color(51, 51, 51));
+        jLDetalle.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLDetalle.setForeground(new java.awt.Color(204, 204, 204));
+        jLDetalle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLDetalle.setText("VER DETALLE");
+        jLDetalle.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLDetalle.setEnabled(false);
+        jLDetalle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLDetalleMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout detalleBtnLayout = new javax.swing.GroupLayout(detalleBtn);
+        detalleBtn.setLayout(detalleBtnLayout);
+        detalleBtnLayout.setHorizontalGroup(
+            detalleBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLDetalle, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+        );
+        detalleBtnLayout.setVerticalGroup(
+            detalleBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLDetalle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -309,17 +352,19 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
                         .addGap(44, 44, 44)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(agregarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(270, 270, 270)
-                                .addComponent(anularBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(estadoBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
                                 .addComponent(pendienteRadioBtn)
                                 .addGap(18, 18, 18)
                                 .addComponent(entregadoRadioBtn)
                                 .addGap(18, 18, 18)
-                                .addComponent(pagadoRadioBtn)))))
+                                .addComponent(pagadoRadioBtn))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(agregarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(92, 92, 92)
+                                .addComponent(anularBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(95, 95, 95)
+                                .addComponent(detalleBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(72, 72, 72))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,12 +391,13 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
                     .addComponent(todosBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(xMesaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(xMeseroBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(agregarBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(anularBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(agregarBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(detalleBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -391,9 +437,11 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jLAgregarMouseClicked
 
     private void jLAnularMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAnularMouseClicked
-        int idPedido = (Integer) jTPedidos.getValueAt(jTPedidos.getSelectedRow(), 0);
-        pData.eliminarPedido(idPedido);
-        cargarTabla();
+        if (jLAnular.isEnabled() && anularBtn.isEnabled()) {
+            int idPedido = (Integer) jTPedidos.getValueAt(jTPedidos.getSelectedRow(), 0);
+            pData.eliminarPedido(idPedido);
+            cargarTabla();
+        }
     }//GEN-LAST:event_jLAnularMouseClicked
 
     private void jTPedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPedidosMouseClicked
@@ -402,9 +450,10 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
             jLAnular.setEnabled(true);
             anularBtn.setEnabled(true);
 
+            jLDetalle.setEnabled(true);
+            detalleBtn.setEnabled(true);
+
             radioButtons();
-            jLModEstado.setEnabled(true);
-            estadoBtn.setEnabled(true);
         }
     }//GEN-LAST:event_jTPedidosMouseClicked
 
@@ -428,7 +477,9 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
                     pedido.getEstado()
                 });
             }
+
             anularBotones();
+
         } catch (NumberFormatException nfe) {
             numMesa = 0;
         }
@@ -443,41 +494,84 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
         int y = (this.getHeight() - mensaje.getHeight()) / 2;
 
         add(mensaje, 0);
+
         mensaje.setVisible(true);
         mensaje.setLocation(x, y);
 
     }//GEN-LAST:event_jLxMeseroMouseClicked
 
     private void jLModEstadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLModEstadoMouseClicked
-        int idPedido = (Integer) jTPedidos.getValueAt(jTPedidos.getSelectedRow(), 0);
-        Pedido pedido = pData.buscarPedido(idPedido);
+        if (jLModEstado.isEnabled() && estadoBtn.isEnabled()) {
+            int idPedido = (Integer) jTPedidos.getValueAt(jTPedidos.getSelectedRow(), 0);
+            Pedido pedido = pData.buscarPedido(idPedido);
 
-        if (pendienteRadioBtn.isSelected()) {
-            pedido.setEstado(EstadoPedido.PENDIENTE);
-            System.out.println(pedido.getEstado());
-            pData.modificarPedido(pedido);
-        } else if (entregadoRadioBtn.isSelected()) {
-            pedido.setEstado(EstadoPedido.ENTREGADO);
-            System.out.println(pedido.getEstado());
-            pData.modificarPedido(pedido);
-        } else {
-            pedido.setEstado(EstadoPedido.PAGADO);
-            System.out.println(pedido.getEstado());
-            pData.modificarPedido(pedido);
+            if (entregadoRadioBtn.isSelected()) {
+                pedido.setEstado(EstadoPedido.ENTREGADO);
+                pData.modificarPedido(pedido);
+            } else if (pagadoRadioBtn.isSelected()) {
+                //Al pagar el pedido verifico si es el último a pagar y si lo es la mesa pasa a libre
+                pedido.setEstado(EstadoPedido.PAGADO);
+                pData.modificarPedido(pedido);
+
+                Mesa mesa = pedido.getMesa();
+
+                int pedidosMesa = pData.listarPedidosMesa(mesa.getNumMesa()).size();
+                int pedidosPagos = pData.listarPedidosMesaPagos(mesa.getNumMesa()).size();
+
+                if (pedidosPagos == pedidosMesa) {
+                    mesa.setEstado(EstadoMesa.LIBRE);
+                    mData.modificarMesa(mesa);
+                    JOptionPane.showMessageDialog(this, "Mesa desocupada.");
+                }
+            }
+            cargarTabla();
+            anularBotones();
         }
-        cargarTabla();
-        anularBotones();
     }//GEN-LAST:event_jLModEstadoMouseClicked
+
+    private void jLDetalleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLDetalleMouseClicked
+        if (jLDetalle.isEnabled() && detalleBtn.isEnabled()) {
+            int idPedido = (Integer) jTPedidos.getValueAt(jTPedidos.getSelectedRow(), 0);
+            Pedido pedido = pData.buscarPedido(idPedido);
+
+            ListaDetalles listado = new ListaDetalles(pedido);
+
+            int x = (this.getWidth() - listado.getWidth()) / 2;
+            int y = (this.getHeight() - listado.getHeight()) / 2;
+
+            add(listado, 0);
+
+            listado.setVisible(true);
+            listado.setLocation(x, y);
+        }
+    }//GEN-LAST:event_jLDetalleMouseClicked
+
+    private void entregadoRadioBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entregadoRadioBtnMouseClicked
+        if (entregadoRadioBtn.isSelected()) {
+            jLModEstado.setEnabled(true);
+            estadoBtn.setEnabled(true);
+        }
+
+    }//GEN-LAST:event_entregadoRadioBtnMouseClicked
+
+    private void pagadoRadioBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pagadoRadioBtnMouseClicked
+        if (pagadoRadioBtn.isSelected()) {
+            jLModEstado.setEnabled(true);
+            estadoBtn.setEnabled(true);
+        }
+    }//GEN-LAST:event_pagadoRadioBtnMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel agregarBtn;
     private javax.swing.JPanel anularBtn;
     private javax.swing.ButtonGroup buttonGroup;
+    private javax.swing.JPanel detalleBtn;
     private javax.swing.JRadioButton entregadoRadioBtn;
     private javax.swing.JPanel estadoBtn;
     private javax.swing.JLabel jLAgregar;
     private javax.swing.JLabel jLAnular;
+    private javax.swing.JLabel jLDetalle;
     private javax.swing.JLabel jLModEstado;
     private javax.swing.JLabel jLTodos;
     private javax.swing.JLabel jLxMesa;
@@ -540,7 +634,6 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
             modelo.addRow(new Object[]{
                 pedido.getIdPedido(),
                 pedido.getMesa().getNumMesa(),
-                pedido.getListaDetalles(),
                 pedido.getPrecioPedido(),
                 pedido.getEstado()
             });
@@ -567,19 +660,15 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
                 pendienteRadioBtn.setSelected(true);
                 pendienteRadioBtn.setEnabled(false);
                 entregadoRadioBtn.setEnabled(true);
-                pagadoRadioBtn.setEnabled(true);
                 break;
             case "ENTREGADO":
                 entregadoRadioBtn.setSelected(true);
                 entregadoRadioBtn.setEnabled(false);
-                pendienteRadioBtn.setEnabled(true);
                 pagadoRadioBtn.setEnabled(true);
                 break;
             default:
                 pagadoRadioBtn.setSelected(true);
                 pagadoRadioBtn.setEnabled(false);
-                pendienteRadioBtn.setEnabled(true);
-                entregadoRadioBtn.setEnabled(true);
                 break;
         }
     }

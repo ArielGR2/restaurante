@@ -63,6 +63,6 @@ public class Detalle {
     
     @Override
     public String toString() {
-        return "Detalle{" + "idDetalle=" + idDetalle + ", pedido=" + pedido + ", producto=" + producto + ", cantProducto=" + cantProducto + '}';
+        return "Pedido: " + pedido.getIdPedido() + " - " + producto.getNombre() + " | $" + producto.getPrecio() +  " c/u | " + cantProducto + "u.";
     }
 }

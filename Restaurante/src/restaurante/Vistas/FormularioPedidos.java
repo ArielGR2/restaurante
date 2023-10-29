@@ -46,7 +46,7 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
             return Double.class;
         }
     };
-    
+
     /**
      * Creates new form FormularioPedidos
      */
@@ -251,7 +251,7 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(204, 204, 204));
         jLabel1.setText("TOTAL PEDIDO:");
 
-        jTextTotal.setBackground(new java.awt.Color(51, 51, 51));
+        jTextTotal.setBackground(new java.awt.Color(102, 102, 102));
         jTextTotal.setForeground(new java.awt.Color(204, 204, 204));
         jTextTotal.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
@@ -411,7 +411,13 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
                 producto.setStock(producto.getStock() + detalle.getCantProducto());
                 prData.modificarProducto(producto);
             }
+            //Elimino el pedido
             pData.eliminarPedido(pedido.getIdPedido());
+            
+            if (pData.listarPedidosMesa(pedido.getMesa().getNumMesa()).isEmpty()) {
+                pedido.getMesa().setEstado(EstadoMesa.LIBRE);
+            }
+            
             dispose();
         }
 
@@ -479,7 +485,6 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 
-  
     private void cabeceraTabla() {
         modelo.addColumn("ID");
         modelo.addColumn("Nombre");
@@ -552,4 +557,5 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
         }
         return suma;
     }
+
 }

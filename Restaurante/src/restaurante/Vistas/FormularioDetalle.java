@@ -277,44 +277,46 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jLCancelarMouseClicked
 
     private void jLCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLCrearMouseClicked
-        //Agregar un funcionamiento para que si ya existe un detalle con el producto sume a la cantidad ya pedida
-        try {
-            List<Detalle> listaDetalles = dData.listarDetallesPedido(pedido.getIdPedido());
+        if (jLCrear.isEnabled() && crearBtn.isEnabled()) {
+            try {
+                List<Detalle> listaDetalles = dData.listarDetallesPedido(pedido.getIdPedido());
 
-            if (cantidad <= producto.getStock()) {
-                boolean productoExistente = false;
+                if (cantidad <= producto.getStock()) {
+                    boolean productoExistente = false;
 
-                for (Detalle d : listaDetalles) {
-                    if (d.getProducto().getIdProducto() == producto.getIdProducto()) {
-                        // El producto ya existe en la lista de detalles, aumenta la cantidad
-                        d.setCantProducto(d.getCantProducto() + cantidad);
-                        dData.modificarDetalle(d);
+                    for (Detalle d : listaDetalles) {
+                        if (d.getProducto().getIdProducto() == producto.getIdProducto()) {
+                            // El producto ya existe en la lista de detalles, aumenta la cantidad
+                            d.setCantProducto(d.getCantProducto() + cantidad);
+                            dData.modificarDetalle(d);
 
+                            producto.setStock(producto.getStock() - cantidad);
+                            pData.modificarProducto(producto);
+
+                            productoExistente = true;
+                            break; // Sal del bucle al encontrar el producto
+                        }
+                    }
+
+                    if (!productoExistente) {
+                        // El producto no existe en la lista de detalles, crea un nuevo detalle
+                        Detalle detalle = new Detalle(pedido, producto, cantidad);
+                        dData.agregarDetalle(detalle);
                         producto.setStock(producto.getStock() - cantidad);
                         pData.modificarProducto(producto);
-
-                        productoExistente = true;
-                        break; // Sal del bucle ya que encontraste el producto
                     }
+                    fPedidos.habilitarCrear();
+                    cerrarVentana();
+                } else {
+                    JOptionPane.showMessageDialog(this, "La cantidad deseada supera el stock.");
                 }
-
-                if (!productoExistente) {
-                    // El producto no existe en la lista de detalles, crea un nuevo detalle
-                    Detalle detalle = new Detalle(pedido, producto, cantidad);
-                    dData.agregarDetalle(detalle);
-                    producto.setStock(producto.getStock() - cantidad);
-                    pData.modificarProducto(producto);
-                }
-                fPedidos.habilitarCrear();
-                cerrarVentana();
-            } else {
-                JOptionPane.showMessageDialog(this, "La cantidad deseada supera el stock.");
+            } catch (NumberFormatException nfe) {
+                JOptionPane.showMessageDialog(this, "Introducir una cantidad válida.");
+            } catch (NullPointerException npe) {
+                JOptionPane.showMessageDialog(this, "No pueden haber campos vacíos.");
             }
-        } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(this, "Introducir una cantidad válida.");
-        } catch (NullPointerException npe) {
-            JOptionPane.showMessageDialog(this, "No pueden haber campos vacíos.");
         }
+
     }//GEN-LAST:event_jLCrearMouseClicked
 
     private void jTextNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextNombreFocusLost

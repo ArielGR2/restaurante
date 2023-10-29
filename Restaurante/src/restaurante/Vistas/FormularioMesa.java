@@ -1,19 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package restaurante.Vistas;
 
 import javax.swing.JOptionPane;
 import restaurante.AccesoDatos.MesaData;
-import restaurante.Entidades.EstadoMesa;
 import restaurante.Entidades.Mesa;
 
-/**
- *
- 
- */
 public class FormularioMesa extends javax.swing.JInternalFrame {
       MesaData mData= new MesaData();
       GestorMesa gMesa;
@@ -54,19 +44,22 @@ public class FormularioMesa extends javax.swing.JInternalFrame {
         background.setBackground(new java.awt.Color(25, 25, 25));
         background.setForeground(new java.awt.Color(204, 204, 204));
 
+        jLTitulo.setBackground(new java.awt.Color(25, 25, 25));
         jLTitulo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLTitulo.setForeground(new java.awt.Color(204, 204, 204));
         jLTitulo.setText("AGREGAR MESA");
 
+        jSeparator1.setBackground(new java.awt.Color(204, 204, 204));
+
         jLNumero.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLNumero.setForeground(new java.awt.Color(204, 204, 204));
-        jLNumero.setText("NUMERO");
+        jLNumero.setText("Número");
 
         jTNumero.setBackground(new java.awt.Color(102, 102, 102));
 
         jLCapacidad.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLCapacidad.setForeground(new java.awt.Color(204, 204, 204));
-        jLCapacidad.setText("CAPACIDAD");
+        jLCapacidad.setText("Capacidad");
 
         jTCapacidad.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -146,7 +139,7 @@ public class FormularioMesa extends javax.swing.JInternalFrame {
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(jLTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -162,7 +155,7 @@ public class FormularioMesa extends javax.swing.JInternalFrame {
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cancelarBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(crearBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 230));
@@ -177,7 +170,6 @@ public class FormularioMesa extends javax.swing.JInternalFrame {
             int capacidad = Integer.parseInt(jTCapacidad.getText());
             
             Mesa encontrada = mData.buscarMesa(numero);
-            //Si no lo encuentra lo crea, si lo encuentra lo da de alta
             if (encontrada == null) {
                 Mesa mesa = new Mesa(numero,capacidad);
                 mData.agregarMesa(mesa);
@@ -189,15 +181,10 @@ public class FormularioMesa extends javax.swing.JInternalFrame {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Introducir un numero válido");
         }
-                                       
-
-
-        
     }//GEN-LAST:event_jLCrearMouseClicked
 
     private void jLCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLCancelarMouseClicked
-        // TODO add your handling code here:
-        cerrarVentana();
+           cerrarVentana();
     }//GEN-LAST:event_jLCancelarMouseClicked
 
 
