@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import restaurante.Entidades.Empleado;
 import restaurante.Entidades.EstadoPedido;
 import restaurante.Entidades.Mesa;
 import restaurante.Entidades.Pedido;
@@ -168,6 +167,36 @@ public class PedidoData {
                 pedido.setPrecioPedido(rs.getDouble("precioPedido"));
                 pedido.setEstado(EstadoPedido.valueOf(rs.getString("estado")));
 
+                pedidos.add(pedido);
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pedido. " + ex.getMessage());
+        }
+
+        return pedidos;
+    }
+    
+    public List<Pedido> listarPedidosMesaPagos(int numMesa) {
+        List<Pedido> pedidos = new ArrayList<>();
+
+        sql = "SELECT idPedido FROM pedido p, mesa m WHERE p.numMesa = 1 AND (p.numMesa = m.numMesa) AND p.estado = 'PAGADO'";
+
+        try {
+
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, numMesa);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Pedido pedido = new Pedido();
+
+                pedido.setIdPedido(rs.getInt("idPedido"));
+                pedido.setMesa(mData.buscarMesa(numMesa));
+                
                 pedidos.add(pedido);
             }
 
