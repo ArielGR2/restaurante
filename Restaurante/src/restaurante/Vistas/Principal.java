@@ -757,7 +757,7 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jLConsultasMouseExited
 
     private void jLConsultasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLConsultasMouseClicked
-        /*GestorInformes gestorInformes = new GestorInformes(this);
+        GestorInforme gestorInformes = new GestorInforme(this);
 
         int x = (this.getWidth() - gestorInformes.getWidth()) / 2;
         int y = (this.getHeight() - gestorInformes.getHeight()) / 2;
@@ -768,7 +768,7 @@ public final class Principal extends javax.swing.JFrame {
 
         gestorInformes.setVisible(true);
         gestorInformes.setLocation(x, y);
-         */
+        
     }//GEN-LAST:event_jLConsultasMouseClicked
 
     private void minTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minTxtMouseClicked
