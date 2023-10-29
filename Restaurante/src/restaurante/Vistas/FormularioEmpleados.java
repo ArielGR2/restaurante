@@ -1,4 +1,4 @@
-    package restaurante.Vistas;
+package restaurante.Vistas;
 
 import javax.swing.JOptionPane;
 import restaurante.AccesoDatos.EmpleadoData;
@@ -202,27 +202,30 @@ public class FormularioEmpleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jLCancelarMouseClicked
 
     private void jLCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLCrearMouseClicked
+
         try {
             int dni = Integer.parseInt(jTextDni.getText());
-            String nombre = jTextNombre.getText();
-            String apellido = jTextApellido.getText();
-            Empleado encontrado = eData.buscarEmpleadoDni(dni);
-            //Si no lo encuentra lo crea, si lo encuentra lo da de alta
-            if (encontrado == null && verificarString(nombre) && verificarString(apellido)) {
-                Empleado empleado = new Empleado(dni, nombre, apellido);
-                eData.agregarEmpleado(empleado);
-            }
-            if (encontrado != null && encontrado.isEstado()) {
-                JOptionPane.showMessageDialog(this, "El empleado ya existe, no es necesario crearlo.");
+            if (verificarString(jTextNombre.getText()) && verificarString(jTextApellido.getText())) {
+                String nombre = jTextNombre.getText();
+                String apellido = jTextApellido.getText();
+                Empleado encontrado = eData.buscarEmpleadoDni(dni);
+                //Si no lo encuentra lo crea, si lo encuentra lo da de alta
+                if (encontrado == null) {
+                    Empleado empleado = new Empleado(dni, nombre, apellido);
+                    eData.agregarEmpleado(empleado);
+                } else if (encontrado != null && encontrado.isEstado()) {
+                    JOptionPane.showMessageDialog(this, "El empleado ya existe, no es necesario crearlo.");
+                } else {
+                    encontrado.setEstado(true);
+                    eData.modificarEmpleado(encontrado);
+                }
+                cerrarVentana();
             } else {
-                encontrado.setEstado(true);
-                eData.modificarEmpleado(encontrado);
+                JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
             }
-            cerrarVentana();
+
         } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(this, "Introducir un DNI válido");
-        } catch (NullPointerException npe) {
-            JOptionPane.showMessageDialog(this, "No debe haber campos vacíos");
         }
     }//GEN-LAST:event_jLCrearMouseClicked
 
