@@ -243,6 +243,11 @@
           </SubComponents>
         </Container>
         <Component class="javax.swing.JSeparator" name="jSeparator3">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel12">
           <Properties>
@@ -258,6 +263,11 @@
         <Component class="com.toedter.calendar.JDateChooser" name="jD3Fecha">
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator2">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTHoraSalida">
           <Properties>

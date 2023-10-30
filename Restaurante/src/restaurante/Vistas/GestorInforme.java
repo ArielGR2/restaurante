@@ -81,9 +81,13 @@ public class GestorInforme extends javax.swing.JInternalFrame {
         jListPedidos.setPreferredSize(new java.awt.Dimension(0, 200));
         jScrollPane1.setViewportView(jListPedidos);
 
+        jSeparator3.setBackground(new java.awt.Color(204, 204, 204));
+
         jLabel12.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Dia ");
+
+        jSeparator2.setBackground(new java.awt.Color(204, 204, 204));
 
         jTHoraSalida.setText("23:30");
 

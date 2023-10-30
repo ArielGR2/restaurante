@@ -75,7 +75,7 @@ public final class Principal extends javax.swing.JFrame {
         setBackground(new java.awt.Color(25, 25, 25));
         setLocationByPlatform(true);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1200, 786));
+        setPreferredSize(new java.awt.Dimension(1200, 900));
         getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
 
         background.setBackground(new java.awt.Color(255, 150, 0));
@@ -698,7 +698,7 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jLProductosMouseExited
 
     private void jLProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLProductosMouseClicked
-        /*GestorProductos gestorProductos = new GestorProductos(this);
+        GestorProductos gestorProductos = new GestorProductos(this);
 
         int x = (this.getWidth() - gestorProductos.getWidth()) / 2;
         int y = (this.getHeight() - gestorProductos.getHeight()) / 2;
@@ -709,7 +709,6 @@ public final class Principal extends javax.swing.JFrame {
 
         gestorProductos.setVisible(true);
         gestorProductos.setLocation(x, y);
-         */
     }//GEN-LAST:event_jLProductosMouseClicked
 
     private void jLPedidosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLPedidosMouseEntered

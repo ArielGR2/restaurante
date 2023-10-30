@@ -267,7 +267,7 @@ public class GestorReservas extends javax.swing.JInternalFrame {
 
                     //Revisamos si hay modificación, si la hay agregamos el empleado a un array de pendientes a actualizar, si no el array queda vacío.
                     for (Reserva reserva : rData.listarReservas()) {
-                        if (reserva.getIdReserva() == idFila && (reserva.getDniCliente() != dni || !reserva.getNombreCliente().equals(nombre)) || !reserva.getFechaHora().equals(fechaHora)) {
+                        if (reserva.getIdReserva() == idFila && (reserva.getDniCliente() != dni || !reserva.getNombreCliente().equals(nombre))) {
                             reserva.setDniCliente(dni);
                             reserva.setNombreCliente(nombre);
                             reserva.setFechaHora(fechaHora);

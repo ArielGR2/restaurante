@@ -431,7 +431,7 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
         int y = (this.getHeight() - formulario.getHeight()) / 2;
         
         add(formulario, 0);
-        this.revalidate();
+        revalidate();
         
         formulario.setVisible(true);
         formulario.setLocation(x, y);
@@ -636,6 +636,7 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
             modelo.addRow(new Object[]{
                 pedido.getIdPedido(),
                 pedido.getMesa().getNumMesa(),
+                pedido.getEmpleado(),
                 pedido.getPrecioPedido(),
                 pedido.getEstado()
             });

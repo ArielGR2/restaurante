@@ -535,13 +535,12 @@ public class GestorProductos extends javax.swing.JInternalFrame {
             cargarTabla();
             return;
         }
-        
-        
+
         FormularioProductosM formulario2 = new FormularioProductosM(this, (Integer) modelo.getValueAt(jTProductos.getSelectedRow(), 0), (String) modelo.getValueAt(jTProductos.getSelectedRow(), 1), (Integer) modelo.getValueAt(jTProductos.getSelectedRow(), 2), (String) modelo.getValueAt(jTProductos.getSelectedRow(), 3));
 //        JDesktopPane desktopPane = getDesktopPane();
 
         add(formulario2, 0);
-        
+
         int x = (this.getWidth() - formulario2.getWidth()) / 2;
         int y = (this.getHeight() - formulario2.getHeight()) / 2;
 
@@ -550,9 +549,11 @@ public class GestorProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jLModificarMouseClicked
 
     private void jLEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLEliminarMouseClicked
-        int id = (Integer) modelo.getValueAt(jTProductos.getSelectedRow(), 0);
-        pData.eliminarProducto(id);
-        cargarTabla();
+        if (jLEliminar.isEnabled()) {
+            int id = (Integer) modelo.getValueAt(jTProductos.getSelectedRow(), 0);
+            pData.eliminarProducto(id);
+            cargarTabla();
+        }
     }//GEN-LAST:event_jLEliminarMouseClicked
 
     private void jTProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTProductosMouseClicked

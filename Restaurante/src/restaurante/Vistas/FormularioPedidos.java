@@ -383,10 +383,10 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
         int y = (this.getHeight() - formulario.getHeight()) / 2;
 
         add(formulario, 0);
+        revalidate();
         
         formulario.setVisible(true);
         formulario.setLocation(x, y);
-        formulario.setOpaque(true);
     }//GEN-LAST:event_jLAgregarMouseClicked
 
     private void jTDetalleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTDetalleMouseClicked
