@@ -20,6 +20,7 @@ public class GestorProductos extends javax.swing.JInternalFrame {
     private static final int FILTRO_MAX = 9999999;
     private static final int ALERTA_STOCK = 100;
     private boolean BUSCANDO = false;
+    Principal ventanaPrincipal;
 
     private DefaultTableModel modelo = new DefaultTableModel() {
         @Override
@@ -59,8 +60,9 @@ public class GestorProductos extends javax.swing.JInternalFrame {
     /**
      * Creates new form EmpleadoVistas
      */
-    public GestorProductos() {
+    public GestorProductos(Principal ventanaPrincipal) {
         initComponents();
+        this.ventanaPrincipal = ventanaPrincipal;
         cabeceraTabla();
         cargarTabla();
         desactivarFiltros();
@@ -509,12 +511,11 @@ public class GestorProductos extends javax.swing.JInternalFrame {
 
     private void jLAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAgregarMouseClicked
         FormularioProductosA formulario = new FormularioProductosA(this);
-        JDesktopPane desktopPane = getDesktopPane();
 
-        desktopPane.add(formulario);
+        add(formulario, 0);
 
-        int x = (desktopPane.getWidth() - formulario.getWidth()) / 2;
-        int y = (desktopPane.getHeight() - formulario.getHeight()) / 2;
+        int x = (this.getWidth() - formulario.getWidth()) / 2;
+        int y = (this.getHeight() - formulario.getHeight()) / 2;
 
         formulario.setLocation(x, y);
         formulario.setVisible(true);
@@ -534,16 +535,18 @@ public class GestorProductos extends javax.swing.JInternalFrame {
             cargarTabla();
             return;
         }
-        FormularioProductosM formulario = new FormularioProductosM(this, (Integer) modelo.getValueAt(jTProductos.getSelectedRow(), 0), (String) modelo.getValueAt(jTProductos.getSelectedRow(), 1), (Integer) modelo.getValueAt(jTProductos.getSelectedRow(), 2), (String) modelo.getValueAt(jTProductos.getSelectedRow(), 3));
-        JDesktopPane desktopPane = getDesktopPane();
+        
+        
+        FormularioProductosM formulario2 = new FormularioProductosM(this, (Integer) modelo.getValueAt(jTProductos.getSelectedRow(), 0), (String) modelo.getValueAt(jTProductos.getSelectedRow(), 1), (Integer) modelo.getValueAt(jTProductos.getSelectedRow(), 2), (String) modelo.getValueAt(jTProductos.getSelectedRow(), 3));
+//        JDesktopPane desktopPane = getDesktopPane();
 
-        desktopPane.add(formulario);
+        add(formulario2, 0);
+        
+        int x = (this.getWidth() - formulario2.getWidth()) / 2;
+        int y = (this.getHeight() - formulario2.getHeight()) / 2;
 
-        int x = (desktopPane.getWidth() - formulario.getWidth()) / 2;
-        int y = (desktopPane.getHeight() - formulario.getHeight()) / 2;
-
-        formulario.setLocation(x, y);
-        formulario.setVisible(true);
+        formulario2.setLocation(x, y);
+        formulario2.setVisible(true);
     }//GEN-LAST:event_jLModificarMouseClicked
 
     private void jLEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLEliminarMouseClicked

@@ -25,6 +25,7 @@ public class FormularioProductosM extends javax.swing.JInternalFrame {
         this.stockOriginal = psStock;
         this.precioOriginal = psPrecio;
         initComponents();
+        
         this.gProductos = ventanaPrincipal;
         this.id = id;
         jTNombre.setText(psNombre);
