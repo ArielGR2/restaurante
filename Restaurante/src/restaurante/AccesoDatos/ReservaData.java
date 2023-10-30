@@ -31,7 +31,7 @@ public class ReservaData {
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, reserva.getNombreCliente());
             ps.setInt(2, reserva.getDniCliente());
-            ps.setDate(3, new java.sql.Date (reserva.getFechaHora().getTime()));
+            ps.setString(3, (reserva.getFechaHora()));
             ps.setInt(4, reserva.getCapacidad());
             ps.setInt(5, reserva.getMesa().getNumMesa());
 
@@ -68,7 +68,7 @@ public class ReservaData {
                 reserva.setIdReserva(idReserva);
                 reserva.setNombreCliente(rs.getString("nombreCliente"));
                 reserva.setDniCliente(rs.getInt("dniCliente"));
-                reserva.setFechaHora(rs.getDate("fechaHora"));
+                reserva.setFechaHora(rs.getString("fechaHora"));
                 reserva.setCapacidad(rs.getInt("capacidad"));
                 reserva.setMesa(mData.buscarMesa(rs.getInt("numMesa")));
             } else {
@@ -99,7 +99,7 @@ public class ReservaData {
                 reserva.setIdReserva(rs.getInt("idReserva"));
                 reserva.setNombreCliente(rs.getString("nombreCliente"));
                 reserva.setDniCliente(rs.getInt("dniCliente"));
-                reserva.setFechaHora(rs.getDate("fechaHora"));
+                reserva.setFechaHora(rs.getString("fechaHora"));
                 reserva.setCapacidad(rs.getInt("capacidad"));
                 reserva.setMesa(mData.buscarMesa(rs.getInt("numMesa")));
 
@@ -124,7 +124,7 @@ public class ReservaData {
 
             ps.setString(1, reserva.getNombreCliente());
             ps.setInt(2, reserva.getDniCliente());
-            ps.setDate(3, new java.sql.Date (reserva.getFechaHora().getTime()));
+            ps.setString(3, (reserva.getFechaHora()));
             ps.setInt(4, reserva.getCapacidad());            
             ps.setInt(5, reserva.getMesa().getNumMesa());
             ps.setInt(6, reserva.getIdReserva());

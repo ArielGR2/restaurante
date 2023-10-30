@@ -425,6 +425,7 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAgregarMouseClicked
+       
         FormularioPedidos formulario = new FormularioPedidos(this);
         
         int x = (this.getWidth() - formulario.getWidth()) / 2;
@@ -442,6 +443,7 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
         if (jLAnular.isEnabled() && anularBtn.isEnabled()) {
             int idPedido = (Integer) jTPedidos.getValueAt(jTPedidos.getSelectedRow(), 0);
             pData.eliminarPedido(idPedido);
+            JOptionPane.showMessageDialog(null, "Pedido eliminado exitosamente.");
             cargarTabla();
         }
     }//GEN-LAST:event_jLAnularMouseClicked

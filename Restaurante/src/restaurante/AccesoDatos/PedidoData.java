@@ -281,9 +281,7 @@ public class PedidoData {
 
             int registroFilas = ps.executeUpdate();
 
-            if (registroFilas == 1) {
-                JOptionPane.showMessageDialog(null, "Pedido eliminado exitosamente.");
-            } else {
+            if (registroFilas != 1) {
                 JOptionPane.showMessageDialog(null, "Error al eliminar.");
             }
 

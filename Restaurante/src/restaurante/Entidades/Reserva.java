@@ -8,11 +8,11 @@ public class Reserva {
     private int idReserva;
     private String nombreCliente;
     private int dniCliente;
-    private Date fechaHora;
+    private String fechaHora;
     private int capacidad;
     private Mesa mesa;
 
-    public Reserva(int idReserva, String nombreCliente, int dniCliente, Date fechaHora, int capacidad, Mesa mesa) {
+    public Reserva(int idReserva, String nombreCliente, int dniCliente, String fechaHora, int capacidad, Mesa mesa) {
         this.idReserva = idReserva;
         this.nombreCliente = nombreCliente;
         this.dniCliente = dniCliente;
@@ -21,7 +21,7 @@ public class Reserva {
         this.mesa = mesa;
     }
 
-    public Reserva(String nombreCliente, int dniCliente, Date fechaHora, int capacidad, Mesa mesa) {
+    public Reserva(String nombreCliente, int dniCliente, String fechaHora, int capacidad, Mesa mesa) {
         this.nombreCliente = nombreCliente;
         this.dniCliente = dniCliente;
        this.fechaHora = fechaHora;
@@ -56,11 +56,11 @@ public class Reserva {
         this.dniCliente = dniCliente;
     }
 
-    public Date getFechaHora() {
+    public String getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(Date fechaHora) {
+    public void setFechaHora(String fechaHora) {
         this.fechaHora = fechaHora;
     }
 

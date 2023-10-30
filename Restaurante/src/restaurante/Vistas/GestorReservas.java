@@ -73,12 +73,12 @@ public class GestorReservas extends javax.swing.JInternalFrame {
         setMaximumSize(new java.awt.Dimension(500, 500));
         setMinimumSize(new java.awt.Dimension(500, 500));
         setNormalBounds(new java.awt.Rectangle(0, 0, 0, 0));
-        setPreferredSize(new java.awt.Dimension(550, 500));
+        setPreferredSize(new java.awt.Dimension(600, 600));
 
         jPanel1.setBackground(new java.awt.Color(25, 25, 25));
         jPanel1.setMaximumSize(new java.awt.Dimension(500, 500));
         jPanel1.setMinimumSize(new java.awt.Dimension(500, 500));
-        jPanel1.setPreferredSize(new java.awt.Dimension(550, 500));
+        jPanel1.setPreferredSize(new java.awt.Dimension(600, 600));
 
         jScrollPane1.setForeground(new java.awt.Color(60, 63, 65));
 
@@ -194,27 +194,27 @@ public class GestorReservas extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
+                        .addGap(102, 102, 102)
                         .addComponent(agregarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(modificarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(eliminarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(agregarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(modificarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(eliminarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addGap(48, 48, 48))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -241,53 +241,46 @@ public class GestorReservas extends javax.swing.JInternalFrame {
 
         formulario.setVisible(true);
         formulario.setLocation(x, y);
-        
+
     }//GEN-LAST:event_jLAgregarMouseClicked
 
     private void jLModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLModificarMouseClicked
-        try {
-            if (jLModificar.isEnabled() && modificarBtn.isEnabled()) {
-                int filas = jTReservas.getRowCount();
-                List<Reserva> pendientes = new ArrayList<>();
 
-                for (int f = 0; f < filas; f++) {
-                    int idFila = (Integer) modelo.getValueAt(f, 0);
-                    String nombre = (String) modelo.getValueAt(f, 1);
-                    int dni = (Integer) modelo.getValueAt(f, 2);
+        if (jLModificar.isEnabled() && modificarBtn.isEnabled()) {
+            int filas = jTReservas.getRowCount();
+            List<Reserva> pendientes = new ArrayList<>();
 
-                    if (!verificarString(nombre)) {
-                        JOptionPane.showMessageDialog(this, "Error en: " + idFila + "\nEl NOMBRE no debe estar vacío y solo contener letras.");
-                        continue;
-                    }
-                    String fechaHoraString = (String) modelo.getValueAt(f, 3);
-                    String formato = "yyyy-MM-dd HH:mm"; // Ajusta el formato según lo que tengas en la JTable
-                    SimpleDateFormat sdf = new SimpleDateFormat(formato);
+            for (int f = 0; f < filas; f++) {
+                int idFila = (Integer) modelo.getValueAt(f, 0);
+                String nombre = (String) modelo.getValueAt(f, 1);
+                int dni = (Integer) modelo.getValueAt(f, 2);
+                String fechaHora = (String) modelo.getValueAt(f, 3);
 
-                    Date fechaHora = sdf.parse(fechaHoraString);
-
-                    //Revisamos si hay modificación, si la hay agregamos el empleado a un array de pendientes a actualizar, si no el array queda vacío.
-                    for (Reserva reserva : rData.listarReservas()) {
-                        if (reserva.getIdReserva() == idFila && (reserva.getDniCliente() != dni || !reserva.getNombreCliente().equals(nombre))) {
-                            reserva.setDniCliente(dni);
-                            reserva.setNombreCliente(nombre);
-                            reserva.setFechaHora(fechaHora);
-
-                            rData.modificarReserva(reserva);
-
-                            pendientes.add(reserva);
-                        }
-                    }
+                if (!verificarString(nombre)) {
+                    JOptionPane.showMessageDialog(this, "Error en: " + idFila + "\nEl NOMBRE no debe estar vacío y solo contener letras.");
+                    continue;
                 }
-                //Si el array está vacío no hay modificaciones
-                if (pendientes.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "No hay modificaciones.");
-                    return;
+
+                //Revisamos si hay modificación, si la hay agregamos el empleado a un array de pendientes a actualizar, si no el array queda vacío.
+                for (Reserva reserva : rData.listarReservas()) {
+                    if (reserva.getIdReserva() == idFila && (reserva.getDniCliente() != dni || !reserva.getNombreCliente().equals(nombre) || !reserva.getFechaHora().equals(fechaHora))) {
+                        reserva.setDniCliente(dni);
+                        reserva.setNombreCliente(nombre);
+                        reserva.setFechaHora(fechaHora);
+
+                        rData.modificarReserva(reserva);
+
+                        pendientes.add(reserva);
+                    }
                 }
             }
-        } catch (ParseException e) {
-            // Manejo de errores si la cadena no cumple con el formato esperado
-            JOptionPane.showMessageDialog(this, "Formato de fecha incorrecto.");
+            //Si el array está vacío no hay modificaciones
+            if (pendientes.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No hay modificaciones.");
+                return;
+            }
         }
+
     }//GEN-LAST:event_jLModificarMouseClicked
 
     private void jLEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLEliminarMouseClicked
@@ -357,7 +350,7 @@ public class GestorReservas extends javax.swing.JInternalFrame {
                 reserva.getIdReserva(),
                 reserva.getNombreCliente(),
                 reserva.getDniCliente(),
-                reserva.getFechaHora().toString(),
+                reserva.getFechaHora(),
                 reserva.getCapacidad(),
                 reserva.getMesa().getNumMesa()
             });

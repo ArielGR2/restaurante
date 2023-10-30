@@ -316,7 +316,6 @@ public class FormularioDetalle extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "No pueden haber campos vacíos.");
             }
         }
-
     }//GEN-LAST:event_jLCrearMouseClicked
 
     private void jTextNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextNombreFocusLost

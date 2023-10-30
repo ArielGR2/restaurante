@@ -1,6 +1,7 @@
 package restaurante.Vistas;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
@@ -250,7 +251,8 @@ public class FormularioReserva extends javax.swing.JInternalFrame {
         try {
             String nombre = jTextNombre.getText();
             int dni = Integer.parseInt(jTextDni.getText());
-            Date fechaHora = fechaHora();
+            String fecha = String.valueOf(jDateFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            String hora = (String) jComboHora.getSelectedItem();
             int cantPersonas = Integer.parseInt(jTextCantidad.getText());
             int capacidadLocal = mData.calcularCapacidadTotalMesasLibres();
 
@@ -259,7 +261,7 @@ public class FormularioReserva extends javax.swing.JInternalFrame {
                 Mesa mesa = mData.buscarMesaxCapacidad(cantPersonas);
 
                 if (mesa != null) {
-                    Reserva reserva = new Reserva(nombre, dni, fechaHora, cantPersonas, mesa);
+                    Reserva reserva = new Reserva(nombre, dni, (fecha + " " + hora), cantPersonas, mesa);
                     rData.agregarReserva(reserva);
                 } else {
                     List<Mesa> mesasDisponibles = mData.listarMesasLibres();
@@ -267,7 +269,7 @@ public class FormularioReserva extends javax.swing.JInternalFrame {
                     for (Mesa m : mesasDisponibles) {
                         if (cantPersonas > 0) {
                             int personasAcomodadas = Math.min(cantPersonas, m.getCapacidad());
-                            Reserva reserva = new Reserva(nombre, dni, fechaHora, personasAcomodadas, m);
+                            Reserva reserva = new Reserva(nombre, dni, (fecha + " " + hora), personasAcomodadas, m);
                             rData.agregarReserva(reserva);
 
                             cantPersonas -= personasAcomodadas;
@@ -324,19 +326,19 @@ public class FormularioReserva extends javax.swing.JInternalFrame {
         return true;
     }
 
-    private Date fechaHora() {
-        Date fecha = jDateFecha.getDate();
-        String hora = (String) jComboHora.getSelectedItem();
-
-        String[] partesHora = hora.split(":");
-        int horas = Integer.parseInt(partesHora[0]);
-        int minutos = Integer.parseInt(partesHora[1]);
-
-        Calendar combo = Calendar.getInstance();
-        combo.setTime(fecha);
-        combo.set(Calendar.HOUR_OF_DAY, horas);
-        combo.set(Calendar.MINUTE, minutos);
-
-        return combo.getTime();
-    }
+//    private Date fechaHora() {
+//        Date fecha = jDateFecha.getDate();
+//        String hora = (String) jComboHora.getSelectedItem();
+//
+//        String[] partesHora = hora.split(":");
+//        int horas = Integer.parseInt(partesHora[0]);
+//        int minutos = Integer.parseInt(partesHora[1]);
+//
+//        Calendar combo = Calendar.getInstance();
+//        combo.setTime(fecha);
+//        combo.set(Calendar.HOUR_OF_DAY, horas);
+//        combo.set(Calendar.MINUTE, minutos);
+//
+//        return combo.getTime();
+//    }
 }
