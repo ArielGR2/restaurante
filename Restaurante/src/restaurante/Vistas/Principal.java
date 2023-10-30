@@ -15,8 +15,6 @@ public final class Principal extends javax.swing.JFrame {
     int xMouse;
     int yMouse;
     
-    boolean ventanaMesaAbierta;
-
     /**
      * Creates new form principal
      */
@@ -745,7 +743,17 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jLReservasMouseExited
 
     private void jLReservasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLReservasMouseClicked
-        //Abrir Vista Reservas
+        GestorReservas gestorReservas = new GestorReservas(this);
+
+        int x = (this.getWidth() - gestorReservas.getWidth()) / 2;
+        int y = (this.getHeight() - gestorReservas.getHeight()) / 2;
+
+        background.add(gestorReservas, 0);
+        background.revalidate();
+        background.repaint();
+
+        gestorReservas.setVisible(true);
+        gestorReservas.setLocation(x, y);
     }//GEN-LAST:event_jLReservasMouseClicked
 
     private void jLConsultasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLConsultasMouseEntered

@@ -91,6 +91,7 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
         jLMesero = new javax.swing.JLabel();
         jComboEmpleados = new javax.swing.JComboBox<>();
 
+        setClosable(true);
         setPreferredSize(new java.awt.Dimension(500, 580));
 
         jPanel1.setBackground(new java.awt.Color(25, 25, 25));
@@ -376,15 +377,16 @@ public class FormularioPedidos extends javax.swing.JInternalFrame {
         }
         pedido = new Pedido(mesa, empleado);
         pData.agregarPedido(pedido);
-
+        
         formulario = new FormularioDetalle(this, pedido);
         int x = (this.getWidth() - formulario.getWidth()) / 2;
         int y = (this.getHeight() - formulario.getHeight()) / 2;
 
         add(formulario, 0);
-
+        
         formulario.setVisible(true);
         formulario.setLocation(x, y);
+        formulario.setOpaque(true);
     }//GEN-LAST:event_jLAgregarMouseClicked
 
     private void jTDetalleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTDetalleMouseClicked

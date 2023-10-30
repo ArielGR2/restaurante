@@ -1,34 +1,32 @@
 package restaurante.Entidades;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Reserva {
 
     private int idReserva;
     private String nombreCliente;
     private int dniCliente;
-    private LocalDate fechaReserva;
+    private Date fechaHora;
     private int capacidad;
     private Mesa mesa;
-    private boolean estado;
 
-    public Reserva(int idReserva, String nombreCliente, int dniCliente, LocalDate fechaReserva, int capacidad, Mesa mesa, boolean estado) {
+    public Reserva(int idReserva, String nombreCliente, int dniCliente, Date fechaHora, int capacidad, Mesa mesa) {
         this.idReserva = idReserva;
         this.nombreCliente = nombreCliente;
         this.dniCliente = dniCliente;
-        this.fechaReserva = fechaReserva;
+        this.fechaHora = fechaHora;
         this.capacidad = capacidad;
         this.mesa = mesa;
-        this.estado = estado;
     }
 
-    public Reserva(String nombreCliente, int dniCliente, LocalDate fechaReserva, int capacidad, Mesa mesa, boolean estado) {
+    public Reserva(String nombreCliente, int dniCliente, Date fechaHora, int capacidad, Mesa mesa) {
         this.nombreCliente = nombreCliente;
         this.dniCliente = dniCliente;
-        this.fechaReserva = fechaReserva;
+       this.fechaHora = fechaHora;
         this.capacidad = capacidad;
         this.mesa = mesa;
-        this.estado = estado;
     }
 
     public Reserva() {
@@ -58,12 +56,12 @@ public class Reserva {
         this.dniCliente = dniCliente;
     }
 
-    public LocalDate getFechaReserva() {
-        return fechaReserva;
+    public Date getFechaHora() {
+        return fechaHora;
     }
 
-    public void setFechaReserva(LocalDate fechaReserva) {
-        this.fechaReserva = fechaReserva;
+    public void setFechaHora(Date fechaHora) {
+        this.fechaHora = fechaHora;
     }
 
     public int getCapacidad() {
@@ -82,16 +80,8 @@ public class Reserva {
         this.mesa = mesa;
     }
 
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
-
     @Override
     public String toString() {
-        return "Reserva{" + "idReserva=" + idReserva + ", nombreCliente=" + nombreCliente + ", dniCliente=" + dniCliente + ", fechaReserva=" + fechaReserva + ", capacidad=" + capacidad + ", mesa=" + mesa + ", estado=" + estado + '}';
+        return "Reserva{" + "idReserva=" + idReserva + ", nombreCliente=" + nombreCliente + ", dniCliente=" + dniCliente + ", fechaHora=" + fechaHora + ", capacidad=" + capacidad + ", mesa=" + mesa +'}';
     }
 }

@@ -12,18 +12,18 @@ import restaurante.Entidades.Mesa;
 import restaurante.Entidades.Pedido;
 
 public class GestorPedidos extends javax.swing.JInternalFrame {
-
+    
     MesaData mData = new MesaData();
     PedidoData pData = new PedidoData();
     Principal ventanaPrincipal;
-
+    
     private DefaultTableModel modelo = new DefaultTableModel() {
-
+        
         @Override
         public boolean isCellEditable(int x, int y) {
             return false;
         }
-
+        
         @Override
         public Class<?> getColumnClass(int c) {
             if (c == 2 && c == 4) {
@@ -426,14 +426,16 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
 
     private void jLAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAgregarMouseClicked
         FormularioPedidos formulario = new FormularioPedidos(this);
-
+        
         int x = (this.getWidth() - formulario.getWidth()) / 2;
         int y = (this.getHeight() - formulario.getHeight()) / 2;
-
+        
         add(formulario, 0);
-
+        this.revalidate();
+        
         formulario.setVisible(true);
         formulario.setLocation(x, y);
+        formulario.setOpaque(true);
     }//GEN-LAST:event_jLAgregarMouseClicked
 
     private void jLAnularMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAnularMouseClicked
@@ -449,10 +451,10 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
         if (filaSeleccionada != -1) {
             jLAnular.setEnabled(true);
             anularBtn.setEnabled(true);
-
+            
             jLDetalle.setEnabled(true);
             detalleBtn.setEnabled(true);
-
+            
             radioButtons();
         }
     }//GEN-LAST:event_jTPedidosMouseClicked
@@ -465,9 +467,9 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
         int numMesa;
         try {
             numMesa = Integer.valueOf(JOptionPane.showInputDialog(this, "Introduzca el número de la mesa:", "", JOptionPane.QUESTION_MESSAGE));
-
+            
             eliminarFilas();
-
+            
             for (Pedido pedido : pData.listarPedidosMesa(numMesa)) {
                 modelo.addRow(new Object[]{
                     pedido.getIdPedido(),
@@ -477,9 +479,9 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
                     pedido.getEstado()
                 });
             }
-
+            
             anularBotones();
-
+            
         } catch (NumberFormatException nfe) {
             numMesa = 0;
         }
@@ -487,14 +489,14 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jLxMesaMouseClicked
 
     private void jLxMeseroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLxMeseroMouseClicked
-
+        
         MensajeMeseros mensaje = new MensajeMeseros(this);
-
+        
         int x = (this.getWidth() - mensaje.getWidth()) / 2;
         int y = (this.getHeight() - mensaje.getHeight()) / 2;
-
+        
         add(mensaje, 0);
-
+        
         mensaje.setVisible(true);
         mensaje.setLocation(x, y);
 
@@ -504,7 +506,7 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
         if (jLModEstado.isEnabled() && estadoBtn.isEnabled()) {
             int idPedido = (Integer) jTPedidos.getValueAt(jTPedidos.getSelectedRow(), 0);
             Pedido pedido = pData.buscarPedido(idPedido);
-
+            
             if (entregadoRadioBtn.isSelected()) {
                 pedido.setEstado(EstadoPedido.ENTREGADO);
                 pData.modificarPedido(pedido);
@@ -512,12 +514,12 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
                 //Al pagar el pedido verifico si es el último a pagar y si lo es la mesa pasa a libre
                 pedido.setEstado(EstadoPedido.PAGADO);
                 pData.modificarPedido(pedido);
-
+                
                 Mesa mesa = pedido.getMesa();
-
+                
                 int pedidosMesa = pData.listarPedidosMesa(mesa.getNumMesa()).size();
                 int pedidosPagos = pData.listarPedidosMesaPagos(mesa.getNumMesa()).size();
-
+                
                 if (pedidosPagos == pedidosMesa) {
                     mesa.setEstado(EstadoMesa.LIBRE);
                     mData.modificarMesa(mesa);
@@ -533,14 +535,14 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
         if (jLDetalle.isEnabled() && detalleBtn.isEnabled()) {
             int idPedido = (Integer) jTPedidos.getValueAt(jTPedidos.getSelectedRow(), 0);
             Pedido pedido = pData.buscarPedido(idPedido);
-
+            
             ListaDetalles listado = new ListaDetalles(pedido);
-
+            
             int x = (this.getWidth() - listado.getWidth()) / 2;
             int y = (this.getHeight() - listado.getHeight()) / 2;
-
+            
             add(listado, 0);
-
+            
             listado.setVisible(true);
             listado.setLocation(x, y);
         }
@@ -595,7 +597,7 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
         modelo.addColumn("Empleado");
         modelo.addColumn("Monto");
         modelo.addColumn("Estado");
-
+        
         jTPedidos.setModel(modelo);
 
         //Centrar títulos de la tabla
@@ -606,7 +608,7 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         jTPedidos.setDefaultRenderer(Object.class, centerRenderer);
     }
-
+    
     public void cargarTabla() {
         eliminarFilas();
         for (Pedido pedido : pData.listarPedidos()) {
@@ -620,14 +622,14 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
         }
         anularBotones();
     }
-
+    
     private void eliminarFilas() {
         int filas = jTPedidos.getRowCount() - 1;
         for (; filas >= 0; filas--) {
             modelo.removeRow(filas);
         }
     }
-
+    
     public void cargarTablaMesero(int idEmpleado) {
         eliminarFilas();
         for (Pedido pedido : pData.listarPedidosEmpleado(idEmpleado)) {
@@ -640,19 +642,19 @@ public class GestorPedidos extends javax.swing.JInternalFrame {
         }
         anularBotones();
     }
-
+    
     private void anularBotones() {
         jLModEstado.setEnabled(false);
         estadoBtn.setEnabled(false);
-
+        
         jLAnular.setEnabled(false);
         anularBtn.setEnabled(false);
-
+        
         pendienteRadioBtn.setEnabled(false);
         entregadoRadioBtn.setEnabled(false);
         pagadoRadioBtn.setEnabled(false);
     }
-
+    
     private void radioButtons() {
         String estado = (jTPedidos.getValueAt(jTPedidos.getSelectedRow(), 4)).toString();
         switch (estado) {
