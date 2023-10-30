@@ -525,7 +525,7 @@ public class GestorProductos extends javax.swing.JInternalFrame {
         if (!jLModificar.isEnabled()) {
             return;
         }
-        System.out.println(jTProductos.getSelectedRowCount());
+        //System.out.println(jTProductos.getSelectedRowCount());
         if (jTProductos.getSelectedRowCount() != 1) {
             JOptionPane.showMessageDialog(this, "Error. selecciona solo una fila a modificar. ");
             jLEliminar.setEnabled(false);

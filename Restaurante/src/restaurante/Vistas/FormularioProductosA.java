@@ -9,6 +9,7 @@ public class FormularioProductosA extends javax.swing.JInternalFrame {
 
     ProductoData pData = new ProductoData();
     GestorProductos gProductos;
+    private boolean edit_precio = false;
 
     /**
      * Creates new form FormularioEmpleados
@@ -251,6 +252,7 @@ public class FormularioProductosA extends javax.swing.JInternalFrame {
 
     private void jTStockKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTStockKeyReleased
         // TODO add your handling code here:
+        edit_precio = false;
         if (!checkFiltroNum(evt.getKeyChar())){
             jTStock.setText(quitarLetrasString(jTStock.getText()));
         }
@@ -258,12 +260,14 @@ public class FormularioProductosA extends javax.swing.JInternalFrame {
 
     private void jTPrecioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTPrecioKeyReleased
         // TODO add your handling code here:
+        edit_precio = true;
         if (!jTPrecio.getText().startsWith("$")){
             jTPrecio.setText("$".concat(jTPrecio.getText()));
         }
         if (!checkFiltroNum(evt.getKeyChar())){
             jTPrecio.setText(quitarLetrasString(jTPrecio.getText()));
         }
+  
     }//GEN-LAST:event_jTPrecioKeyReleased
 
 
@@ -289,7 +293,7 @@ public class FormularioProductosA extends javax.swing.JInternalFrame {
     }
     
     private boolean checkFiltroNum(int t){ // CHECK SOLO NUMEROS EN INT
-        if (!(t == 8 || t == 10 || t == 27 || (t >= 48 && t <= 57))){
+        if (!(t == 8 || t == 10 || t == 27 || (t == 46 && edit_precio == true) || (t >= 48 && t <= 57))){
             JOptionPane.showMessageDialog(this, "Solo puedes ingresar numeros. ");
             return false;
         }
@@ -299,7 +303,7 @@ public class FormularioProductosA extends javax.swing.JInternalFrame {
     private boolean numTFVerificacion(String cad){ // CHECK SOLO NUMEROS EN STRING
         byte[] t = cad.getBytes(StandardCharsets.US_ASCII);
         for (int i = 0; i < cad.length(); i++) {
-            if (!(t[i] == 8 || t[i] == 10 || t[i] == 27 || (t[i] >= 48 && t[i] <= 57))){
+            if (!(t[i] == 8 || t[i] == 10 || t[i] == 27 || (t[i] == 46 && edit_precio == true) || (t[i] >= 48 && t[i] <= 57))){
                 return false;
             }
         }

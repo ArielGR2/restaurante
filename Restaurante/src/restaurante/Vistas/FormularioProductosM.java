@@ -15,6 +15,7 @@ public class FormularioProductosM extends javax.swing.JInternalFrame {
     private String nombreOriginal;
     private int stockOriginal;
     private String precioOriginal;
+    private boolean edit_precio = false;
 
     /**
      * Creates new form FormularioEmpleados
@@ -390,6 +391,7 @@ public class FormularioProductosM extends javax.swing.JInternalFrame {
         jTPrecio.setText("");
         jLPrecioAlert.setText("Actual: "+precioOriginal);
         jLPrecioAlert.setForeground(new Color(102,255,255));
+        edit_precio = true;
     }//GEN-LAST:event_jTPrecioMouseReleased
 
     private void jTPrecioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTPrecioFocusLost
@@ -398,6 +400,7 @@ public class FormularioProductosM extends javax.swing.JInternalFrame {
             jTPrecio.setText(precioOriginal);
         }
         jLPrecioAlert.setText(" ");
+        edit_precio = false;
     }//GEN-LAST:event_jTPrecioFocusLost
 
 
@@ -426,7 +429,7 @@ public class FormularioProductosM extends javax.swing.JInternalFrame {
     }
     
     private boolean checkFiltroNum(int t){ // CHECK SOLO NUMEROS EN INT
-        if (!(t == 8 || t == 10 || t == 27 || (t >= 48 && t <= 57))){
+        if (!(t == 8 || t == 10 || t == 27 || (t == 46 && edit_precio == true) || (t >= 48 && t <= 57))){
             JOptionPane.showMessageDialog(this, "Solo puedes ingresar numeros. ");
             return false;
         }
@@ -436,7 +439,7 @@ public class FormularioProductosM extends javax.swing.JInternalFrame {
     private boolean numTFVerificacion(String cad){ // CHECK SOLO NUMEROS EN STRING
         byte[] t = cad.getBytes(StandardCharsets.US_ASCII);
         for (int i = 0; i < cad.length(); i++) {
-            if (!(t[i] == 8 || t[i] == 10 || t[i] == 27 || (t[i] >= 48 && t[i] <= 57))){
+            if (!(t[i] == 8 || t[i] == 10 || t[i] == 27 || (t[i] == 46 && edit_precio == true) || (t[i] >= 48 && t[i] <= 57))){
                 return false;
             }
         }
@@ -467,6 +470,7 @@ public class FormularioProductosM extends javax.swing.JInternalFrame {
     
     private String quitarLetrasString(String text){
         String textf = "";
+        int cant_puntos = 0;
         for (int i=0;i<text.length();i++){
             String letra = text.charAt(i)+"";
             if (numTFVerificacion(letra) || (letra.equals("$") && i == 0)){
